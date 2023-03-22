@@ -5,6 +5,10 @@ let z = 0;
 let sigma = 10;
 let rho = 28;
 let beta = 8 / 3;
+
+let a = 0.2;
+let b = 0.2;
+let c = 5.7;
 let points = [];
 
 function setup() {
@@ -14,25 +18,35 @@ function setup() {
 }
 let angle = 0;
 function draw() {
+    orbitControl()
     background("black");
 
-    dt = 0.01;
-    let dx = sigma * (y - x) * dt;
-    let dy = (x * (rho - z) - y) * dt;
-    let dz = (x * y - beta * z) * dt;
+    dt = 0.1;
+    //lorenz
+    // let dx = sigma * (y - x) * dt;
+    // let dy = (x * (rho - z) - y) * dt;
+    // let dz = (x * y - beta * z) * dt;
+    // x = x + dx;
+    // y = y + dy;
+    // z = z + dz;
+
+    //rossler
+    let dx = (-y - z) * dt;
+    let dy = (x + a * y) * dt;
+    let dz = (b + z * (x - c)) * dt;
     x = x + dx;
     y = y + dy;
     z = z + dz;
 
     // points.push(createVector(x, y, z));
-    points.push(new p5.Vector(x, y , z));
+    points.push(new p5.Vector(x, y, z));
     translate(0, 0, 0);
-    if(points.length >1500 ){
-        points.shift()
+    if (points.length > 1500) {
+        points.shift();
     }
     angle += 0.005;
     rotateY(angle);
-    rotateX(PI/2)
+    rotateX(PI / 2);
     scale(8);
     stroke(255);
     noFill();
