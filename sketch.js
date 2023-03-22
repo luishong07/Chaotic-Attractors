@@ -8,12 +8,13 @@ let beta = 8 / 3;
 
 let a = 0.2;
 let b = 0.2;
-let c = 5.7;
+let c = 14;
 let points = [];
 
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
-
+    // strokeWeight(2)
+    line(0,0,0,0,1,0)
     colorMode(HSB);
 }
 let angle = 0;
@@ -37,11 +38,12 @@ function draw() {
     x = x + dx;
     y = y + dy;
     z = z + dz;
+    console.log(x,y,z)
 
     // points.push(createVector(x, y, z));
     points.push(new p5.Vector(x, y, z));
     translate(0, 0, 0);
-    if (points.length > 1500) {
+    if (points.length > 3000) {
         points.shift();
     }
     angle += 0.005;
