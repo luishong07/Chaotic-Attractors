@@ -1,4 +1,4 @@
-let x = 0.01;
+let x = 0.124;
 let y = 0;
 let z = 0;
 
@@ -10,12 +10,13 @@ let a = 1/5;
 let b = 1/5;
 let c = 5.7;
 let points = [];
-
+let cell
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     // strokeWeight(2)
     // line(0,0,0,0,1,0)
     colorMode(HSB);
+    cell = new Cell()
 }
 let angle = 0;
 function draw() {
@@ -40,22 +41,23 @@ function draw() {
     y = y + dy;
     z = z + dz;
     // console.log(x,y,z)
-
+    cell.show(x,y,z)
     // points.push(createVector(x, y, z));
     points.push(new p5.Vector(x, y, z));
     translate(0, 0, 0);
     if (points.length > 3000) {
         points.shift();
     }
-    angle += 0.005;
+    // angle += 0.005;
     rotateY(angle);
-    rotateX(PI / 2);
+    // rotateX(PI / 2);
     scale(8);
 
     stroke(255);
     noFill();
 
     let hu = 0;
+
     beginShape();
 
     for (let v of points) {
@@ -67,5 +69,8 @@ function draw() {
             hu = 0;
         }
     }
+
+
     endShape();
+    
 }
