@@ -16,18 +16,19 @@ let c = 5.7;
 let points = [];
 let c1;
 let c2;
-let cells = []
+let cells = [];
 let bee = 0.208186;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     // strokeWeight(2)
     // line(0,0,0,0,1,0)
     colorMode(HSB);
-    c1 = new Cell(0.001,0,0);
-    c2 = new Cell(0.002,0,0);
-    cells.push(c1)
-    cells.push(c2)
-
+    c1 = new Cell(0.001, 0, 0, "red");
+    c2 = new Cell(0.002, 0, 0, "blue");
+    c3 = new Cell(0.003,0,0,"green")
+    cells.push(c1);
+    cells.push(c2);
+    cells.push(c3)
 }
 let angle = 0;
 function draw() {
@@ -41,17 +42,16 @@ function draw() {
     // let dz = sin(x) - bee*z
 
     dt = 0.01;
-    for(let c of cells){
+    for (let c of cells) {
         // console.log(c.x,c.y,c.z)
         let dx = sigma * (c.y - c.x) * dt;
         let dy = (c.x * (rho - c.z) - c.y) * dt;
         let dz = (c.x * c.y - beta * c.z) * dt;
-        let newX = c.x + dx
-        let newY = c.y + dy
-        let newZ = c.z + dz
-        console.log(newX, newY, newZ)
-        c.show(newX, newY, newZ)
-
+        let newX = c.x + dx;
+        let newY = c.y + dy;
+        let newZ = c.z + dz;
+        // console.log(newX, newY, newZ);
+        c.show(newX, newY, newZ);
     }
     //lorenz
     let dx = sigma * (y - x) * dt;
@@ -85,24 +85,25 @@ function draw() {
     if (points.length > 500) {
         points.shift();
     }
-    // angle += 0.005;
+    angle += 0.005;
     rotateY(angle);
     // rotateX(PI / 2);
+    // console.log(angle)
     scale(15);
     stroke(255);
     noFill();
     let hu = 0;
-    beginShape();
+    // beginShape();
 
-    for (let v of points) {
-        stroke(hu, 255, 255);
-        point(v.x, v.y, v.z);
+    // for (let v of points) {
+    //     stroke(hu, 255, 255);
+    //     point(v.x, v.y, v.z);
 
-        hu += 1;
-        if (hu > 255) {
-            hu = 0;
-        }
-    }
+    //     hu += 1;
+    //     if (hu > 255) {
+    //         hu = 0;
+    //     }
+    // }
 
-    endShape();
+    // endShape();
 }
