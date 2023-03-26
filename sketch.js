@@ -12,7 +12,7 @@ let beta = 8 / 3;
 
 let a = 1 / 5;
 let b = 1 / 5;
-let c = 5.7;
+let C = 5.7;
 let points = [];
 let c1;
 let c2;
@@ -23,9 +23,9 @@ function setup() {
     // strokeWeight(2)
     // line(0,0,0,0,1,0)
     colorMode(HSB);
-    c1 = new Cell(0, 0, 0.1, "red");
-    c2 = new Cell(0, 0, 0.02, "blue");
-    c3 = new Cell(0, 0, 0.01, "green");
+    c1 = new Cell(0,0,0.1,"red");
+    c2 = new Cell(0,0,0.2,"blue");
+    c3 = new Cell(0,0,0.3, "green");
     cells.push(c1);
     cells.push(c2);
     cells.push(c3);
@@ -43,10 +43,10 @@ function draw() {
 
     dt = 0.05;
     for (let c of cells) {
-        console.log(c.x,c.y,c.z)
         let dx = (-c.y - c.z) * dt;
         let dy = (c.x + a * c.y) * dt;
-        let dz = (b + c.z * (c.x - c)) * dt;
+        let dz = (b + c.z * (c.x - C)) * dt;
+        // console.log(b, c.z, c.x , c);
 
         // let dx = sigma * (c.y - c.x) * dt;
         // let dy = (c.x * (rho - c.z) - c.y) * dt;
@@ -54,7 +54,7 @@ function draw() {
         let newX = c.x + dx;
         let newY = c.y + dy;
         let newZ = c.z + dz;
-        // console.log(newX, newY, newZ);
+        // console.log(c.x,c.y,c.z)
         c.show(newX, newY, newZ);
     }
     //lorenz
@@ -72,13 +72,14 @@ function draw() {
     // let dy = (x + a * y) * dt;
     // let dz = (b + z * (x - c)) * dt;
 
-    // x2 = x2 + dx2;
-    // y2 = y2 + dy2;
-    // z2 = z2 + dz2;
+
+    // x = x + dx;
+    // y = y + dy;
+    // z = z + dz;
 
     // x = x + dx 
     // console.log(x,y,z)
-    // c2.show(x, y, z);
+    // c1.show(x, y, z);
     // c3.show(x2, y2, z2)
     points.push(createVector(x, y, z));
     points.push(new p5.Vector(x, y, z));

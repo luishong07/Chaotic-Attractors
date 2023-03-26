@@ -15,11 +15,11 @@ class Cell {
         this.y = y;
         this.z = z;
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 200) {
+        if (this.path.length > 1000) {
             this.path.shift();
         }
         stroke(255, 100);
-        strokeWeight(5);
+        strokeWeight(10);
         point(x * 15, y * 15, z * 15);
         // console.log(this.color)
         beginShape()
