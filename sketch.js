@@ -1,3 +1,5 @@
+
+//lorenz constants
 // const sigma = 10;
 // const rho = 28;
 // const beta = 8 / 3;
@@ -11,13 +13,26 @@
 // let C = -0.4;
 
 //aizawa constants
-const a = 0.95
-const b = 0.7
-const c = 0.6
-const d = 3.5
-const e = 0.25
-const f = 0.1
+// const a = 0.95;
+// const b = 0.7;
+// const c = 0.6;
+// const d = 3.5;
+// const e = 0.25;
+// const f = 0.1;
 
+//lorenz83
+// const a = 0.95;
+// const b = 7.91;
+// const f = 4.83;
+// const g = 4.66;
+
+
+//dadras constants
+const a = 3
+const b = 2.7
+const c = 1.7
+const d = 2
+const e = 9
 
 let points = [];
 let c1;
@@ -27,9 +42,9 @@ let bee = 0.208186;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
-    c1 = new Cell(0.1, 0, 0, "red");
+    c1 = new Cell(0.1, 0.1, 0, "red");
     c2 = new Cell(0.1, 0, 0.2, "blue");
-    c3 = new Cell(0, 0.1, 0.3, "green");
+    c3 = new Cell(0.2, 0.1, 0.3, "green");
     cells.push(c1);
     cells.push(c2);
     cells.push(c3);
@@ -50,28 +65,41 @@ function draw() {
     // let dy = sin(z) - bee*y
     // let dz = sin(x) - bee*z
 
+    //aizawa
+    // dt = 0.01
+    // let dx = ((p.z-b)*p.x - d*p.y)*dt
+    // let dy = ((d*p.x) + p.y*(p.z - b))*dt
+    // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
+
+    //lorenz83
+    // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
+    // let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
+    // let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
+
+
+    //dadras
+    // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
+    // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
+    // let dz = ((d*p.x*p.y) - (e*p.z))*dt
     dt = 0.01;
     for (let p of cells) {
 
+        let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
+        let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
+        let dz = ((d*p.x*p.y) - (e*p.z))*dt
 
-        // let dx = sigma * (p.y - p.x) * dt;
-        // let dy = (p.x * (rho - p.z) - p.y) * dt;
-        // let dz = (p.x * p.y - beta * p.z) * dt;
 
-        let dx = ((p.z-b)*p.x - d*p.y)*dt
-        let dy = ((d*p.x) + p.y*(p.z - b))*dt
-        let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
 
         let newX = p.x + dx;
         let newY = p.y + dy;
         let newZ = p.z + dz;
-        console.log(newX, newY, newZ)
+        // console.log(newX, newY, newZ);
         p.show(newX, newY, newZ);
     }
     //lorenz
-    // let dx = sigma * (y - x) * dt;
-    // let dy = (x * (rho - z) - y) * dt;
-    // let dz = (x * y - beta * z) * dt;
+    // let dx = sigma * (p.y - p.x) * dt;
+    // let dy = (p.x * (rho - p.z) - p.y) * dt;
+    // let dz = (p.x * p.y - beta * p.z) * dt;
 
     //rossler
     // dt = 0.05;

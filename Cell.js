@@ -5,6 +5,7 @@ class Cell {
         this.z = z;
         this.path = [];
         this.color = color
+        this.angle = 0
     }
 
     // getInitialValues() {
@@ -15,9 +16,10 @@ class Cell {
         this.y = y;
         this.z = z;
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 3000) {
+        if (this.path.length > 1500) {
             this.path.shift();
         }
+        rotateY(angle)
         stroke(255, 100);
         strokeWeight(10);
         point(x * 30, y * 30, z * 30);
