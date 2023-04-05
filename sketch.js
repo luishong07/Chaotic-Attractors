@@ -28,11 +28,16 @@
 
 
 //dadras constants
-const a = 3
-const b = 2.7
-const c = 1.7
-const d = 2
-const e = 9
+// const a = 3
+// const b = 2.7
+// const c = 1.7
+// const d = 2
+// const e = 9
+
+//chen constants
+const alpha = 5
+const beta = -10
+const delta = -0.38
 
 let points = [];
 let c1;
@@ -42,7 +47,7 @@ let bee = 0.208186;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
-    c1 = new Cell(0.1, 0.1, 0, "red");
+    c1 = new Cell(0.1, 0.1, 0.2, "red");
     c2 = new Cell(0.1, 0, 0.2, "blue");
     c3 = new Cell(0.2, 0.1, 0.3, "green");
     cells.push(c1);
@@ -81,12 +86,12 @@ function draw() {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    dt = 0.01;
+    dt = 0.0006;
     for (let p of cells) {
 
-        let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
-        let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
-        let dz = ((d*p.x*p.y) - (e*p.z))*dt
+        let dx =(alpha*p.x -p.y*p.z)*dt
+        let dy = (beta*p.y + p.x*p.z)*dt
+        let dz = (delta*p.z +((p.x*p.y)/3))*dt
 
 
 
@@ -115,7 +120,7 @@ function draw() {
     // rotateY(angle);
     // rotateX(PI / 2);
     // console.log(angle)
-    scale(30);
+    // scale(10);
     stroke(255);
     noFill();
     let hu = 0;
