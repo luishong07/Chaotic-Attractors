@@ -41,23 +41,35 @@
 // const a = 1.89
 
 //rabonivich-fabrikant
-let alpha = 0.14;
-let sigma = 0.10;
+// let alpha = 0.14;
+// let sigma = 0.1;
+
+//sprott constants
+// let a = 2.07
+// let b = 1.79
+
+//three scroll unified chaotic system
+const a = 32.48
+const b = 45.84
+const c = 1.18
+const d = 0.13
+const e = 0.57
+const f = 14.7
 
 let points = [];
 let c1;
 let c2;
 let cells = [];
 let bee = 0.208186;
-let scl = 20;
+let scl = 1;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
-    c1 = new Cell(0.1, 0.1, 0.2, "red", scl);
-    c2 = new Cell(0.1, 0, 0.2, "blue", scl);
-    c3 = new Cell(0.2, 0.1, 0.3, "green", scl);
+    c1 = new Cell(-0.1, 0.1, 0.2, "red", scl);
+    // c2 = new Cell(0.1, -0.5, -0.2, "blue", scl);
+    c3 = new Cell(-0.2, -0.1, -0.3, "green", scl);
     cells.push(c1);
-    cells.push(c2);
+    // cells.push(c2);
     cells.push(c3);
 }
 let angle = 0;
@@ -91,11 +103,11 @@ function draw() {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    dt = 0.02;
+    dt = 0.0005;
     for (let p of cells) {
-        let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x)*dt;
-        let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y)*dt;
-        let dz = (-2 * p.z * (alpha + p.x * p.y))*dt;
+        let dx = (a*(p.y - p.x) +d*p.x*p.z)*dt
+        let dy = (b*p.x - p.x*p.z + f*p.y)*dt
+        let dz = (c*p.z + p.x*p.y - e*p.x**2)*dt
 
         let newX = p.x + dx;
         let newY = p.y + dy;
@@ -103,6 +115,16 @@ function draw() {
         // console.log(newX, newY, newZ);
         p.show(newX, newY, newZ);
     }
+
+    //sprott
+    // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
+    // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
+    // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
+
+    //rabinovich-fabrikant
+    // let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x) * dt;
+    // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
+    // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
 
     //halvorsen
     // dt = 0.01;
@@ -135,7 +157,7 @@ function draw() {
     // rotateY(angle);
     // rotateX(PI / 2);
     // console.log(angle)
-    // scale(10);
+    scale(10);
     stroke(255);
     noFill();
     // let hu = 0;
