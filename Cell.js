@@ -17,10 +17,10 @@ class Cell {
         this.y = y;
         this.z = z;
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 3000) {
+        if (this.path.length > 1000) {
             this.path.shift();
         }
-        rotateY(angle)
+        // rotateY(angle)
         stroke(255, 100);
         strokeWeight(10);
         point(x *this.scl, y *this.scl, z *this.scl);

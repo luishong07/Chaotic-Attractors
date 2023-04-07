@@ -3,9 +3,10 @@
 // const rho = 28;
 // const beta = 8 / 3;
 
+// rossler constants
 // let a = 1 / 5;
 // let b = 1 / 5;
-// let C = 5.7;
+// let c = 5.7;
 
 // let a = 0.2;
 // let b = 0.01;
@@ -20,10 +21,10 @@
 // const f = 0.1;
 
 //lorenz83
-// const a = 0.95;
-// const b = 7.91;
-// const f = 4.83;
-// const g = 4.66;
+const a = 0.95;
+const b = 7.91;
+const f = 4.83;
+const g = 4.66;
 
 //dadras constants
 // const a = 3
@@ -49,31 +50,37 @@
 // let b = 1.79
 
 //three scroll unified chaotic system
-const a = 32.48
-const b = 45.84
-const c = 1.18
-const d = 0.13
-const e = 0.57
-const f = 14.7
+// const a = 32.48
+// const b = 45.84
+// const c = 1.18
+// const d = 0.13
+// const e = 0.57
+// const f = 14.7
 
 let points = [];
 let c1;
 let c2;
 let cells = [];
 let bee = 0.208186;
-let scl = 1;
+let scl = 20;
+let particles = [];
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
-    c1 = new Cell(-0.1, 0.1, 0.2, "red", scl);
+    c1 = new Cell(0.1, -0.1, -0.2, "red", scl);
     // c2 = new Cell(0.1, -0.5, -0.2, "blue", scl);
     c3 = new Cell(-0.2, -0.1, -0.3, "green", scl);
     cells.push(c1);
     // cells.push(c2);
     cells.push(c3);
+    for (let i = 0; i < 35; i++) {
+        let p = new Particle(0, 0, 0, scl);
+        particles.push(p);
+    }
 }
 let angle = 0;
 function draw() {
+    // frameRate(15)
     orbitControl();
     background("black");
 
@@ -84,9 +91,9 @@ function draw() {
 
     //thomas
     // dt = 0.0001;
-    // let dx = sin(y) - bee*x
-    // let dy = sin(z) - bee*y
-    // let dz = sin(x) - bee*z
+    // let dx = sin(p.y) - bee*p.x
+    // let dy = sin(p.z) - bee*p.y
+    // let dz = sin(p.x) - bee*p.z
 
     //aizawa
     // dt = 0.01
@@ -103,11 +110,11 @@ function draw() {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    dt = 0.0005;
+    dt = 0.01;
     for (let p of cells) {
-        let dx = (a*(p.y - p.x) +d*p.x*p.z)*dt
-        let dy = (b*p.x - p.x*p.z + f*p.y)*dt
-        let dz = (c*p.z + p.x*p.y - e*p.x**2)*dt
+        let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
+        let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
+        let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
 
         let newX = p.x + dx;
         let newY = p.y + dy;
@@ -115,6 +122,23 @@ function draw() {
         // console.log(newX, newY, newZ);
         p.show(newX, newY, newZ);
     }
+
+    for (let p of particles) {
+        let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
+        let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
+        let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
+
+        let newX = p.x + dx;
+        let newY = p.y + dy;
+        let newZ = p.z + dz;
+        // console.log(newX, newY, newZ);
+        p.show(newX, newY, newZ);
+    }
+
+    //three scroll unified chaotic system
+    // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
+    // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
+    // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
 
     //sprott
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
@@ -145,9 +169,9 @@ function draw() {
 
     //rossler
     // dt = 0.05;
-    // let dx = (-y - z) * dt;
-    // let dy = (x + a * y) * dt;
-    // let dz = (b + z * (x - c)) * dt;
+    // let dx = (-p.y - p.z) * dt;
+    // let dy = (p.x + a * p.y) * dt;
+    // let dz = (b + p.z * (p.x - c)) * dt;
 
     translate(0, 0, 0);
     // if (points.length > 500) {
