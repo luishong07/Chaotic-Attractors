@@ -17,7 +17,7 @@ class Cell {
         this.y = y;
         this.z = z;
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 1000) {
+        if (this.path.length > 500) {
             this.path.shift();
         }
         // rotateY(angle)

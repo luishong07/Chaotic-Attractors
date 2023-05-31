@@ -1,7 +1,8 @@
+
 //lorenz constants
-// const sigma = 10;
-// const rho = 28;
-// const beta = 8 / 3;
+const sigma = 10;
+const rho = 28;
+const beta = 8 / 3;
 
 // rossler constants
 // let a = 1 / 5;
@@ -21,10 +22,10 @@
 // const f = 0.1;
 
 //lorenz83
-const a = 0.95;
-const b = 7.91;
-const f = 4.83;
-const g = 4.66;
+// const a = 0.95;
+// const b = 7.91;
+// const f = 4.83;
+// const g = 4.66;
 
 //dadras constants
 // const a = 3
@@ -62,7 +63,7 @@ let c1;
 let c2;
 let cells = [];
 let bee = 0.208186;
-let scl = 20;
+let scl = 10;
 let particles = [];
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
@@ -73,7 +74,7 @@ function setup() {
     cells.push(c1);
     // cells.push(c2);
     cells.push(c3);
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 20; i++) {
         let p = new Particle(0, 0, 0, scl);
         particles.push(p);
     }
@@ -112,26 +113,24 @@ function draw() {
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
     dt = 0.01;
     for (let p of cells) {
-        let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
-        let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
-        let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
+        let dx = sigma * (p.y - p.x) * dt;
+        let dy = (p.x * (rho - p.z) - p.y) * dt;
+        let dz = (p.x * p.y - beta * p.z) * dt;
 
         let newX = p.x + dx;
         let newY = p.y + dy;
         let newZ = p.z + dz;
-        // console.log(newX, newY, newZ);
         p.show(newX, newY, newZ);
     }
 
     for (let p of particles) {
-        let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
-        let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
-        let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
+       let dx = sigma * (p.y - p.x) * dt;
+        let dy = (p.x * (rho - p.z) - p.y) * dt;
+        let dz = (p.x * p.y - beta * p.z) * dt;
 
         let newX = p.x + dx;
         let newY = p.y + dy;
         let newZ = p.z + dz;
-        // console.log(newX, newY, newZ);
         p.show(newX, newY, newZ);
     }
 
@@ -181,7 +180,7 @@ function draw() {
     // rotateY(angle);
     // rotateX(PI / 2);
     // console.log(angle)
-    scale(10);
+    scale(1);
     stroke(255);
     noFill();
     // let hu = 0;
