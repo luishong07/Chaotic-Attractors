@@ -1,4 +1,4 @@
-class Cell {
+class Tracer {
     constructor(x, y, z, color,scl) {
         this.x = x;
         this.y = y;

@@ -1,4 +1,3 @@
-
 //lorenz constants
 const sigma = 10;
 const rho = 28;
@@ -61,23 +60,25 @@ const beta = 8 / 3;
 let points = [];
 let c1;
 let c2;
-let cells = [];
+let tracers = [];
 let bee = 0.208186;
 let scl = 10;
 let particles = [];
+let lorenz
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
-    c1 = new Cell(0.1, -0.1, -0.2, "red", scl);
-    // c2 = new Cell(0.1, -0.5, -0.2, "blue", scl);
-    c3 = new Cell(-0.2, -0.1, -0.3, "green", scl);
-    cells.push(c1);
-    // cells.push(c2);
-    cells.push(c3);
+    c1 = new Tracer(0.1, -0.1, -0.2, "red", scl);
+    // c2 = new Tracer(0.1, -0.5, -0.2, "blue", scl);
+    c3 = new Tracer(-0.2, -0.1, -0.3, "green", scl);
+    tracers.push(c1);
+    // tracers.push(c2);
+    tracers.push(c3);
     for (let i = 0; i < 20; i++) {
         let p = new Particle(0, 0, 0, scl);
         particles.push(p);
     }
+    lorenz = new Lorenz();
 }
 let angle = 0;
 function draw() {
@@ -111,20 +112,24 @@ function draw() {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    dt = 0.01;
-    for (let p of cells) {
-        let dx = sigma * (p.y - p.x) * dt;
-        let dy = (p.x * (rho - p.z) - p.y) * dt;
-        let dz = (p.x * p.y - beta * p.z) * dt;
+    // dt = 0.01;
+    dt = lorenz.dt
+    for (let t of tracers) {
+        // let dx = sigma * (t.y - t.x) * dt;
+        // let dy = (t.x * (rho - t.z) - t.y) * dt;
+        // let dz = (t.x * t.y - beta * t.z) * dt;
+        let dx = lorenz.dx(t.x, t.y) * dt;
+        let dy = lorenz.dy(t.x, t.y, t.z) * dt;
+        let dz = lorenz.dz(t.x, t.y, t.z) * dt;
 
-        let newX = p.x + dx;
-        let newY = p.y + dy;
-        let newZ = p.z + dz;
-        p.show(newX, newY, newZ);
+        let newX = t.x + dx;
+        let newY = t.y + dy;
+        let newZ = t.z + dz;
+        t.show(newX, newY, newZ);
     }
 
     for (let p of particles) {
-       let dx = sigma * (p.y - p.x) * dt;
+        let dx = sigma * (p.y - p.x) * dt;
         let dy = (p.x * (rho - p.z) - p.y) * dt;
         let dz = (p.x * p.y - beta * p.z) * dt;
 
