@@ -73,14 +73,14 @@ function setup() {
 
     tracers.push(c1);
  
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 60; i++) {
         let p = new Particle(lorenz.particleColor(),lorenz.scl);
         particles.push(p);
     }
 }
 let angle = 0;
 function draw() {
-    // frameRate(15)
+    frameRate(30)
     orbitControl();
     background("black");
 

@@ -14,7 +14,7 @@ class Lorenz {
         this.rho = 28;
         this.beta = 8 / 3;
         this.tracerColor = color(188, 50, 90);
-        this.scl = 10;
+        this.scl = 8;
         this.dt = 0.01;
         // this.particleColor = color(random(80, 150), 100, 100);
     }
