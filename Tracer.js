@@ -1,5 +1,6 @@
 class Tracer {
     constructor(x, y, z, color,scl) {
+        console.log(color)
         this.x = x;
         this.y = y;
         this.z = z;
@@ -21,7 +22,7 @@ class Tracer {
             this.path.shift();
         }
         // rotateY(angle)
-        stroke(255, 100);
+        stroke(this.color);
         strokeWeight(10);
         point(x *this.scl, y *this.scl, z *this.scl);
         // console.log(this.color)

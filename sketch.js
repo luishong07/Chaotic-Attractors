@@ -68,17 +68,15 @@ let lorenz
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
-    c1 = new Tracer(0.1, -0.1, -0.2, "red", scl);
-    // c2 = new Tracer(0.1, -0.5, -0.2, "blue", scl);
-    c3 = new Tracer(-0.2, -0.1, -0.3, "green", scl);
+    lorenz = new Lorenz();
+    c1 = new Tracer(0.1, -0.1, -0.2, lorenz.tracerColor, lorenz.scl);
+
     tracers.push(c1);
-    // tracers.push(c2);
-    tracers.push(c3);
-    for (let i = 0; i < 20; i++) {
-        let p = new Particle(0, 0, 0, scl);
+ 
+    for (let i = 0; i < 30; i++) {
+        let p = new Particle(lorenz.particleColor(),lorenz.scl);
         particles.push(p);
     }
-    lorenz = new Lorenz();
 }
 let angle = 0;
 function draw() {
