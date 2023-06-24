@@ -1,6 +1,6 @@
 class Tracer {
     constructor(x, y, z, color,scl) {
-        console.log(color)
+        console.log(scl)
         this.x = x;
         this.y = y;
         this.z = z;
@@ -18,10 +18,21 @@ class Tracer {
         this.y = y;
         this.z = z;
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 500) {
+        if (this.path.length > 1200) {
             this.path.shift();
         }
-        // rotateY(angle)
+        stroke('red')
+        // line(0,0,0, 0,0,this.scl*5)
+        // line(0,0,0, this.scl*5,0,0)
+        // line(0,0,0, 0,this.scl*5,0)
+        rotateY(-PI/4)
+        rotateX(PI/4)
+
+        this.angle -=0.01
+        if(this.angle <= -TWO_PI){
+            this.angle = 0
+        }
+        rotate(this.angle, new p5.Vector(1,1,1))
         stroke(this.color);
         strokeWeight(10);
         point(x *this.scl, y *this.scl, z *this.scl);

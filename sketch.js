@@ -39,7 +39,7 @@ const beta = 8 / 3;
 // const delta = -0.38;
 
 //halvorsen constans
-// const a = 1.89
+const a = 1.89
 
 //rabonivich-fabrikant
 // let alpha = 0.14;
@@ -62,19 +62,19 @@ let c1;
 let c2;
 let tracers = [];
 let bee = 0.208186;
-let scl = 10;
+let scl = 35;
 let particles = [];
 let lorenz
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSB);
     lorenz = new Lorenz();
-    c1 = new Tracer(0.1, -0.1, -0.2, lorenz.tracerColor, lorenz.scl);
+    c1 = new Tracer(0.1, -0.1, -0.2, lorenz.tracerColor, scl);
 
     tracers.push(c1);
  
     for (let i = 0; i < 60; i++) {
-        let p = new Particle(lorenz.particleColor(),lorenz.scl);
+        let p = new Particle(lorenz.particleColor(),scl);
         particles.push(p);
     }
 }
@@ -110,15 +110,16 @@ function draw() {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    // dt = 0.01;
-    dt = lorenz.dt
+    dt = 0.01;
+    // dt = lorenz.dt
     for (let t of tracers) {
-        // let dx = sigma * (t.y - t.x) * dt;
-        // let dy = (t.x * (rho - t.z) - t.y) * dt;
-        // let dz = (t.x * t.y - beta * t.z) * dt;
-        let dx = lorenz.dx(t.x, t.y) * dt;
-        let dy = lorenz.dy(t.x, t.y, t.z) * dt;
-        let dz = lorenz.dz(t.x, t.y, t.z) * dt;
+        let dx = (-1*a*t.x - 4*t.y - 4*t.z -t.y**2)*dt
+        let dy = (-1*a*t.y - 4*t.z - 4*t.x -t.z**2)*dt
+        let dz = (-1*a*t.z - 4*t.x - 4*t.y -t.x**2)*dt
+        
+        // let dx = lorenz.dx(t.x, t.y) * dt;
+        // let dy = lorenz.dy(t.x, t.y, t.z) * dt;
+        // let dz = lorenz.dz(t.x, t.y, t.z) * dt;
 
         let newX = t.x + dx;
         let newY = t.y + dy;
@@ -127,9 +128,9 @@ function draw() {
     }
 
     for (let p of particles) {
-        let dx = sigma * (p.y - p.x) * dt;
-        let dy = (p.x * (rho - p.z) - p.y) * dt;
-        let dz = (p.x * p.y - beta * p.z) * dt;
+        let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
+        let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
+        let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
 
         let newX = p.x + dx;
         let newY = p.y + dy;
