@@ -1,7 +1,50 @@
 //lorenz constants
-const sigma = 10;
-const rho = 28;
-const beta = 8 / 3;
+const lorenz = {
+    sigma: 10,
+    rho: 28,
+    beta: 8 / 3,
+    tracerColor: () => {
+        return color(188, 50, 50);
+    },
+    scl: 8,
+    dt: 0.01,
+    dx: function (x, y) {
+        return this.sigma * (y - x);
+    },
+    dy: function (x, y, z) {
+        return -1 * x * z + this.rho * x - y;
+    },
+    dz: function (x, y, z) {
+        return x * y - this.beta * z;
+    },
+    particleColor: function () {
+        return color(random(70, 160), 100, 50);
+    }
+};
+
+const fourwing = {
+    a: 0.2,
+    b: 0.01,
+    c: -0.4,
+    tracerColor: function () {
+        return color(169, 100.5);
+    },
+    scl: 50,
+    dt: 0.1,
+    dx: function (x, y, z) {
+        return this.a * x + y * z;
+    },
+    dy: function (x, y, z) {
+        return this.b * x + this.c * y + x * z;
+    },
+    dz: function (x,y,z) {
+        console.log(-z - (x * y))
+        return -z - x * y;
+    },
+    particleColor: function () {
+        return color(random(0,57),100,50)
+    },
+};
 
 // rossler constants
 // let a = 1 / 5;
@@ -9,9 +52,18 @@ const beta = 8 / 3;
 // let c = 5.7;
 
 //fourwing
-let a = 0.2;
-let b = 0.01;
-let c = -0.4;
+// const fourwing = {
+//     a: 0.2,
+//     b: 0.01,
+//     c: -0.4,
+//     traceColor: color(169, 100.5),
+//     scl: 50,
+//     dt: 0.1,
+// };
+
+// let a = 0.2;
+// let b = 0.01;
+// let c = -0.4;
 
 //aizawa constants
 // const a = 0.95;
@@ -63,31 +115,49 @@ let c1;
 let c2;
 let tracers = [];
 let bee = 0.208186;
-let scl = 8;
+let scl = 100;
 let particles = [];
-let lorenz;
+// let lorenz;
+let dt;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
-    colorMode(HSB);
-    lorenz = new Lorenz();
-    c1 = new Tracer(0.1, -0.1, -0.2, lorenz.tracerColor, scl);
-    // c2 = new Tracer(0.1, -0.1, 0.2, lorenz.tracerColor, scl);
+    colorMode(HSL);
+    // lorenz = new Lorenz();
+    c1 = new Tracer(0.1, -0.1, -0.2, fourwing.tracerColor(), fourwing.scl);
+    c2 = new Tracer(0.1, -0.1, 0.2, fourwing.tracerColor(), fourwing.scl);
 
     tracers.push(c1);
-    // tracers.push(c2);
+    tracers.push(c2);
 
-    for (let i = 0; i < 60; i++) {
-        let p = new Particle(lorenz.particleColor(), scl);
+    for (let i = 0; i < 100; i++) {
+        let p = new Particle(fourwing.particleColor(), fourwing.scl);
         particles.push(p);
     }
 }
 let angle = 0;
+dt = fourwing.dt;
 function draw() {
+    background("black");
+    // background('rgba(16,0,0, 1)')
     frameRate(30);
     orbitControl();
-    background("black");
-    // rotateY(PI/2)
-    // rotateZ(PI/2)
+    // rotateZ(PI / 2);
+
+    stroke('red')
+    line(0,0,0,
+        0,innerHeight/2,0)//y axis
+
+    stroke('blue')
+    line(0,0,0,
+        0,0,200)//z axis
+
+    stroke('yellow')
+    line(0,0,0,
+        innerHeight/2,0,0)//x axis
+        
+    // angle+=0.01
+    // // rotateX(angle)
+    // rotateY(angle)
 
     //four wing
     // let dx = (a*x + y*z)*dt
@@ -115,24 +185,24 @@ function draw() {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    dt = 0.01;
+    // dt = 0.1;
     // dt = lorenz.dt
     for (let t of tracers) {
-        let dx = sigma * (t.y - t.x) * dt;
-        let dy = (t.x * (rho - t.z) - t.y) * dt;
-        let dz = (t.x * t.y - beta * t.z) * dt;
-
-        // let dx = (a*t.x + t.y*t.z)*dt
-        // let dy = (b*t.x + c*t.y - t.x*t.z)*dt
-        // let dz = (-1*t.z -1*t.x*t.y)*dt
+        let dx = fourwing.dx(t.x, t.y) * dt;
+        let dy = fourwing.dy(t.x, t.y, t.z) * dt;
+        let dz = fourwing.dz(t.x, t.y, t.z) * dt;
+        console.log(fourwing.dx(t.x,t.y,t.z));
+        // let dx = (a * t.x + t.y * t.z) * dt;
+        // let dy = (b * t.x + c * t.y - t.x * t.z) * dt;
+        // let dz = (-1 * t.z - 1 * t.x * t.y) * dt;
 
         // let dx = (-1*a*t.x - 4*t.y - 4*t.z -t.y**2)*dt
         // let dy = (-1*a*t.y - 4*t.z - 4*t.x -t.z**2)*dt
         // let dz = (-1*a*t.z - 4*t.x - 4*t.y -t.x**2)*dt
 
-        // let dx = lorenz.dx(t.x, t.y) * dt;
-        // let dy = lorenz.dy(t.x, t.y, t.z) * dt;
-        // let dz = lorenz.dz(t.x, t.y, t.z) * dt;
+        // let dx = fourwing.dx(t.x, t.y) * dt;
+        // let dy = fourwing.dy(t.x, t.y, t.z) * dt;
+        // let dz = fourwing.dz(t.x, t.y, t.z) * dt;
 
         let newX = t.x + dx;
         let newY = t.y + dy;
@@ -141,10 +211,9 @@ function draw() {
     }
 
     for (let p of particles) {
-
-        let dx = sigma * (p.y - p.x) * dt;
-        let dy = (p.x * (rho - p.z) - p.y) * dt;
-        let dz = (p.x * p.y - beta * p.z) * dt;
+        let dx = fourwing.dx(p.x, p.y) * dt;
+        let dy = fourwing.dy(p.x, p.y, p.z) * dt;
+        let dz = fourwing.dz(p.x, p.y, p.z) * dt;
 
         // let dx = (a * p.x + p.y * p.z) * dt;
         // let dy = (b * p.x + c * p.y - p.x * p.z) * dt;
@@ -198,7 +267,7 @@ function draw() {
     // let dy = (p.x + a * p.y) * dt;
     // let dz = (b + p.z * (p.x - c)) * dt;
 
-    translate(0, 0, 0);
+    // translate(0, 0, -200);
     // if (points.length > 500) {
     //     points.shift();
     // }
@@ -206,8 +275,8 @@ function draw() {
     // rotateY(angle);
     // rotateX(PI / 2);
     // console.log(angle)
-    scale(1);
-    stroke(255);
-    noFill();
+    // scale(1);
+    // stroke(255);
+    // noFill();
     // let hu = 0;
 }
