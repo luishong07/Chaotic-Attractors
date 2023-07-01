@@ -71,6 +71,32 @@ const halvorsen ={
 
 }
 
+const rabinovichFabrikant = {
+    // let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x) * dt;
+    // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
+    // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
+    alpha: 0.14,
+    sigma: 0.10,
+    tracerColor: function(){
+        return color(325,100, 50)
+    },
+    scl: 200,
+    dt: 0.0145,
+    dx: function(x,y,z){
+        return (y * (z - 1 + x ** 2) + this.sigma * x) * this.dt;    
+    },
+    dy: function(x,y,z){
+        return (x * (3 * z + 1 - x ** 2) + this.sigma * y) * this.dt;
+    },
+    dz: function(x,y,z){
+        return -2 * z * (this.alpha + x * y) * this.dt;
+    },
+    particleColor: function(){
+        return color(random(170,205),100,50)
+    }
+
+}
+
 // rossler constants
 // let a = 1 / 5;
 // let b = 1 / 5;
@@ -148,11 +174,11 @@ let attractor
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    attractor = halvorsen
+    attractor = rabinovichFabrikant
     // dt = attractor.dt;
     // lorenz = new Lorenz();
     // console.log(attractor)
-    c1 = new Tracer(0.1, -0.1, -0.2, attractor.tracerColor(), attractor.scl);
+    c1 = new Tracer(-0.1,0.1,0.1, attractor.tracerColor(), attractor.scl);
     c2 = new Tracer(-0.1, -0.1, 0.2, attractor.tracerColor(), attractor.scl);
 
     tracers.push(c1);
@@ -167,7 +193,7 @@ let angle = 0;
 function draw() {
     background("black");
     // background('rgba(16,0,0, 1)')
-    frameRate(30);
+    frameRate(60);
     orbitControl();
     // rotateZ(PI / 2);
 

@@ -17,7 +17,7 @@ class Tracer {
         this.z = z;
 
         this.path.push(createVector(this.x*this.scl, this.y*this.scl,this.z*this.scl));
-        if (this.path.length > 1200) {
+        if (this.path.length > 3000) {
             this.path.shift();
         }
         noFill()
