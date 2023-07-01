@@ -9,13 +9,13 @@ const lorenz = {
     scl: 8,
     dt: 0.01,
     dx: function (x, y) {
-        return this.sigma * (y - x);
+        return (this.sigma * (y - x))*this.dt;
     },
     dy: function (x, y, z) {
-        return -1 * x * z + this.rho * x - y;
+        return (-1 * x * z + this.rho * x - y)*this.dt;
     },
     dz: function (x, y, z) {
-        return x * y - this.beta * z;
+        return (x * y - this.beta * z)*this.dt;
     },
     particleColor: function () {
         return color(random(70, 160), 100, 50);
@@ -27,24 +27,49 @@ const fourwing = {
     b: 0.01,
     c: -0.4,
     tracerColor: function () {
-        return color(169, 100.5);
+        return color(169, 100,50);
     },
-    scl: 50,
+    scl: 100,
     dt: 0.1,
     dx: function (x, y, z) {
-        return this.a * x + y * z;
+        return (this.a * x + y * z)*this.dt;
     },
     dy: function (x, y, z) {
-        return this.b * x + this.c * y + x * z;
+        return (this.b * x + this.c * y - x * z)*this.dt;
     },
     dz: function (x,y,z) {
-        console.log(-z - (x * y))
-        return -z - x * y;
+        // console.log(x,y,z)
+        return (-z - x * y)*this.dt;
     },
     particleColor: function () {
         return color(random(0,57),100,50)
     },
 };
+
+const halvorsen ={
+    // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
+    // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
+    // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
+    a: 1.89,
+    tracerColor: function(){
+        return color(230,100,76)
+    },
+    scl:40,
+    dt:0.01,
+    dx: function(x,y,z){
+        return (-1*this.a*x - 4*y - 4*z -y**2)*this.dt
+    },
+    dy: function(x,y,z){
+        return (-1*this.a*y - 4*z - 4*x -z**2)*this.dt
+    },
+    dz: function(x,y,z){
+        return (-1*this.a*z - 4*x - 4*y -x**2)*this.dt
+    },
+    particleColor: function(){
+        return color(random(160,205),100,50)
+    }
+
+}
 
 // rossler constants
 // let a = 1 / 5;
@@ -119,23 +144,26 @@ let scl = 100;
 let particles = [];
 // let lorenz;
 let dt;
+let attractor
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
+    attractor = halvorsen
+    // dt = attractor.dt;
     // lorenz = new Lorenz();
-    c1 = new Tracer(0.1, -0.1, -0.2, fourwing.tracerColor(), fourwing.scl);
-    c2 = new Tracer(0.1, -0.1, 0.2, fourwing.tracerColor(), fourwing.scl);
+    // console.log(attractor)
+    c1 = new Tracer(0.1, -0.1, -0.2, attractor.tracerColor(), attractor.scl);
+    c2 = new Tracer(-0.1, -0.1, 0.2, attractor.tracerColor(), attractor.scl);
 
     tracers.push(c1);
     tracers.push(c2);
 
-    for (let i = 0; i < 100; i++) {
-        let p = new Particle(fourwing.particleColor(), fourwing.scl);
+    for (let i = 0; i < 80; i++) {
+        let p = new Particle(attractor.particleColor(), attractor.scl);
         particles.push(p);
     }
 }
 let angle = 0;
-dt = fourwing.dt;
 function draw() {
     background("black");
     // background('rgba(16,0,0, 1)')
@@ -188,10 +216,16 @@ function draw() {
     // dt = 0.1;
     // dt = lorenz.dt
     for (let t of tracers) {
-        let dx = fourwing.dx(t.x, t.y) * dt;
-        let dy = fourwing.dy(t.x, t.y, t.z) * dt;
-        let dz = fourwing.dz(t.x, t.y, t.z) * dt;
-        console.log(fourwing.dx(t.x,t.y,t.z));
+        // let dx = attractor.dx(t.x, t.y,t.z) * dt;
+        // let dy = attractor.dy(t.x, t.y, t.z) * dt;
+        // let dz = attractor.dz(t.x, t.y, t.z) * dt;
+
+        let dx = attractor.dx(t.x, t.y,t.z) 
+        let dy = attractor.dy(t.x, t.y, t.z) 
+        let dz = attractor.dz(t.x, t.y, t.z) 
+
+
+        // console.log(t);
         // let dx = (a * t.x + t.y * t.z) * dt;
         // let dy = (b * t.x + c * t.y - t.x * t.z) * dt;
         // let dz = (-1 * t.z - 1 * t.x * t.y) * dt;
@@ -211,9 +245,16 @@ function draw() {
     }
 
     for (let p of particles) {
-        let dx = fourwing.dx(p.x, p.y) * dt;
-        let dy = fourwing.dy(p.x, p.y, p.z) * dt;
-        let dz = fourwing.dz(p.x, p.y, p.z) * dt;
+        let dx = attractor.dx(p.x, p.y,p.z) 
+        let dy = attractor.dy(p.x, p.y, p.z) 
+        let dz = attractor.dz(p.x, p.y, p.z)
+
+
+
+        // let dx = attractor.dx(p.x, p.y, p.z) * dt;
+        // let dy = attractor.dy(p.x, p.y, p.z) * dt;
+        // let dz = attractor.dz(p.x, p.y, p.z) * dt;
+        // console.log(attractor.dx(p.x,p.y,p.z));
 
         // let dx = (a * p.x + p.y * p.z) * dt;
         // let dy = (b * p.x + c * p.y - p.x * p.z) * dt;
