@@ -97,6 +97,31 @@ const rabinovichFabrikant = {
 
 }
 
+const sprott = {
+    // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
+    // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
+    // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
+    a: 2.07,
+    b: 1.79,
+    tracerColor: function(){
+        return color(57,100,50)
+    },
+    scl: 100,
+    dt: 0.1,
+    dx: function(x,y,z){
+        return (y + this.a * x * y + x * z) * this.dt;
+    },
+    dy: function(x,y,z){
+        return (1 - this.b * x ** 2 + y * z) * this.dt;
+    },
+    dz: function(x,y,z){
+        return (x - x ** 2 - y ** 2) * this.dt;
+    },
+    particleColor: function(){
+        return color(random(0,33),100,50)
+    }
+}
+
 
 
 // rossler constants
@@ -176,7 +201,7 @@ let attractor
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    attractor = rabinovichFabrikant
+    attractor = sprott
     // dt = attractor.dt;
     // lorenz = new Lorenz();
     // console.log(attractor)
