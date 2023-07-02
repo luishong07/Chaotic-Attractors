@@ -122,7 +122,63 @@ const sprott = {
     }
 }
 
+const dadras = {
+    // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
+    // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
+    // let dz = ((d*p.x*p.y) - (e*p.z))*dt
+    a: 3,
+    b:2.7,
+    c:1.7,
+    d:2,
+    e:9,
+    scl: 20,
+    dt: 0.01,
+    tracerColor: function(){
+        return color(282,100,84)
+    },
+    dx: function(x,y,z){
+        return ( y - (this.a*x) + (this.b*y*z))*this.dt
+    },
+    dy: function(x,y,z){
+        return ((this.c*y) - (x*z) + z)*this.dt
+    },
+    dz: function(x,y,z){
+        return ((this.d*x*y) - (this.e*z))*this.dt
+    },
+    particleColor: function(){
+        return color(random(0,200),100,84)
+    }
+} 
 
+const aizawa = {
+    // let dx = ((p.z-b)*p.x - d*p.y)*dt
+    // let dy = ((d*p.x) + p.y*(p.z - b))*dt
+    // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
+    //note: consider making the starting values in the z axis only positives
+    a: 0.95,
+    b: 0.7,
+    c: 0.6,
+    d: 3.5,
+    e: 0.25,
+    f: 0.1,
+    scl: 100,
+    dt: 0.015,
+    tracerColor: function(){
+        return color(0,96,37)
+    },
+    dx: function(x,y,z){
+        return ((z-this.b)*x - this.d*y)*this.dt
+    },
+    dy: function(x,y,z){
+        return ((this.d*x) + y*(z - this.b))*this.dt
+    },
+    dz: function(x,y,z){
+        return (this.c + (this.a*z) -((z*z*z)/3) - (((x*x)+(y*y))*(1+(this.e*z))) +(this.f*z*x*x*x))*this.dt
+    },
+    particleColor: function(){
+        return color(random(0,150),100,84)
+    }
+}
 
 // rossler constants
 // let a = 1 / 5;
@@ -201,7 +257,7 @@ let attractor
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    attractor = sprott
+    attractor = aizawa
     // dt = attractor.dt;
     // lorenz = new Lorenz();
     // console.log(attractor)
