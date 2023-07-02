@@ -81,7 +81,7 @@ const rabinovichFabrikant = {
         return color(325,100, 50)
     },
     scl: 200,
-    dt: 0.0145,
+    dt: 0.04,
     dx: function(x,y,z){
         return (y * (z - 1 + x ** 2) + this.sigma * x) * this.dt;    
     },
@@ -96,6 +96,8 @@ const rabinovichFabrikant = {
     }
 
 }
+
+
 
 // rossler constants
 // let a = 1 / 5;
@@ -178,8 +180,8 @@ function setup() {
     // dt = attractor.dt;
     // lorenz = new Lorenz();
     // console.log(attractor)
-    c1 = new Tracer(-0.1,0.1,0.1, attractor.tracerColor(), attractor.scl);
-    c2 = new Tracer(-0.1, -0.1, 0.2, attractor.tracerColor(), attractor.scl);
+    c1 = new Tracer(0.1,-0.1,0.1, attractor.tracerColor(), attractor.scl);
+    c2 = new Tracer(0.1, -0.1, 0.2, attractor.tracerColor(), attractor.scl);
 
     tracers.push(c1);
     tracers.push(c2);
@@ -193,7 +195,7 @@ let angle = 0;
 function draw() {
     background("black");
     // background('rgba(16,0,0, 1)')
-    frameRate(60);
+    frameRate(30);
     orbitControl();
     // rotateZ(PI / 2);
 
