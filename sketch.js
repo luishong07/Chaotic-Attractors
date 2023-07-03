@@ -9,17 +9,17 @@ const lorenz = {
     scl: 8,
     dt: 0.01,
     dx: function (x, y) {
-        return (this.sigma * (y - x))*this.dt;
+        return this.sigma * (y - x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-1 * x * z + this.rho * x - y)*this.dt;
+        return (-1 * x * z + this.rho * x - y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x * y - this.beta * z)*this.dt;
+        return (x * y - this.beta * z) * this.dt;
     },
     particleColor: function () {
         return color(random(70, 160), 100, 50);
-    }
+    },
 };
 
 const fourwing = {
@@ -27,75 +27,73 @@ const fourwing = {
     b: 0.01,
     c: -0.4,
     tracerColor: function () {
-        return color(169, 100,50);
+        return color(169, 100, 50);
     },
     scl: 100,
     dt: 0.1,
     dx: function (x, y, z) {
-        return (this.a * x + y * z)*this.dt;
+        return (this.a * x + y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.b * x + this.c * y - x * z)*this.dt;
+        return (this.b * x + this.c * y - x * z) * this.dt;
     },
-    dz: function (x,y,z) {
+    dz: function (x, y, z) {
         // console.log(x,y,z)
-        return (-z - x * y)*this.dt;
+        return (-z - x * y) * this.dt;
     },
     particleColor: function () {
-        return color(random(0,57),100,50)
+        return color(random(0, 57), 100, 50);
     },
 };
 
-const halvorsen ={
+const halvorsen = {
     // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
     a: 1.89,
-    tracerColor: function(){
-        return color(230,100,76)
+    tracerColor: function () {
+        return color(230, 100, 76);
     },
-    scl:40,
-    dt:0.01,
-    dx: function(x,y,z){
-        return (-1*this.a*x - 4*y - 4*z -y**2)*this.dt
+    scl: 40,
+    dt: 0.01,
+    dx: function (x, y, z) {
+        return (-1 * this.a * x - 4 * y - 4 * z - y ** 2) * this.dt;
     },
-    dy: function(x,y,z){
-        return (-1*this.a*y - 4*z - 4*x -z**2)*this.dt
+    dy: function (x, y, z) {
+        return (-1 * this.a * y - 4 * z - 4 * x - z ** 2) * this.dt;
     },
-    dz: function(x,y,z){
-        return (-1*this.a*z - 4*x - 4*y -x**2)*this.dt
+    dz: function (x, y, z) {
+        return (-1 * this.a * z - 4 * x - 4 * y - x ** 2) * this.dt;
     },
-    particleColor: function(){
-        return color(random(160,205),100,50)
-    }
-
-}
+    particleColor: function () {
+        return color(random(160, 205), 100, 50);
+    },
+};
 
 const rabinovichFabrikant = {
     // let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x) * dt;
     // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
     // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
     alpha: 0.14,
-    sigma: 0.10,
-    tracerColor: function(){
-        return color(325,100, 50)
+    sigma: 0.1,
+    tracerColor: function () {
+        return color(325, 100, 50);
     },
     scl: 200,
     dt: 0.04,
-    dx: function(x,y,z){
-        return (y * (z - 1 + x ** 2) + this.sigma * x) * this.dt;    
+    dx: function (x, y, z) {
+        return (y * (z - 1 + x ** 2) + this.sigma * x) * this.dt;
     },
-    dy: function(x,y,z){
+    dy: function (x, y, z) {
         return (x * (3 * z + 1 - x ** 2) + this.sigma * y) * this.dt;
     },
-    dz: function(x,y,z){
+    dz: function (x, y, z) {
         return -2 * z * (this.alpha + x * y) * this.dt;
     },
-    particleColor: function(){
-        return color(random(170,205),100,50)
-    }
-
-}
+    particleColor: function () {
+        return color(random(170, 205), 100, 50);
+    },
+};
 
 const sprott = {
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
@@ -103,52 +101,52 @@ const sprott = {
     // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
     a: 2.07,
     b: 1.79,
-    tracerColor: function(){
-        return color(57,100,50)
+    tracerColor: function () {
+        return color(57, 100, 50);
     },
     scl: 100,
     dt: 0.1,
-    dx: function(x,y,z){
+    dx: function (x, y, z) {
         return (y + this.a * x * y + x * z) * this.dt;
     },
-    dy: function(x,y,z){
+    dy: function (x, y, z) {
         return (1 - this.b * x ** 2 + y * z) * this.dt;
     },
-    dz: function(x,y,z){
+    dz: function (x, y, z) {
         return (x - x ** 2 - y ** 2) * this.dt;
     },
-    particleColor: function(){
-        return color(random(0,33),100,50)
-    }
-}
+    particleColor: function () {
+        return color(random(0, 33), 100, 50);
+    },
+};
 
 const dadras = {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
     a: 3,
-    b:2.7,
-    c:1.7,
-    d:2,
-    e:9,
+    b: 2.7,
+    c: 1.7,
+    d: 2,
+    e: 9,
     scl: 20,
     dt: 0.01,
-    tracerColor: function(){
-        return color(282,100,84)
+    tracerColor: function () {
+        return color(282, 100, 84);
     },
-    dx: function(x,y,z){
-        return ( y - (this.a*x) + (this.b*y*z))*this.dt
+    dx: function (x, y, z) {
+        return (y - this.a * x + this.b * y * z) * this.dt;
     },
-    dy: function(x,y,z){
-        return ((this.c*y) - (x*z) + z)*this.dt
+    dy: function (x, y, z) {
+        return (this.c * y - x * z + z) * this.dt;
     },
-    dz: function(x,y,z){
-        return ((this.d*x*y) - (this.e*z))*this.dt
+    dz: function (x, y, z) {
+        return (this.d * x * y - this.e * z) * this.dt;
     },
-    particleColor: function(){
-        return color(random(0,200),100,84)
-    }
-} 
+    particleColor: function () {
+        return color(random(0, 200), 100, 84);
+    },
+};
 
 const aizawa = {
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
@@ -163,22 +161,55 @@ const aizawa = {
     f: 0.1,
     scl: 100,
     dt: 0.015,
-    tracerColor: function(){
-        return color(0,96,37)
+    tracerColor: function () {
+        return color(0, 96, 37);
     },
+    dx: function (x, y, z) {
+        return ((z - this.b) * x - this.d * y) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (this.d * x + y * (z - this.b)) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (
+            (this.c +
+                this.a * z -
+                (z * z * z) / 3 -
+                (x * x + y * y) * (1 + this.e * z) +
+                this.f * z * x * x * x) *
+            this.dt
+        );
+    },
+    particleColor: function () {
+        return color(random(0, 150), 100, 84);
+    },
+};
+const chen = {
+    // let dx = (alpha * p.x - p.y * p.z) * dt;
+    // let dy = (beta * p.y + p.x * p.z) * dt;
+    // let dz = (delta * p.z + (p.x * p.y) / 3) * dt;
+    // good starting coordenates 5, -5, -5
+    alpha: 5,
+    beta: -10,
+    delta: -0.38,
+    scl: 20,
+    dt: 0.01,
     dx: function(x,y,z){
-        return ((z-this.b)*x - this.d*y)*this.dt
+        return (this.alpha * x - y * z) * this.dt;
     },
     dy: function(x,y,z){
-        return ((this.d*x) + y*(z - this.b))*this.dt
+        return (this.beta * y + x * z) * this.dt;
     },
     dz: function(x,y,z){
-        return (this.c + (this.a*z) -((z*z*z)/3) - (((x*x)+(y*y))*(1+(this.e*z))) +(this.f*z*x*x*x))*this.dt
+        return (this.delta * z + (x * y) / 3) * this.dt;
+    },
+    tracerColor: function(){
+        return color(0, 100, 80)
     },
     particleColor: function(){
-        return color(random(0,150),100,84)
+        return color(random(30,200),100,50)
     }
-}
+};
 
 // rossler constants
 // let a = 1 / 5;
@@ -253,21 +284,21 @@ let scl = 100;
 let particles = [];
 // let lorenz;
 let dt;
-let attractor
+let attractor;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    attractor = aizawa
+    attractor = chen;
     // dt = attractor.dt;
     // lorenz = new Lorenz();
     // console.log(attractor)
-    c1 = new Tracer(0.1,-0.1,0.1, attractor.tracerColor(), attractor.scl);
-    c2 = new Tracer(0.1, -0.1, 0.2, attractor.tracerColor(), attractor.scl);
+    c1 = new Tracer(1, 0, 5, attractor.tracerColor(), attractor.scl);
+    c2 = new Tracer(5, -5, -5, attractor.tracerColor(), attractor.scl);
 
     tracers.push(c1);
     tracers.push(c2);
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 120; i++) {
         let p = new Particle(attractor.particleColor(), attractor.scl);
         particles.push(p);
     }
@@ -280,18 +311,15 @@ function draw() {
     orbitControl();
     // rotateZ(PI / 2);
 
-    stroke('red')
-    line(0,0,0,
-        0,innerHeight/2,0)//y axis
+    stroke("red");
+    line(0, 0, 0, 0, innerHeight / 2, 0); //y axis
 
-    stroke('blue')
-    line(0,0,0,
-        0,0,200)//z axis
+    stroke("blue");
+    line(0, 0, 0, 0, 0, 100); //z axis
 
-    stroke('yellow')
-    line(0,0,0,
-        innerHeight/2,0,0)//x axis
-        
+    stroke("yellow");
+    line(0, 0, 0, innerHeight / 2, 0, 0); //x axis
+
     // angle+=0.01
     // // rotateX(angle)
     // rotateY(angle)
@@ -329,10 +357,9 @@ function draw() {
         // let dy = attractor.dy(t.x, t.y, t.z) * dt;
         // let dz = attractor.dz(t.x, t.y, t.z) * dt;
 
-        let dx = attractor.dx(t.x, t.y,t.z) 
-        let dy = attractor.dy(t.x, t.y, t.z) 
-        let dz = attractor.dz(t.x, t.y, t.z) 
-
+        let dx = attractor.dx(t.x, t.y, t.z);
+        let dy = attractor.dy(t.x, t.y, t.z);
+        let dz = attractor.dz(t.x, t.y, t.z);
 
         // console.log(t);
         // let dx = (a * t.x + t.y * t.z) * dt;
@@ -354,11 +381,9 @@ function draw() {
     }
 
     for (let p of particles) {
-        let dx = attractor.dx(p.x, p.y,p.z) 
-        let dy = attractor.dy(p.x, p.y, p.z) 
-        let dz = attractor.dz(p.x, p.y, p.z)
-
-
+        let dx = attractor.dx(p.x, p.y, p.z);
+        let dy = attractor.dy(p.x, p.y, p.z);
+        let dz = attractor.dz(p.x, p.y, p.z);
 
         // let dx = attractor.dx(p.x, p.y, p.z) * dt;
         // let dy = attractor.dy(p.x, p.y, p.z) * dt;
