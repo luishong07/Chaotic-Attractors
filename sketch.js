@@ -193,7 +193,7 @@ const chen = {
     beta: -10,
     delta: -0.38,
     scl: 20,
-    dt: 0.01,
+    dt: 0.008,
     dx: function(x,y,z){
         return (this.alpha * x - y * z) * this.dt;
     },
@@ -210,6 +210,31 @@ const chen = {
         return color(random(30,200),100,50)
     }
 };
+
+const thomas = {
+    // dt = 0.0001;
+    // let dx = sin(p.y) - bee*p.x
+    // let dy = sin(p.z) - bee*p.y
+    // let dz = sin(p.x) - bee*p.z
+    b: 0.208186,
+    scl: 100,
+    dt: 0.15,
+    dx: function(x,y,z){
+        return (sin(y) - this.b*x)*this.dt
+    },
+    dy: function(x,y,z){
+        return (sin(z) - this.b*y)*this.dt
+    },
+    dz: function(x,y,z){
+        return (sin(x) - this.b*z)*this.dt
+    },
+    tracerColor: function(){
+        return color(174, 66, 39)
+    },
+    particleColor: function(){
+        return color(random(0,50),89, 54)
+    }
+}
 
 // rossler constants
 // let a = 1 / 5;
@@ -288,17 +313,17 @@ let attractor;
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    attractor = chen;
+    attractor = thomas;
     // dt = attractor.dt;
     // lorenz = new Lorenz();
     // console.log(attractor)
     c1 = new Tracer(1, 0, 5, attractor.tracerColor(), attractor.scl);
-    c2 = new Tracer(5, -5, -5, attractor.tracerColor(), attractor.scl);
+    c2 = new Tracer(5, 0, -5, attractor.tracerColor(), attractor.scl);
 
     tracers.push(c1);
     tracers.push(c2);
 
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 80; i++) {
         let p = new Particle(attractor.particleColor(), attractor.scl);
         particles.push(p);
     }
@@ -314,11 +339,11 @@ function draw() {
     stroke("red");
     line(0, 0, 0, 0, innerHeight / 2, 0); //y axis
 
-    stroke("blue");
-    line(0, 0, 0, 0, 0, 100); //z axis
+    // stroke("blue");
+    // line(0, 0, 0, 0, 0, 100); //z axis
 
     stroke("yellow");
-    line(0, 0, 0, innerHeight / 2, 0, 0); //x axis
+    line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
 
     // angle+=0.01
     // // rotateX(angle)
