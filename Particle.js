@@ -1,8 +1,8 @@
 class Particle{
     constructor(clr,scl){
-        this.x = random(-2,2)
-        this.y = random(-2,2)
-        this.z = random(-2,2)
+        this.x = random(-5,5)
+        this.y = random(-5,5)
+        this.z = random(-5,5)
         // this.z = random([random(-7,-9),random(7,9)])
         this.r = random(255)
         this.g = random(255)

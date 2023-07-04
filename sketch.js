@@ -292,124 +292,147 @@ const lorenz83 = {
     g: 4.66,
     scl: 50,
     dt: 0.01,
-    dx: function(x,y,z){
+    dx: function (x, y, z) {
         return (-1 * this.a * x - y ** 2 - z ** 2 + this.a * this.f) * this.dt;
     },
-    dy: function(x,y,z){
+    dy: function (x, y, z) {
         return (-1 * y + x * y - this.b * x * z + this.g) * this.dt;
     },
-    dz: function(x,y,z){
+    dz: function (x, y, z) {
         return (-1 * z + this.b * x * y + x * z) * this.dt;
     },
-    tracerColor: function(){
-        return color(0, 100, 30)
+    tracerColor: function () {
+        return color(0, 100, 30);
     },
-    particleColor:  function(){
-        return color(random(22,66), 100 , 49)
-    }
+    particleColor: function () {
+        return color(random(22, 66), 100, 49);
+    },
 };
 
 const newtonLeipnik = {
+    //dt value contigent on initial conditions
+    //for higher dt values like 0.03, smaller values better for initial conditions
     a: 0.4,
     b: 0.175,
-    scl: 50,
-    dt: 0.005,
-    dx: function(x,y,z){
-        return (-this.a*x + y + 10*y*z)*this.dt
+    scl: 80,
+    dt: 0.03,
+    dx: function (x, y, z) {
+        return (-this.a * x + y + 10 * y * z) * this.dt;
     },
-    dy: function(x,y,z){
-        return (-x - this.a*y + 5*x*z)*this.dt
+    dy: function (x, y, z) {
+        return (-x - this.a * y + 5 * x * z) * this.dt;
     },
-    dz: function(x,y,z){
-        return (this.b*z - 5*x*y)*this.dt
+    dz: function (x, y, z) {
+        return (this.b * z - 5 * x * y) * this.dt;
     },
-    tracerColor: function(){
-        return color(0, 100, 30)
+    tracerColor: function () {
+        return color(0, 100, 30);
     },
-    particleColor:  function(){
-        return color(random(22,66), 100 , 49)
-    }
-}
+    particleColor: function () {
+        return color(random(22, 66), 100, 49);
+    },
+};
 
-const circular ={
-    r: function(){
-        return random(1,50)
+const circular = {
+    r: function () {
+        return random(1, 50);
     },
-    theta: function(){
-        return random(0,TWO_PI)
+    theta: function () {
+        return random(0, TWO_PI);
     },
-    dx: function(r,theta){
-        return this.r * cos(this.theta)
+    dx: function (r, theta) {
+        return this.r * cos(this.theta);
     },
-    dy: function(r,theta){
-        return this.r * sin(this.theta)
+    dy: function (r, theta) {
+        return this.r * sin(this.theta);
     },
-    dz: function(){
-        return 0
+    dz: function () {
+        return 0;
     },
-    tracerColor: function(){
-        return color(0, 100, 30)
+    tracerColor: function () {
+        return color(0, 100, 30);
     },
-    particleColor:  function(){
-        return color(random(22,66), 100 , 49)
-    }
-}
+    particleColor: function () {
+        return color(random(22, 66), 100, 49);
+    },
+};
 
-//lorenz83
-// const a = 0.95;
-// const b = 7.91;
-// const f = 4.83;
-// const g = 4.66;
-
-let points = [];
 let c1;
 let c2;
 let tracers = [];
-let bee = 0.208186;
-let scl = 100;
 let particles = [];
-let dt;
 let attractor;
+// let attractors = {}
+let attractors = {
+    "lorenz": lorenz,
+    "fourwing": fourwing,
+    "halvorsen": halvorsen,
+    "rabinovichFabrikant": rabinovichFabrikant,
+    "sprott": sprott,
+    "dadras": dadras,
+    "aizawa": aizawa,
+    "chen": chen,
+    "thomas": thomas,
+    "rossler": rossler,
+    "threeScroll": threeScroll,
+    "lorenz83": lorenz83,
+};
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    attractor = newtonLeipnik;
 
-    c1 = new Tracer(1, 0, 1.1, attractor.tracerColor(), attractor.scl);
-    c2 = new Tracer(1, 0, 1, attractor.tracerColor(), attractor.scl);
+    attractor = thomas;
+
+    // sel = createSelect();
+    // sel.position(100, 100);
+    // sel.option("chen");
+    // sel.option("thomas");
+    // sel.option("rossler");
+    // sel.changed(changeAttractor);
+
+    c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
+    c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
+    c3 = new Tracer(-0, 1, -2, attractor.tracerColor(), attractor.scl);
 
     tracers.push(c1);
     tracers.push(c2);
+    tracers.push(c3);
 
-    for (let i = 0; i < 80; i++) {
+
+    for (let i = 0; i < 120; i++) {
         let p = new Particle(attractor.particleColor(), attractor.scl);
         particles.push(p);
     }
 }
 let angle = 0;
+
+// function changeAttractor() {
+//     att = sel.value()
+//     console.log(attractors[att])
+//     attractor = attractors[att]
+//     reset()
+// }
+
 function draw() {
     background("black");
     frameRate(30);
     orbitControl();
     // rotateY(PI / 2);
-
+    
     stroke("red");
     line(0, 0, 0, 0, innerHeight / 2, 0); //y axis
-
+    
     stroke("blue");
     line(0, 0, 0, 0, 0, innerHeight / 2); //z axis
-
+    
     stroke("yellow");
     line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
-
+    
+    // rotateY(angle)
+    rotate(angle+=0.01,[1,1,1])
     // angle+=0.01
     // // rotateX(angle)
     // rotateY(angle)
-
-    //lorenz83
-    // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
-    // let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
-    // let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
 
     for (let t of tracers) {
         let dx = attractor.dx(t.x, t.y, t.z);
