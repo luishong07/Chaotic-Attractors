@@ -530,19 +530,19 @@ function setup() {
 
     attractor = lorenz;
 
-    sel = createSelect();
-    sel.position(100, 100);
+    // sel = createSelect();
+    // sel.position(100, 100);
 
-    let div = createDiv("hello there");
-    div.style("color", "white");
-    div.position(100, 200);
+    // let div = createDiv("hello there");
+    // div.style("color", "white");
+    // div.position(100, 200);
 
-    for (const attr in attractors) {
-        sel.option(`${attr}-${attractors[attr].scl}`, `${attr}`);
-    }
+    // for (const attr in attractors) {
+    //     sel.option(`${attr}-${attractors[attr].scl}`, `${attr}`);
+    // }
 
     // sel.option("rossler");
-    sel.changed(changeAttractor);
+    // sel.changed(changeAttractor);
 
     c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
@@ -584,7 +584,6 @@ function draw() {
     background("black");
     frameRate(30);
     orbitControl();
-    // rotateY(PI );
 
     stroke("red");
     line(0, 0, 0, 0, innerWidth / 2, 0); //y axis

@@ -1,12 +1,50 @@
-.menu{
+.menu {
     /* z-index: 1; */
-    color: red;
+    /* color: red; */
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: pink;
+    width: 300px;
+    /* height: 500px; */
+    aspect-ratio: 0.618;
+    background: lightgray;
     top: 1rem;
-    left:  1rem;
+    left: 1rem;
     border-radius: 1em;
+    outline: red solid 1px;
 
+}
+
+.title-box {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 1em auto;
+    background: green;
+    
+}
+.title-box hr {
+    margin-top: -0.4em;
+    margin-bottom: 1em;
+    width: 80%;
+    height: 0.1em;
+    box-sizing: content-box;
+    border: none;
+    background: black;
+}
+
+h3{
+    display: inline-block;
+    font-weight: 500;
+    /* letter-spacing: 2px; */
+    font-size: 1.4em;
+    text-align: center;
+ }
+.intro {
+    width: 170px;
+    margin: 0 auto;
+    color: #fff;
+    font-family: "Droid Serif", serif;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 18px;
+    background: pink;
 }
