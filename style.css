@@ -1,0 +1,12 @@
+.menu{
+    /* z-index: 1; */
+    color: red;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: pink;
+    top: 1rem;
+    left:  1rem;
+    border-radius: 1em;
+
+}

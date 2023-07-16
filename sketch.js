@@ -19,17 +19,16 @@ const lorenz = {
     particleColor: function () {
         return color(random(40, 120), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5))
-        let y = round(random(-5,5))
-        let z = round(random(-5,5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5));
+        let y = round(random(-5, 5));
+        let z = round(random(-5, 5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const fourwing = {
     a: 0.2,
@@ -53,17 +52,16 @@ const fourwing = {
     particleColor: function () {
         return color(random(0, 57), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-0.5,0.5))
-        let y = round(random(-0.5,0.5))
-        let z = round(random(-0.5,0.5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-0.5, 0.5));
+        let y = round(random(-0.5, 0.5));
+        let z = round(random(-0.5, 0.5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const halvorsen = {
     // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
@@ -87,17 +85,16 @@ const halvorsen = {
     particleColor: function () {
         return color(random(160, 205), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5))
-        let y = round(random(-5,5))
-        let z = round(random(-5,5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5));
+        let y = round(random(-5, 5));
+        let z = round(random(-5, 5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const rabinovichFabrikant = {
     // let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x) * dt;
@@ -122,17 +119,16 @@ const rabinovichFabrikant = {
     particleColor: function () {
         return color(random(170, 205), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-1,1),2)
-        let y = round(random(-1,1),2)
-        let z = round(random(0,1),2)
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        let z = round(random(0, 1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const sprott = {
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
@@ -144,7 +140,7 @@ const sprott = {
         return color(57, 100, 50);
     },
     scl: 100,
-    dt: 0.1,
+    dt: 0.05,
     dx: function (x, y, z) {
         return (y + this.a * x * y + x * z) * this.dt;
     },
@@ -157,17 +153,16 @@ const sprott = {
     particleColor: function () {
         return color(random(0, 33), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-1,1))
-        let y = round(random(-1,1))
-        let z = round(random(-1,1))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        let z = round(random(0, 1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const dadras = {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
@@ -195,17 +190,16 @@ const dadras = {
     particleColor: function () {
         return color(random(0, 200), 100, 84);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5))
-        let y = round(random(-5,5))
-        let z = round(random(-5,5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5));
+        let y = round(random(-5, 5));
+        let z = round(random(-5, 5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const aizawa = {
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
@@ -242,20 +236,17 @@ const aizawa = {
     particleColor: function () {
         return color(random(0, 150), 100, 84);
     },
-    initialCoordinates: function(){
-        let position ={}
-        // let x = round(random(-2,2))
-        // let y = round(random(-0.1,0.1))
-        // let z = round(random(-0.1,0.1))
-        let x=-0.1
-        let y =0
-        let z = 0
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        // let z = round(random(-0.25,1),2)
+        let z = 0;
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const chen = {
     // let dx = (alpha * p.x - p.y * p.z) * dt;
@@ -282,17 +273,16 @@ const chen = {
     particleColor: function () {
         return color(random(30, 200), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5),2)
-        let y = round(random(-5,5),2)
-        let z = round(random([random(-10,-5),random(10,5)]),2)
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5), 2);
+        let y = round(random(-5, 5), 2);
+        let z = round(random([random(-10, -5), random(10, 5)]), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const thomas = {
     // dt = 0.0001;
@@ -317,17 +307,16 @@ const thomas = {
     particleColor: function () {
         return color(random(0, 50), 89, 54);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5))
-        let y = round(random(-5,5))
-        let z = round(random(-5,5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5));
+        let y = round(random(-5, 5));
+        let z = round(random(-5, 5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const rossler = {
     // dt = 0.05;
@@ -356,17 +345,16 @@ const rossler = {
     particleColor: function () {
         return color(random(75, 200), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5))
-        let y = round(random(-5,5))
-        let z = round(random(-5,5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5));
+        let y = round(random(-5, 5));
+        let z = round(random(-5, 5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const threeScroll = {
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
@@ -395,17 +383,16 @@ const threeScroll = {
     particleColor: function () {
         return color(random(36, 63), 100, 50);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-5,5))
-        let y = round(random(-5,5))
-        let z = round(random(-5,5))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5));
+        let y = round(random(-5, 5));
+        let z = round(random(-5, 5));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const lorenz83 = {
     // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
@@ -432,17 +419,16 @@ const lorenz83 = {
     particleColor: function () {
         return color(random(22, 66), 100, 49);
     },
-    initialCoordinates: function(){
-        let position ={}
-        let x = round(random(-2,2))
-        let y = round(random(-2,2))
-        let z = round(random(-2,2))
-        position["x"] = x
-        position["y"] = y
-        position["z"] = z
-        return position
-
-    }
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2));
+        let y = round(random(-2, 2));
+        let z = round(random(-2, 2));
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const newtonLeipnik = {
     //dt value contigent on initial conditions
@@ -466,6 +452,25 @@ const newtonLeipnik = {
     particleColor: function () {
         return color(random(22, 66), 100, 49);
     },
+};
+const noseHoover = {
+    // dx = y
+    // dy = -x+y*z
+    // dz = a*y*y
+    // a = 1.5
+};
+const bouali = {
+    // dx = x*(4-y)+a*z
+    // dy = -y*(1-x^2)
+    // dz = -x (1.5 - s*z) - 0.05*z
+};
+const finance = {
+    //dx = ((1/b) - a)* x + z +x*y
+    // dy = -b*y -X^2
+    // dz = -x - c *z
+    // a = 0.001
+    // b= 0.2
+    // c =1.1
 };
 
 const circular = {
@@ -520,16 +525,18 @@ let attractors = {
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
+    const mainInfoContainer = document.querySelector(".menu");
+    console.log(mainInfoContainer);
 
     attractor = lorenz;
 
     sel = createSelect();
     sel.position(100, 100);
 
-    let div = createDiv('hello there')
-    div.style('color','white')
-    div.position(100,200)
-    
+    let div = createDiv("hello there");
+    div.style("color", "white");
+    div.position(100, 200);
+
     for (const attr in attractors) {
         sel.option(`${attr}-${attractors[attr].scl}`, `${attr}`);
     }
@@ -546,7 +553,11 @@ function setup() {
     tracers.push(c3);
 
     for (let i = 0; i < 80; i++) {
-        let p = new Particle(attractor.particleColor(), attractor.scl,attractor.initialCoordinates);
+        let p = new Particle(
+            attractor.particleColor(),
+            attractor.scl,
+            attractor.initialCoordinates
+        );
         particles.push(p);
     }
 }
@@ -555,17 +566,15 @@ let angle = 0;
 function changeAttractor() {
     att = sel.value();
     let currentScale = attractors[att].scl;
-    
     for (let p of particles) {
-        let newParticleCoordinate = attractors[att].initialCoordinates()
-        p.initialCoordinates = attractors[att].initialCoordinates
-        p.path = []
+        let newParticleCoordinate = attractors[att].initialCoordinates();
+        p.initialCoordinates = attractors[att].initialCoordinates;
+        p.path = [];
         p.scl = attractors[att].scl;
         p.color = attractors[att].particleColor();
-        p.x = newParticleCoordinate.x
-        p.y = newParticleCoordinate.y
-        p.z = newParticleCoordinate.z
-
+        p.x = newParticleCoordinate.x;
+        p.y = newParticleCoordinate.y;
+        p.z = newParticleCoordinate.z;
     }
     attractor = attractors[att];
     // reset()
