@@ -523,7 +523,7 @@ let attractors = {
 // }
 
 function setup() {
-    createCanvas(1000, 600, WEBGL);
+    createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
     // const mainInfoContainer = document.querySelector(".menu");
     // console.log(mainInfoContainer);
