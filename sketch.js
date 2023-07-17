@@ -523,10 +523,10 @@ let attractors = {
 // }
 
 function setup() {
-    createCanvas(innerWidth, innerHeight, WEBGL);
+    createCanvas(1000, 600, WEBGL);
     colorMode(HSL);
-    const mainInfoContainer = document.querySelector(".menu");
-    console.log(mainInfoContainer);
+    // const mainInfoContainer = document.querySelector(".menu");
+    // console.log(mainInfoContainer);
 
     attractor = lorenz;
 

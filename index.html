@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>lorenz-attractor</title>
-        <link rel="stylesheet" href="style.css" >
+        <link rel="stylesheet" href="style.css" />
         <script src="libraries/p5.js"></script>
         <!-- <script src="libraries/p5.sound.js"></script> -->
         <script src="sketch.js"></script>
@@ -20,12 +20,12 @@
             canvas {
                 margin: auto;
                 z-index: -1;
+                display: none;
             }
-            
         </style>
     </head>
     <body>
-        <div class="menu">
+        <!-- <div class="menu">
             <div class="title-box">
                 <h3>
                 Here goes a select element
@@ -50,6 +50,206 @@
                 <div class="intro">
                   Yllamco laboris nisi ut aliquip ex ea commodo.
                 </div>   
-            </div>
+            </div> -->
+
+        <nav class="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- svg icon here -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
+                        <span class="link-text">
+                            T 1
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- svg icon here -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
+                        <span class="link-text">
+                            T 2
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- svg icon here -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
+                        <span class="link-text">
+                            T 3
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <main>
+            <h1>Hello there</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Placerat orci nulla pellentesque dignissim. Nulla pellentesque
+                dignissim enim sit amet venenatis. Tempus urna et pharetra
+                pharetra massa massa ultricies mi. Massa id neque aliquam
+                vestibulum morbi blandit cursus risus at. Pellentesque pulvinar
+                pellentesque habitant morbi tristique. Arcu felis bibendum ut
+                tristique et. Phasellus faucibus scelerisque eleifend donec
+                pretium vulputate sapien nec sagittis. Massa eget egestas purus
+                viverra accumsan in nisl nisi. Morbi enim nunc faucibus a
+                pellentesque. Semper quis lectus nulla at volutpat diam.
+                Elementum integer enim neque volutpat ac. Morbi tristique
+                senectus et netus et. Diam maecenas sed enim ut sem viverra
+                aliquet eget. Eget gravida cum sociis natoque. Ut diam quam
+                nulla porttitor massa id neque. Vitae sapien pellentesque
+                habitant morbi tristique. Vitae congue eu consequat ac felis
+                donec et odio. In nisl nisi scelerisque eu ultrices vitae auctor
+                eu. Venenatis lectus magna fringilla urna porttitor. Nisi
+                scelerisque eu ultrices vitae auctor eu augue. Consequat mauris
+                nunc congue nisi vitae suscipit tellus mauris a. Varius morbi
+                enim nunc faucibus a. Ac placerat vestibulum lectus mauris
+                ultrices. Sed viverra tellus in hac habitasse platea dictumst.
+                Leo urna molestie at elementum eu facilisis sed odio. Elit ut
+                aliquam purus sit. Faucibus purus in massa tempor nec. Semper
+                auctor neque vitae tempus. Blandit turpis cursus in hac
+                habitasse platea dictumst. Mattis aliquam faucibus purus in.
+                Felis bibendum ut tristique et egestas quis ipsum suspendisse
+                ultrices. Arcu odio ut sem nulla pharetra diam sit amet. Est
+                placerat in egestas erat imperdiet sed euismod nisi porta. Eget
+                nullam non nisi est sit amet. Scelerisque purus semper eget duis
+                at tellus at urna condimentum. Facilisi nullam vehicula ipsum a
+                arcu cursus. Egestas diam in arcu cursus euismod quis viverra
+                nibh cras. Viverra orci sagittis eu volutpat odio facilisis
+                mauris sit amet. Tincidunt vitae semper quis lectus nulla at
+                volutpat diam ut. Duis at tellus at urna condimentum mattis
+                pellentesque id. Lectus arcu bibendum at varius vel pharetra vel
+                turpis nunc. Diam quis enim lobortis scelerisque fermentum dui
+                faucibus in. Consequat interdum varius sit amet mattis. Etiam
+                tempor orci eu lobortis elementum nibh tellus molestie. Erat
+                velit scelerisque in dictum non consectetur a erat. Velit
+                euismod in pellentesque massa placerat. Eget sit amet tellus
+                cras adipiscing enim eu turpis egestas. Id donec ultrices
+                tincidunt arcu. Proin sagittis nisl rhoncus mattis rhoncus. Diam
+                maecenas ultricies mi eget mauris pharetra et. Diam sit amet
+                nisl suscipit adipiscing bibendum. Purus sit amet luctus
+                venenatis lectus magna fringilla. Tellus integer feugiat
+                scelerisque varius morbi enim. Id diam vel quam elementum.
+                Egestas integer eget aliquet nibh. Sem viverra aliquet eget sit
+                amet. Nam libero justo laoreet sit amet cursus sit amet. A diam
+                maecenas sed enim. Interdum varius sit amet mattis vulputate
+                enim. Ultrices mi tempus imperdiet nulla malesuada pellentesque
+                elit. Quam lacus suspendisse faucibus interdum posuere.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Placerat orci nulla pellentesque dignissim. Nulla pellentesque
+                dignissim enim sit amet venenatis. Tempus urna et pharetra
+                pharetra massa massa ultricies mi. Massa id neque aliquam
+                vestibulum morbi blandit cursus risus at. Pellentesque pulvinar
+                pellentesque habitant morbi tristique. Arcu felis bibendum ut
+                tristique et. Phasellus faucibus scelerisque eleifend donec
+                pretium vulputate sapien nec sagittis. Massa eget egestas purus
+                viverra accumsan in nisl nisi. Morbi enim nunc faucibus a
+                pellentesque. Semper quis lectus nulla at volutpat diam.
+                Elementum integer enim neque volutpat ac. Morbi tristique
+                senectus et netus et. Diam maecenas sed enim ut sem viverra
+                aliquet eget. Eget gravida cum sociis natoque. Ut diam quam
+                nulla porttitor massa id neque. Vitae sapien pellentesque
+                habitant morbi tristique. Vitae congue eu consequat ac felis
+                donec et odio. In nisl nisi scelerisque eu ultrices vitae auctor
+                eu. Venenatis lectus magna fringilla urna porttitor. Nisi
+                scelerisque eu ultrices vitae auctor eu augue. Consequat mauris
+                nunc congue nisi vitae suscipit tellus mauris a. Varius morbi
+                enim nunc faucibus a. Ac placerat vestibulum lectus mauris
+                ultrices. Sed viverra tellus in hac habitasse platea dictumst.
+                Leo urna molestie at elementum eu facilisis sed odio. Elit ut
+                aliquam purus sit. Faucibus purus in massa tempor nec. Semper
+                auctor neque vitae tempus. Blandit turpis cursus in hac
+                habitasse platea dictumst. Mattis aliquam faucibus purus in.
+                Felis bibendum ut tristique et egestas quis ipsum suspendisse
+                ultrices. Arcu odio ut sem nulla pharetra diam sit amet. Est
+                placerat in egestas erat imperdiet sed euismod nisi porta. Eget
+                nullam non nisi est sit amet. Scelerisque purus semper eget duis
+                at tellus at urna condimentum. Facilisi nullam vehicula ipsum a
+                arcu cursus. Egestas diam in arcu cursus euismod quis viverra
+                nibh cras. Viverra orci sagittis eu volutpat odio facilisis
+                mauris sit amet. Tincidunt vitae semper quis lectus nulla at
+                volutpat diam ut. Duis at tellus at urna condimentum mattis
+                pellentesque id. Lectus arcu bibendum at varius vel pharetra vel
+                turpis nunc. Diam quis enim lobortis scelerisque fermentum dui
+                faucibus in. Consequat interdum varius sit amet mattis. Etiam
+                tempor orci eu lobortis elementum nibh tellus molestie. Erat
+                velit scelerisque in dictum non consectetur a erat. Velit
+                euismod in pellentesque massa placerat. Eget sit amet tellus
+                cras adipiscing enim eu turpis egestas. Id donec ultrices
+                tincidunt arcu. Proin sagittis nisl rhoncus mattis rhoncus. Diam
+                maecenas ultricies mi eget mauris pharetra et. Diam sit amet
+                nisl suscipit adipiscing bibendum. Purus sit amet luctus
+                venenatis lectus magna fringilla. Tellus integer feugiat
+                scelerisque varius morbi enim. Id diam vel quam elementum.
+                Egestas integer eget aliquet nibh. Sem viverra aliquet eget sit
+                amet. Nam libero justo laoreet sit amet cursus sit amet. A diam
+                maecenas sed enim. Interdum varius sit amet mattis vulputate
+                enim. Ultrices mi tempus imperdiet nulla malesuada pellentesque
+                elit. Quam lacus suspendisse faucibus interdum posuere.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Placerat orci nulla pellentesque dignissim. Nulla pellentesque
+                dignissim enim sit amet venenatis. Tempus urna et pharetra
+                pharetra massa massa ultricies mi. Massa id neque aliquam
+                vestibulum morbi blandit cursus risus at. Pellentesque pulvinar
+                pellentesque habitant morbi tristique. Arcu felis bibendum ut
+                tristique et. Phasellus faucibus scelerisque eleifend donec
+                pretium vulputate sapien nec sagittis. Massa eget egestas purus
+                viverra accumsan in nisl nisi. Morbi enim nunc faucibus a
+                pellentesque. Semper quis lectus nulla at volutpat diam.
+                Elementum integer enim neque volutpat ac. Morbi tristique
+                senectus et netus et. Diam maecenas sed enim ut sem viverra
+                aliquet eget. Eget gravida cum sociis natoque. Ut diam quam
+                nulla porttitor massa id neque. Vitae sapien pellentesque
+                habitant morbi tristique. Vitae congue eu consequat ac felis
+                donec et odio. In nisl nisi scelerisque eu ultrices vitae auctor
+                eu. Venenatis lectus magna fringilla urna porttitor. Nisi
+                scelerisque eu ultrices vitae auctor eu augue. Consequat mauris
+                nunc congue nisi vitae suscipit tellus mauris a. Varius morbi
+                enim nunc faucibus a. Ac placerat vestibulum lectus mauris
+                ultrices. Sed viverra tellus in hac habitasse platea dictumst.
+                Leo urna molestie at elementum eu facilisis sed odio. Elit ut
+                aliquam purus sit. Faucibus purus in massa tempor nec. Semper
+                auctor neque vitae tempus. Blandit turpis cursus in hac
+                habitasse platea dictumst. Mattis aliquam faucibus purus in.
+                Felis bibendum ut tristique et egestas quis ipsum suspendisse
+                ultrices. Arcu odio ut sem nulla pharetra diam sit amet. Est
+                placerat in egestas erat imperdiet sed euismod nisi porta. Eget
+                nullam non nisi est sit amet. Scelerisque purus semper eget duis
+                at tellus at urna condimentum. Facilisi nullam vehicula ipsum a
+                arcu cursus. Egestas diam in arcu cursus euismod quis viverra
+                nibh cras. Viverra orci sagittis eu volutpat odio facilisis
+                mauris sit amet. Tincidunt vitae semper quis lectus nulla at
+                volutpat diam ut. Duis at tellus at urna condimentum mattis
+                pellentesque id. Lectus arcu bibendum at varius vel pharetra vel
+                turpis nunc. Diam quis enim lobortis scelerisque fermentum dui
+                faucibus in. Consequat interdum varius sit amet mattis. Etiam
+                tempor orci eu lobortis elementum nibh tellus molestie. Erat
+                velit scelerisque in dictum non consectetur a erat. Velit
+                euismod in pellentesque massa placerat. Eget sit amet tellus
+                cras adipiscing enim eu turpis egestas. Id donec ultrices
+                tincidunt arcu. Proin sagittis nisl rhoncus mattis rhoncus. Diam
+                maecenas ultricies mi eget mauris pharetra et. Diam sit amet
+                nisl suscipit adipiscing bibendum. Purus sit amet luctus
+                venenatis lectus magna fringilla. Tellus integer feugiat
+                scelerisque varius morbi enim. Id diam vel quam elementum.
+                Egestas integer eget aliquet nibh. Sem viverra aliquet eget sit
+                amet. Nam libero justo laoreet sit amet cursus sit amet. A diam
+                maecenas sed enim. Interdum varius sit amet mattis vulputate
+                enim. Ultrices mi tempus imperdiet nulla malesuada pellentesque
+                elit. Quam lacus suspendisse faucibus interdum posuere.
+            </p>
+            <!-- the canvas is being placed here -->
+        </main>
     </body>
 </html>

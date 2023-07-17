@@ -1,9 +1,7 @@
-.menu {
-    /* z-index: 1; */
-    /* color: red; */
+/* .menu {
+  
     position: absolute;
     width: 300px;
-    /* height: 500px; */
     aspect-ratio: 0.618;
     background: lightgray;
     top: 1rem;
@@ -34,7 +32,6 @@
 h3{
     display: inline-block;
     font-weight: 500;
-    /* letter-spacing: 2px; */
     font-size: 1.4em;
     text-align: center;
  }
@@ -47,4 +44,83 @@ h3{
     font-style: italic;
     line-height: 18px;
     background: pink;
+} */
+
+
+:root{
+    font-size: 16px;
+    
+    --text-primary: red;
+    --text-secondary: yellow;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+
+}
+body{
+    color: black;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+body::-webkit-scrollbar{
+    width: 0.25rem;
+
+}
+body::-webkit-scrollbar-track{
+    background-color: black
+}
+body::-webkit-scrollbar-thumb{
+    background-color: purple;
+}
+main{
+    margin-left: 5rem;
+    padding: 1rem;
+ 
+
+
+}
+.navbar{
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--bg-primary);
+}
+.navbar-nav{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%
+}
+.nav-item{
+    width: 100%;
+}
+.nav-item:last-child{
+    margin-top: auto;
+}
+.nav-link{
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.link-text{
+    display: none;
+    margin-left: 1rem;
+
+}
+.nav-link svg{
+    min-width: 2rem; 
+    margin: 0 1.5rem;
+}
+.navbar:hover{
+    width: 16rem;
+
+}
+.navbar:hover .link-text{
+    display: block;
 }
