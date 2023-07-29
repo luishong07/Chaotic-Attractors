@@ -49,11 +49,7 @@ h3{
 :root {
     font-size: 16px;
 
-    /* --text-primary: red;
-    --text-secondary: yellow;
-    --bg-primary: #3c3b3b;
-    --bg-secondary: #141418;
-     */
+    
     --text-primary: #b6b6b6;
     --text-secondary: #ececec;
     --bg-primary: #23232e;
@@ -76,16 +72,24 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background-color: purple;
 }
-main {
-    /* margin-left: 5rem;
-    padding: 1rem; */
+
+.card{
+    position: absolute;
+    width: 15rem;
+    top: 2em;
+    right: 2em;
+    aspect-ratio: 0.618;
+    background: var(--bg-primary);
+    border-radius: .5rem;
 }
+
 .navbar {
     width: 5rem;
-    height: 100vh;
+    height: 100dvh;
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 200ms ease;
+    overflow: scroll;
 }
 .navbar-nav {
     list-style: none;
@@ -99,9 +103,9 @@ main {
 .nav-item {
     width: 100%;
 }
-.nav-item:last-child {
+/* .nav-item:last-child {
     margin-top: auto;
-}
+} */
 .nav-link {
     display: flex;
     align-items: center;
@@ -156,5 +160,6 @@ main {
 
 .navbar:hover .logo svg{
     transform: rotate(-180deg)
-    
+
 }
+

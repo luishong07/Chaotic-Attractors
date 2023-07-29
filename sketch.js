@@ -525,8 +525,41 @@ let attractors = {
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
     colorMode(HSL);
-    // const mainInfoContainer = document.querySelector(".menu");
-    // console.log(mainInfoContainer);
+    const attractorNamesArray = Object.keys(attractors);
+    const mainInfoContainer = document.querySelector(".navbar-nav");
+
+    for (let i = 0; i < attractorNamesArray.length; i++) {
+        const li = document.createElement("li");
+        li.setAttribute("class", "nav-item");
+        li.setAttribute("id", attractorNamesArray[i])
+
+        const a = document.createElement("a");
+        a.setAttribute("href", "#");
+        a.setAttribute("class", "nav-link");
+
+        const span = document.createElement("span");
+        span.setAttribute("class", "link-text");
+        span.textContent = attractorNamesArray[i];
+
+        li.append(a);
+        a.append(span);
+        li.addEventListener('click', ()=>{
+            changeAttractor(li.id)
+        })
+        mainInfoContainer.append(li);
+
+
+    }
+
+    // const items = document.querySelectorAll(".nav-item");
+    // console.log(items)
+    // for (let i = 0; i < items.length; i++) {
+    //     items[i].addEventListener("click", () => {
+    //         console.log(items[i].id);
+    //     });
+    // }
+
+    // console.log(Object.keys(attractors));
 
     attractor = lorenz;
 
@@ -563,8 +596,9 @@ function setup() {
 }
 let angle = 0;
 
-function changeAttractor() {
-    att = sel.value();
+function changeAttractor(name) {
+    // console.log(name)
+    att = name
     let currentScale = attractors[att].scl;
     for (let p of particles) {
         let newParticleCoordinate = attractors[att].initialCoordinates();
