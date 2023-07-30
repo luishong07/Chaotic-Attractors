@@ -523,7 +523,10 @@ let attractors = {
 // }
 
 function setup() {
-    createCanvas(innerWidth, innerHeight, WEBGL);
+    let hld = document.getElementById("holder")
+    // let cnv = createCanvas(innerWidth, innerHeight, WEBGL);
+    let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
+    cnv.parent('holder')
     colorMode(HSL);
     const attractorNamesArray = Object.keys(attractors);
     const mainInfoContainer = document.querySelector(".navbar-nav");
@@ -595,6 +598,13 @@ function setup() {
     }
 }
 let angle = 0;
+
+function windowResized(){
+    let hld = document.getElementById("holder")
+    console.log(hld.offsetWidth, hld.offsetHeight)
+    resizeCanvas(hld.offsetWidth, hld.offsetHeight);
+
+}
 
 function changeAttractor(name) {
     // console.log(name)

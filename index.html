@@ -16,10 +16,13 @@
                 margin: 0;
                 padding: 0;
                 z-index: 1;
+                /* display: flex; */
             }
             canvas {
-                margin: auto;
-                z-index: -1;
+                /* position: fixed; */
+                /* right: 0; */
+                /* margin: auto; */
+                z-index: 1;
                 /* display: none; */
             }
         </style>
@@ -51,39 +54,22 @@
                   Yllamco laboris nisi ut aliquip ex ea commodo.
                 </div>   
             </div> -->
- 
+
         <nav class="navbar">
             <ul class="navbar-nav">
-                <div class="dropdown">
-                    <li class="logo link">
-                        <a href="#" class="nav-link">
-                            <span class="link-text">Home</span>
-                        </a>
-                    </li>
-                    <div class="dropdown-menu">
-                        Content
-                    </div>
-                </div>
-                <!-- <li class="nav-item" id="lorenz">
-                    <a href="#" class="nav-link">
-                        <span class="link-text"> Lorenz </span>
+                <li class="logo dropdown">
+                    <a href="#" class="nav-link link">
+                        <span class="link-text">Home</span>
                     </a>
+                    <div class="dropdown-menu">Content</div>
                 </li>
-                <li class="nav-item" id="halvorsen">
-                    <a href="#" class="nav-link">
-                        <span class="link-text"> Halvorsen </span>
-                    </a>
-                </li>
-                <li class="nav-item" id="thomas">
-                    <a href="#" class="nav-link">
-                        <span class="link-text"> Thomas </span>
-                    </a>
-                </li> -->
             </ul>
         </nav>
-        <div class="card"></div>
+        <!-- <div class="card"></div> -->
+        <div id = "holder">
 
-        <main>
+        </div>
+        <!-- <main> -->
             <!-- <h1>Hello there</h1>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -248,6 +234,6 @@
                 elit. Quam lacus suspendisse faucibus interdum posuere.
             </p> -->
             <!-- the canvas is being placed here -->
-        </main>
+        <!-- </main> -->
     </body>
 </html>
