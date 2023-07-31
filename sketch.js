@@ -54,9 +54,10 @@ const fourwing = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-0.5, 0.5));
-        let y = round(random(-0.5, 0.5));
-        let z = round(random(-0.5, 0.5));
+        let x = round(random(-2, 2),2);
+        let y = round(random(-2, 2),2);
+        let z = round(random(-2, 2),2);
+        // let z = 0
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -142,13 +143,13 @@ const sprott = {
     scl: 100,
     dt: 0.05,
     dx: function (x, y, z) {
-        return (y + this.a * x * y + x * z) * this.dt;
+        return (y + (this.a * x * y) + x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (1 - this.b * x ** 2 + y * z) * this.dt;
+        return (1 - this.b * (x *x) + y * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x - x ** 2 - y ** 2) * this.dt;
+        return (x - (x *x) - (y *y)) * this.dt;
     },
     particleColor: function () {
         return color(random(0, 33), 100, 50);
@@ -524,61 +525,40 @@ let attractors = {
 
 function setup() {
     let hld = document.getElementById("holder")
-    // let cnv = createCanvas(innerWidth, innerHeight, WEBGL);
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     cnv.parent('holder')
     colorMode(HSL);
     const attractorNamesArray = Object.keys(attractors);
     const mainInfoContainer = document.querySelector(".navbar-nav");
 
-    // for (let i = 0; i < attractorNamesArray.length; i++) {
-    //     const li = document.createElement("li");
-    //     li.setAttribute("class", "nav-item");
-    //     li.setAttribute("id", attractorNamesArray[i])
+    for (let i = 0; i < attractorNamesArray.length; i++) {
+        const li = document.createElement("li");
+        li.setAttribute("class", "nav-item");
+        li.setAttribute("id", attractorNamesArray[i])
 
-    //     const a = document.createElement("a");
-    //     a.setAttribute("href", "#");
-    //     a.setAttribute("class", "nav-link");
+        const a = document.createElement("a");
+        a.setAttribute("href", "#");
+        a.setAttribute("class", "nav-link");
 
-    //     const span = document.createElement("span");
-    //     span.setAttribute("class", "link-text");
-    //     span.textContent = attractorNamesArray[i];
+        const span = document.createElement("span");
+        span.setAttribute("class", "link-text");
+        span.textContent = attractorNamesArray[i];
 
-    //     li.append(a);
-    //     a.append(span);
-    //     li.addEventListener('click', ()=>{
-    //         changeAttractor(li.id)
-    //     })
-    //     mainInfoContainer.append(li);
+        li.append(a);
+        a.append(span);
+        li.addEventListener('click', ()=>{
+            changeAttractor(li.id)
+        })
+        mainInfoContainer.append(li);
 
 
-    // }
+    }
 
-    // const items = document.querySelectorAll(".nav-item");
-    // console.log(items)
-    // for (let i = 0; i < items.length; i++) {
-    //     items[i].addEventListener("click", () => {
-    //         console.log(items[i].id);
-    //     });
-    // }
-
-    // console.log(Object.keys(attractors));
-
+   
+    //initial attractor
     attractor = lorenz;
 
-    // sel = createSelect();
-    // sel.position(100, 100);
-
-    // let div = createDiv("hello there");
-    // div.style("color", "white");
-    // div.position(100, 200);
-
-    // for (const attr in attractors) {
-    //     sel.option(`${attr}-${attractors[attr].scl}`, `${attr}`);
-    // }
-
-    // sel.option("rossler");
-    // sel.changed(changeAttractor);
+    
 
     c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
@@ -607,9 +587,7 @@ function windowResized(){
 }
 
 function changeAttractor(name) {
-    // console.log(name)
     att = name
-    let currentScale = attractors[att].scl;
     for (let p of particles) {
         let newParticleCoordinate = attractors[att].initialCoordinates();
         p.initialCoordinates = attractors[att].initialCoordinates;
@@ -621,7 +599,6 @@ function changeAttractor(name) {
         p.z = newParticleCoordinate.z;
     }
     attractor = attractors[att];
-    // reset()
 }
 
 function draw() {
@@ -663,8 +640,6 @@ function draw() {
         let newX = p.x + dx;
         let newY = p.y + dy;
         let newZ = p.z + dz;
-        // textFont('Georgia')
-        // text(newX, 200, 200)
         p.show(newX, newY, newZ);
     }
 }
