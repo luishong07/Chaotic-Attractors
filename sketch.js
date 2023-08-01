@@ -54,9 +54,9 @@ const fourwing = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-2, 2),2);
-        let y = round(random(-2, 2),2);
-        let z = round(random(-2, 2),2);
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
         // let z = 0
         position["x"] = x;
         position["y"] = y;
@@ -143,13 +143,13 @@ const sprott = {
     scl: 100,
     dt: 0.05,
     dx: function (x, y, z) {
-        return (y + (this.a * x * y) + x * z) * this.dt;
+        return (y + this.a * x * y + x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (1 - this.b * (x *x) + y * z) * this.dt;
+        return (1 - this.b * (x * x) + y * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x - (x *x) - (y *y)) * this.dt;
+        return (x - x * x - y * y) * this.dt;
     },
     particleColor: function () {
         return color(random(0, 33), 100, 50);
@@ -457,13 +457,73 @@ const newtonLeipnik = {
 const noseHoover = {
     // dx = y
     // dy = -x+y*z
-    // dz = a*y*y
+    // dz = a-y*y
     // a = 1.5
+    a: 1.5,
+    scl: 50,
+    dt: 0.02,
+    tracerColor: () => {
+        return color(188, 50, 50);
+    },
+    dx: function (x, y, z) {
+        return y * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (-x + y * z) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (this.a - y * y) * this.dt;
+    },
+    particleColor: function () {
+        return color(random(40, 120), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        let z = round(random(-1, 1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const bouali = {
     // dx = x*(4-y)+a*z
     // dy = -y*(1-x^2)
     // dz = -x (1.5 - s*z) - 0.05*z
+    //a = 0.3
+    //s = 1.0
+    a: 0.3,
+    s: 1.0,
+    tracerColor: function () {
+        return color(169, 100, 50);
+    },
+    scl: 40,
+    dt: 0.05,
+    dx: function (x, y, z) {
+        return (x * (4 - y) + this.a * z) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (-y * (1 - x * x)) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (-x * (1.5 - this.s * z) - 0.05 * z) * this.dt;
+    },
+    particleColor: function () {
+        return color(random(0, 57), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(0, 2), 2);
+        let z = round(random(-2, 2), 2);
+        // let z = 0
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
 const finance = {
     //dx = ((1/b) - a)* x + z +x*y
@@ -517,6 +577,9 @@ let attractors = {
     rossler: rossler,
     threeScroll: threeScroll,
     lorenz83: lorenz83,
+
+    noseHoover: noseHoover,
+    bouali: bouali
 };
 // let f
 // function preload(){
@@ -524,9 +587,9 @@ let attractors = {
 // }
 
 function setup() {
-    let hld = document.getElementById("holder")
+    let hld = document.getElementById("holder");
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
-    cnv.parent('holder')
+    cnv.parent("holder");
     colorMode(HSL);
     const attractorNamesArray = Object.keys(attractors);
     const mainInfoContainer = document.querySelector(".navbar-nav");
@@ -534,7 +597,7 @@ function setup() {
     for (let i = 0; i < attractorNamesArray.length; i++) {
         const li = document.createElement("li");
         li.setAttribute("class", "nav-item");
-        li.setAttribute("id", attractorNamesArray[i])
+        li.setAttribute("id", attractorNamesArray[i]);
 
         const a = document.createElement("a");
         a.setAttribute("href", "#");
@@ -546,19 +609,14 @@ function setup() {
 
         li.append(a);
         a.append(span);
-        li.addEventListener('click', ()=>{
-            changeAttractor(li.id)
-        })
+        li.addEventListener("click", () => {
+            changeAttractor(li.id);
+        });
         mainInfoContainer.append(li);
-
-
     }
 
-   
     //initial attractor
     attractor = lorenz;
-
-    
 
     c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
@@ -579,15 +637,14 @@ function setup() {
 }
 let angle = 0;
 
-function windowResized(){
-    let hld = document.getElementById("holder")
-    console.log(hld.offsetWidth, hld.offsetHeight)
+function windowResized() {
+    let hld = document.getElementById("holder");
+    console.log(hld.offsetWidth, hld.offsetHeight);
     resizeCanvas(hld.offsetWidth, hld.offsetHeight);
-
 }
 
 function changeAttractor(name) {
-    att = name
+    att = name;
     for (let p of particles) {
         let newParticleCoordinate = attractors[att].initialCoordinates();
         p.initialCoordinates = attractors[att].initialCoordinates;
