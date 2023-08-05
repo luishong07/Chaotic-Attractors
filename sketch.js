@@ -386,9 +386,9 @@ const threeScroll = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-5, 5));
-        let y = round(random(-5, 5));
-        let z = round(random(-5, 5));
+        let x = round(random(-100, 100));
+        let y = round(random(-100, 100));
+        let z = round(random(-100, 100));
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -500,12 +500,12 @@ const bouali = {
         return color(169, 100, 50);
     },
     scl: 40,
-    dt: 0.05,
+    dt: 0.025,
     dx: function (x, y, z) {
         return (x * (4 - y) + this.a * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-y * (1 - x * x)) * this.dt;
+        return -y * (1 - x * x) * this.dt;
     },
     dz: function (x, y, z) {
         return (-x * (1.5 - this.s * z) - 0.05 * z) * this.dt;
@@ -525,6 +525,43 @@ const bouali = {
         return position;
     },
 };
+const coullet = {
+    a: 0.8,
+    b: -1.1,
+    c: -0.45,
+    d: -1,
+    scl: 10,
+    dt: 0.004,
+    tracerColor: function () {
+        return color(169, 100, 50);
+    },
+    dx: function (x, y, z) {
+        return y * this.dt;
+    },
+    dy: function (x, y, z) {
+        return z * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (
+            (this.a * x + this.b * y + this.c * z + this.d * x * x * x) *
+            this.dt
+        );
+    },
+    particleColor: function () {
+        return color(random(0, 57), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
+
 const finance = {
     //dx = ((1/b) - a)* x + z +x*y
     // dy = -b*y -X^2
@@ -532,8 +569,70 @@ const finance = {
     // a = 0.001
     // b= 0.2
     // c =1.1
+    a: 0.001,
+    b: 0.2,
+    c: 1.1,
+    scl: 50,
+    dt: 0.05,
+    dx: function (x, y, z) {
+        return ((1 / this.b - this.a) * x + z + x * y) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (-this.b * y - x * x) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (-x - this.c * z) * this.dt;
+    },
+    tracerColor: function () {
+        return color(169, 100, 50);
+    },
+    particleColor: function () {
+        return color(random(0, 57), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
+        // let z = 0
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
 };
-
+const arneodo = {
+    a: -5.5,
+    b: 3.5,
+    c: -1,
+    scl: 30,
+    dt: 0.01,
+    dx: function (x, y, z) {
+        return y * this.dt;
+    },
+    dy: function (x, y, z) {
+        return z * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (-this.a * x - this.b * y - z + this.c * x * x * x) * this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(160, 205), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2),2);
+        let y = round(random(-2, 2),2);
+        let z = round(random(-2, 2),2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
 const circular = {
     r: function () {
         return random(1, 50);
@@ -565,6 +664,10 @@ let particles = [];
 let attractor;
 // let attractors = {}
 let attractors = {
+
+    arneodo:arneodo,
+
+    finance: finance,
     lorenz: lorenz,
     fourwing: fourwing,
     halvorsen: halvorsen,
@@ -579,7 +682,8 @@ let attractors = {
     lorenz83: lorenz83,
 
     noseHoover: noseHoover,
-    bouali: bouali
+    bouali: bouali,
+    // coullet:coullet
 };
 // let f
 // function preload(){
@@ -626,7 +730,7 @@ function setup() {
     tracers.push(c2);
     tracers.push(c3);
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 50; i++) {
         let p = new Particle(
             attractor.particleColor(),
             attractor.scl,

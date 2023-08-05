@@ -31,7 +31,7 @@ class Particle {
             this.z = newCoordinate.z;
         }
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 50) {
+        if (this.path.length > 100) {
             this.path.shift();
         }
         noFill();
