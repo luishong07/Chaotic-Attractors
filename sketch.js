@@ -530,8 +530,8 @@ const coullet = {
     b: -1.1,
     c: -0.45,
     d: -1,
-    scl: 10,
-    dt: 0.004,
+    scl: 100,
+    dt: 0.03,
     tracerColor: function () {
         return color(169, 100, 50);
     },
@@ -542,19 +542,17 @@ const coullet = {
         return z * this.dt;
     },
     dz: function (x, y, z) {
-        return (
-            (this.a * x + this.b * y + this.c * z + this.d * x * x * x) *
-            this.dt
-        );
+        return ((0.8  * x )+ (-1.1 * y) + (-0.45 * z) + (-1 * x * x * x)) * this.dt;
     },
     particleColor: function () {
         return color(random(0, 57), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-2, 2), 2);
-        let y = round(random(-2, 2), 2);
-        let z = round(random(-2, 2), 2);
+        let x = round(random(-0.5, 0.5), 2);
+        let y = round(random(-0.5, 0.5), 2);
+        // let y = round(0, 2);
+        let z = round(random(-0.5, 0.5), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -624,15 +622,16 @@ const arneodo = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-2, 2),2);
-        let y = round(random(-2, 2),2);
-        let z = round(random(-2, 2),2);
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
         return position;
     },
 };
+
 const circular = {
     r: function () {
         return random(1, 50);
@@ -664,9 +663,9 @@ let particles = [];
 let attractor;
 // let attractors = {}
 let attractors = {
+    coullet:coullet,
 
-    arneodo:arneodo,
-
+    arneodo: arneodo,
     finance: finance,
     lorenz: lorenz,
     fourwing: fourwing,
@@ -683,7 +682,6 @@ let attractors = {
 
     noseHoover: noseHoover,
     bouali: bouali,
-    // coullet:coullet
 };
 // let f
 // function preload(){
