@@ -29,15 +29,7 @@ body::-webkit-scrollbar-thumb {
     background-color: purple;
 }
 
-.card{
-    position: absolute;
-    width: 15rem;
-    top: 2em;
-    right: 2em;
-    aspect-ratio: 0.618;
-    background: var(--bg-primary);
-    border-radius: .5rem;
-}
+
 
 .navbar {
     width: 5rem;
@@ -130,4 +122,34 @@ body::-webkit-scrollbar-thumb {
     right: 0;
     justify-content: center;
     align-items: center;
+}
+
+.card{
+    display: grid;
+    grid-template-rows: 3rem auto;
+    z-index: 2;
+    position: absolute;
+    width: 18rem;
+    top: 2em;
+    right: 2em;
+    aspect-ratio: 0.618;
+    /* background: var(--bg-primary); */
+    border-radius: .5rem;
+    outline: grey solid 1px;
+    /* justify-items: center; */
+}
+
+.name{
+    display: grid;
+    background-color: red;
+    text-align: center;
+}
+.name > *{
+    margin: auto;
+}
+.equ{
+    background-color: blue;
+}
+.para{
+    background-color: green;
 }

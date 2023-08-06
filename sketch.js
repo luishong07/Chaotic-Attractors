@@ -769,7 +769,13 @@ let attractors = {
 
 function setup() {
     let hld = document.getElementById("holder");
+    let pause = document.querySelector(".logo")
+    let title = document.getElementById("attractor-name")
+    title.textContent = 'Lorenz'
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
+    pause.addEventListener('click', ()=>{
+        halt()
+    })
     cnv.parent("holder");
     colorMode(HSL);
     const attractorNamesArray = Object.keys(attractors);
@@ -817,6 +823,14 @@ function setup() {
     }
 }
 let angle = 0;
+
+function halt(){
+    if(isLooping()){
+        noLoop()
+    }else{
+        loop()
+    }
+}
 
 function windowResized() {
     let hld = document.getElementById("holder");
