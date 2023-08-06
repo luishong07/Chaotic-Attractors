@@ -328,7 +328,7 @@ const rossler = {
     a: 1 / 5,
     b: 1 / 5,
     c: 5.7,
-    scl: 20,
+    scl: 18,
     dt: 0.05,
     dx: function (x, y, z) {
         return (-y - z) * this.dt;
@@ -367,8 +367,8 @@ const threeScroll = {
     d: 0.13,
     e: 0.57,
     f: 14.7,
-    scl: 3,
-    dt: 0.0005,
+    scl: 0.5,
+    dt: 0.00025,
     dx: function (x, y, z) {
         return (this.a * (y - x) + this.d * x * z) * this.dt;
     },
@@ -382,7 +382,7 @@ const threeScroll = {
         return color(260, 100, 50);
     },
     particleColor: function () {
-        return color(random(36, 63), 100, 50);
+        return color(random(261, 291), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -422,9 +422,9 @@ const lorenz83 = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-2, 2));
-        let y = round(random(-2, 2));
-        let z = round(random(-2, 2));
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -436,8 +436,8 @@ const newtonLeipnik = {
     //for higher dt values like 0.03, smaller values better for initial conditions
     a: 0.4,
     b: 0.175,
-    scl: 80,
-    dt: 0.03,
+    scl: 250,
+    dt: 0.05,
     dx: function (x, y, z) {
         return (-this.a * x + y + 10 * y * z) * this.dt;
     },
@@ -452,6 +452,16 @@ const newtonLeipnik = {
     },
     particleColor: function () {
         return color(random(22, 66), 100, 49);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-0.1, 0.1), 2);
+        let y = round(random(-0.1, 0.1), 2);
+        let z = round(random(-0.1, 0.1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
     },
 };
 const noseHoover = {
@@ -542,7 +552,7 @@ const coullet = {
         return z * this.dt;
     },
     dz: function (x, y, z) {
-        return ((0.8  * x )+ (-1.1 * y) + (-0.45 * z) + (-1 * x * x * x)) * this.dt;
+        return (0.8 * x + -1.1 * y + -0.45 * z + -1 * x * x * x) * this.dt;
     },
     particleColor: function () {
         return color(random(0, 57), 100, 50);
@@ -559,7 +569,6 @@ const coullet = {
         return position;
     },
 };
-
 const finance = {
     //dx = ((1/b) - a)* x + z +x*y
     // dy = -b*y -X^2
@@ -631,7 +640,73 @@ const arneodo = {
         return position;
     },
 };
-
+const rayleighBenard = {
+    a: 9.0,
+    b: 12,
+    c: 0.5,
+    scl: 20,
+    dt: 0.02,
+    dx: function (x, y, z) {
+        return (-this.a * x + this.a * y) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (this.b * x - y - x * z)*this.dt;
+    },
+    dz: function (x, y, z) {
+        return (x * y - this.c * z) * this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(160, 205), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-10, 10), 2);
+        let y = round(random(-10, 10), 2);
+        let z = round(random(-10, 10), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
+const dequanLi = {
+    alpha: 40,
+    beta: 1.833,
+    delta: 0.16,
+    epsilon: 0.65,
+    rho: 55,
+    zeta: 20,
+    scl: 0.75,
+    dt: 0.0005,
+    dx: function(x,y,z){
+        return (this.alpha*(y-x) + this.delta*(x*z))*this.dt
+    },
+    dy: function(x,y,z){
+        return (this.rho*x + this.zeta*y - x*z)*this.dt
+    },
+    dz: function(x,y,z){
+        return (this.beta*z + x*y - this.epsilon*x*x)*this.dt
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(261, 291), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-50, 50), 2);
+        let y = round(random(-50, 50), 2);
+        let z = round(random(-50, 50), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
 const circular = {
     r: function () {
         return random(1, 50);
@@ -663,8 +738,12 @@ let particles = [];
 let attractor;
 // let attractors = {}
 let attractors = {
-    coullet:coullet,
 
+    // dequanLi:dequanLi, 
+
+    rayleighBenard:rayleighBenard,
+    newtonLeipnik: newtonLeipnik,
+    coullet: coullet,
     arneodo: arneodo,
     finance: finance,
     lorenz: lorenz,
