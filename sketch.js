@@ -758,6 +758,110 @@ const genesioTesi = {
         return position;
     },
 };
+const burkeShaw = {
+    name: 'Burke-Shaw',
+    a: 10,
+    b: 4.272,
+    dt: 0.01,
+    scl: 50,
+    dx: function(x,y,z){
+        return (-this.a*(x+y))*this.dt
+    },
+    dy: function(x,y,z){
+        return (-y-this.a*x*z)*this.dt
+    },
+    dz: function(x,y,z){
+        return (this.a*x*y + this.b)*this.dt
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(160, 205), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+
+
+}
+const chua = {
+    name: 'Chua',
+    a: 40,
+    b: 12,
+    c: 28,
+    d: 3,
+    dt: 0.005,
+    scl: 5,
+    dx: function(x,y,z){
+        return (this.a*(y-x))*this.dt
+    },
+    dy: function(x,y,z){
+        return (-this.b*x - x*z + this.c*y)*this.dt
+    },
+    dz: function(x,y,z){
+        return (x*y - this.d*z)*this.dt
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(1, 50), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5), 2);
+        let y = round(random(-5, 5), 2);
+        let z = round(random(-5, 5), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const hadley = {
+    name: 'Hadley',
+    a: 4,
+    b: 1,
+    c: 0.2,
+    d: 8,
+    dt: 0.02,
+    scl: 100,
+    dx: function(x,y,z){
+        return (-(y*y) - (z*z) - this.c*x + this.d*this.c)*this.dt
+    },
+    dy: function(x,y,z){
+        return (x*y -this.a*z*x - y + this.b)*this.dt
+    },
+    dz: function(x,y,z){
+        return (this.a*x*y + x*z - z)*this.dt
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(100, 200), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        let z = round(random(-1, 1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+
+
 const circular = {
     r: function () {
         return random(1, 50);
@@ -790,8 +894,14 @@ let attractor;
 // let attractors = {}
 let attractors = {
     // dequanLi:dequanLi,
-    genesioTesi: genesioTesi,
 
+    hadley:hadley,
+
+    
+    genesioTesi: genesioTesi,
+    
+    chua:chua,
+    burkeShaw: burkeShaw,
     rayleighBenard: rayleighBenard,
     newtonLeipnik: newtonLeipnik,
     coullet: coullet,
