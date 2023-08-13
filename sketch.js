@@ -1,8 +1,35 @@
+const alpha = "\u03B1"
+const beta ="\u03B2"
+const gamma = "\u03B3"
+const delta = "\u03B4"
+const epsilon = "\u03B5"
+const zeta = "\u03B6"
+const eta = "\u03B7"
+const theta = "\u03B8"
+const iota = "\u03B9"
+const kappa = "\u03BA"
+const lambda = "\u03BB"
+const mu = "\u03BC"
+const nu = "\u03BD"
+const xi = "\u03BE"
+const omicron = "\u03BF"
+const pi = "\u03C0"
+const rho = "\u03C1"
+const sigma = "\u03C2"
+const tau = "\u03C4"
+const upsilon = "\u03C5"
+const phi = "\u03C6"
+const hi = "\u03C7"
+const psi = "\u03C8"
+const omega = "\u03C9"
+const squared = "\u00B2"
+
+
 const lorenz = {
     name: "Lorenz",
-    dxdt: "\u03C3",
-    dydt: "\u03BB",
-    dzdt: "\u03BC",
+    dxdt: sigma+"(y-x)",
+    dydt: "x("+rho+"-z)-y",
+    dzdt: "xy-"+beta+"z",
     sigma: 10,
     rho: 28,
     beta: 8 / 3,
@@ -36,6 +63,9 @@ const lorenz = {
 };
 const fourwing = {
     name: "Fourwing",
+    dxdt: alpha+"x + yz",
+    dydt: "\u03B2"+"x + " + "\u03B4"+"y - xz",
+    dzdt: "-z - xy",
     a: 0.2,
     b: 0.01,
     c: -0.4,
@@ -70,6 +100,9 @@ const fourwing = {
 };
 const halvorsen = {
     name: "Halvorsen",
+    dxdt: "-"+"\u03B1" + "x - 4y - 4z -y" + "\u00B2",
+    dydt: "-"+"\u03B1" + "y - 4z - 4x -z" + "\u00B2",
+    dzdt: "-"+"\u03B1" + "z - 4x - 4y -x" + "\u00B2",
     // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
@@ -107,18 +140,22 @@ const rabinovichFabrikant = {
     // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
     // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
     name: "Rabinovich-Fabrikant",
+    dxdt: "y(z-1+x"+"\u00B2"+")+"+"\u03B3"+"x",
+    dydt: "x(3z+1-x"+"\u00B2"+")+"+"\u03B3"+"y",
+    dzdt: "-2z("+"\u03B1" + "+xy)",
     alpha: 0.14,
-    sigma: 0.065,
+    // gamma: 0.065,
+    gamma: 0.1,
     tracerColor: function () {
         return color(325, 100, 50);
     },
     scl: 100,
-    dt: 0.04,
+    dt: 0.015,
     dx: function (x, y, z) {
-        return (y * (z - 1 + x ** 2) + this.sigma * x) * this.dt;
+        return (y * (z - 1 + x ** 2) + this.gamma * x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x * (3 * z + 1 - x ** 2) + this.sigma * y) * this.dt;
+        return (x * (3 * z + 1 - x ** 2) + this.gamma * y) * this.dt;
     },
     dz: function (x, y, z) {
         return -2 * z * (this.alpha + x * y) * this.dt;
@@ -139,6 +176,9 @@ const rabinovichFabrikant = {
 };
 const sprott = {
     name: "Sprott",
+    dxdt: "y + "+ alpha+"xy + xz",
+    dydt: "1 - "+beta +"x"+squared+"+yz",
+    dzdt: "x-x"+squared+"-y"+squared,
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
     // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
     // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
@@ -174,27 +214,30 @@ const sprott = {
 };
 const dadras = {
     name: "Dadras",
+    dxdt: "y - " + rho+"x + "+sigma+"yz",
+    dydt: tau+"y - xz + z",
+    dzdt: zeta+"xy - "+epsilon+"z",
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    a: 3,
-    b: 2.7,
-    c: 1.7,
-    d: 2,
-    e: 9,
+    rho: 3,
+    sigma: 2.7,
+    tau: 1.7,
+    zeta: 2,
+    epsilon: 9,
     scl: 20,
     dt: 0.01,
     tracerColor: function () {
         return color(282, 100, 84);
     },
     dx: function (x, y, z) {
-        return (y - this.a * x + this.b * y * z) * this.dt;
+        return (y - this.rho * x + this.sigma * y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.c * y - x * z + z) * this.dt;
+        return (this.tau * y - x * z + z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.d * x * y - this.e * z) * this.dt;
+        return (this.zeta * x * y - this.epsilon * z) * this.dt;
     },
     particleColor: function () {
         return color(random(0, 200), 100, 84);
@@ -212,6 +255,9 @@ const dadras = {
 };
 const aizawa = {
     name: "Aizawa",
+    dxdt: "β",
+    dydt: "",
+    dzdt: "",
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
     // let dy = ((d*p.x) + p.y*(p.z - b))*dt
     // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
@@ -260,6 +306,9 @@ const aizawa = {
 };
 const chen = {
     name: "Chen",
+    dxdt: alpha+"x-yz",
+    dydt: beta+"y+xz",
+    dzdt: delta+"z+xy/3",
     // let dx = (alpha * p.x - p.y * p.z) * dt;
     // let dy = (beta * p.y + p.x * p.z) * dt;
     // let dz = (delta * p.z + (p.x * p.y) / 3) * dt;
@@ -297,6 +346,9 @@ const chen = {
 };
 const thomas = {
     name: "Thomas",
+    dxdt: "sin(y)-"+"\u03B2"+"x",
+    dydt: "sin(x)-"+"\u03B2"+"y",
+    dzdt: "sin(z)-"+"\u03B2"+"z",
     // dt = 0.0001;
     // let dx = sin(p.y) - bee*p.x
     // let dy = sin(p.z) - bee*p.y
@@ -332,6 +384,9 @@ const thomas = {
 };
 const rossler = {
     name: "Rossler",
+    dxdt: "-(y+z)",
+    dydt: "x+" + "\u03B1"+"y",
+    dzdt: "\u03B2"+ "+z(x-"+"\u03C2"+")",
     // dt = 0.05;
     // let dx = (-p.y - p.z) * dt;
     // let dy = (p.x + a * p.y) * dt;
@@ -371,6 +426,9 @@ const rossler = {
 };
 const threeScroll = {
     name: "3-Scroll Unified System",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -410,6 +468,9 @@ const threeScroll = {
 };
 const lorenz83 = {
     name: "Lorenz 83",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
     // let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
     // let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
@@ -447,6 +508,9 @@ const lorenz83 = {
 };
 const newtonLeipnik = {
     name: "Newton Leipnik",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     //dt value contigent on initial conditions
     //for higher dt values like 0.03, smaller values better for initial conditions
     a: 0.4,
@@ -481,6 +545,9 @@ const newtonLeipnik = {
 };
 const noseHoover = {
     name: "Nose-Hoover",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     // dx = y
     // dy = -x+y*z
     // dz = a-y*y
@@ -516,6 +583,9 @@ const noseHoover = {
 };
 const bouali = {
     name: "Bouali",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     // dx = x*(4-y)+a*z
     // dy = -y*(1-x^2)
     // dz = -x (1.5 - s*z) - 0.05*z
@@ -554,6 +624,9 @@ const bouali = {
 };
 const coullet = {
     name: "Coullet",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 0.8,
     b: -1.1,
     c: -0.45,
@@ -589,6 +662,9 @@ const coullet = {
 };
 const finance = {
     name: "Finance",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     //dx = ((1/b) - a)* x + z +x*y
     // dy = -b*y -X^2
     // dz = -x - c *z
@@ -629,6 +705,9 @@ const finance = {
 };
 const arneodo = {
     name: "Arneodo",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: -5.5,
     b: 3.5,
     c: -1,
@@ -662,6 +741,9 @@ const arneodo = {
 };
 const rayleighBenard = {
     name: "Rayleigh-Benard",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 9.0,
     b: 12,
     c: 0.5,
@@ -694,6 +776,9 @@ const rayleighBenard = {
     },
 };
 const dequanLi = {
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     alpha: 40,
     beta: 1.833,
     delta: 0.16,
@@ -730,6 +815,9 @@ const dequanLi = {
 };
 const genesioTesi = {
     name: 'Genesio Tesi',
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: -1.1,
     b: -0.44,
     scl: 200,
@@ -762,6 +850,9 @@ const genesioTesi = {
 };
 const burkeShaw = {
     name: 'Burke-Shaw',
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 10,
     b: 4.272,
     dt: 0.01,
@@ -796,6 +887,9 @@ const burkeShaw = {
 }
 const chua = {
     name: 'Chua',
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 40,
     b: 12,
     c: 28,
@@ -830,6 +924,9 @@ const chua = {
 }
 const hadley = {
     name: 'Hadley',
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 4,
     b: 1,
     c: 0.2,
@@ -864,6 +961,9 @@ const hadley = {
 }
 const lorenzMod1 = {
     name: 'Lorenz Mod 1',
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 0.1,
     b: 4,
     c: 14,
@@ -898,6 +998,9 @@ const lorenzMod1 = {
 }
 const lorenzMod2 = {
     name: 'Lorenz Mod 2',
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     a: 0.9,
     b: 5,
     c: 9.9,
@@ -932,6 +1035,9 @@ const lorenzMod2 = {
 }
 const anishchenkoAstakhov = {
     name: "Anishchenko Astakhov",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     nu: 1.2,
     eta: 0.5,
     scl: 20,
@@ -970,6 +1076,9 @@ const anishchenkoAstakhov = {
 }
 const rucklidge= {
     name: "Rucklidge",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     kappa: 2,
     alpha: 6.7,
     scl: 20,
@@ -1002,6 +1111,9 @@ const rucklidge= {
 }
 const qiChen = {
     name: "Qi-Chen",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     alpha: 38,
     beta: 8/3,
     sigma: 80,
@@ -1035,6 +1147,9 @@ const qiChen = {
 }
 const wangSun = {
     name: "Wang-Sun",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
     alpha: 0.2,
     beta: -0.01,
     sigma: 1,
@@ -1185,11 +1300,12 @@ function setup() {
     }
 
     //initial attractor
-    attractor = lorenz;
-    title.textContent = lorenz.name
-    dx.textContent += lorenz.dxdt
-    dy.textContent += lorenz.dydt
-    dz.textContent += lorenz.dzdt
+    attractor = aizawa;
+    title.textContent = attractor.name
+    dx.textContent += attractor.dxdt
+    dy.textContent += attractor.dydt
+    dz.textContent += attractor.dzdt
+    
     //random selection at start
     // attractor = attractors[random(attractorNamesArray)];
     // title.textContent = attractor["name"];
@@ -1230,8 +1346,15 @@ function windowResized() {
 
 function changeAttractor(name) {
     let title = document.getElementById("attractor-name");
+    let dx = document.getElementById("dx")
+    let dy = document.getElementById("dy")
+    let dz = document.getElementById("dz")
     att = name;
     let titleName = attractors[att].name;
+    dx.textContent = attractors[att].dxdt
+    dy.textContent = attractors[att].dydt
+    dz.textContent = attractors[att].dzdt
+
     title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
     for (let p of particles) {
         let newParticleCoordinate = attractors[att].initialCoordinates();
