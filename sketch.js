@@ -1,5 +1,8 @@
 const lorenz = {
     name: "Lorenz",
+    dxdt: "\u03C3",
+    dydt: "\u03BB",
+    dzdt: "\u03BC",
     sigma: 10,
     rho: 28,
     beta: 8 / 3,
@@ -48,7 +51,6 @@ const fourwing = {
         return (this.b * x + this.c * y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        // console.log(x,y,z)
         return (-z - x * y) * this.dt;
     },
     particleColor: function () {
@@ -101,12 +103,12 @@ const halvorsen = {
     },
 };
 const rabinovichFabrikant = {
-    name: "Rabinovich-Fabrikant",
     // let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x) * dt;
     // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
     // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
+    name: "Rabinovich-Fabrikant",
     alpha: 0.14,
-    sigma: 0.1,
+    sigma: 0.065,
     tracerColor: function () {
         return color(325, 100, 50);
     },
@@ -280,7 +282,7 @@ const chen = {
         return color(0, 100, 80);
     },
     particleColor: function () {
-        return color(random(30, 200), 100, 50);
+        return color(random(30, 100), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -338,8 +340,8 @@ const rossler = {
     a: 1 / 5,
     b: 1 / 5,
     c: 5.7,
-    scl: 18,
-    dt: 0.05,
+    scl: 15,
+    dt: 0.04,
     dx: function (x, y, z) {
         return (-y - z) * this.dt;
     },
@@ -860,7 +862,213 @@ const hadley = {
         return position;
     },
 }
-
+const lorenzMod1 = {
+    name: 'Lorenz Mod 1',
+    a: 0.1,
+    b: 4,
+    c: 14,
+    d: 0.08,
+    dt: 0.005,
+    scl: 20,
+    dx: function(x,y,z){
+        return (-this.a*x + (y*y) -(z*z) + this.a*this.c)*this.dt
+    },
+    dy: function(x,y,z){
+        return (x*(y - this.b*z) + this.d)*this.dt
+    },
+    dz: function(x,y,z){
+        return (z + x*(this.b*y + z))*this.dt
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(150, 220), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5), 2);
+        let y = round(random(-5, 5), 2);
+        let z = round(random(-5, 5), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const lorenzMod2 = {
+    name: 'Lorenz Mod 2',
+    a: 0.9,
+    b: 5,
+    c: 9.9,
+    d: 1,
+    dt: 0.005,
+    scl: 20,
+    dx: function(x,y,z){
+        return (-this.a*x + (y*y) -(z*z) + this.a*this.c)*this.dt
+    },
+    dy: function(x,y,z){
+        return (x*(y - this.b*z) + this.d)*this.dt
+    },
+    dz: function(x,y,z){
+        return (-z + x*(this.b*y + z))*this.dt
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(150, 220), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-5, 5), 2);
+        let y = round(random(-5, 5), 2);
+        let z = round(random(-5, 5), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    }
+}
+const anishchenkoAstakhov = {
+    name: "Anishchenko Astakhov",
+    nu: 1.2,
+    eta: 0.5,
+    scl: 20,
+    dt: 0.02,
+    dx: function (x, y, z) {
+        return (this.nu*x + y - x*z) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (-x) * this.dt;
+    },
+    dz: function (x, y, z) {
+        let newX 
+        if(x>0){
+            newX = 1
+        }else{
+            newX = 0
+        }
+        return (-this.nu*z + this.nu*(newX)*x*x) * this.dt;
+    },
+    tracerColor: function () {
+        return color(325, 100, 50);
+    },
+    particleColor: function () {
+        return color(random(170, 205), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-3, 3), 2);
+        let y = round(random(-3, 3), 2);
+        let z = round(random(-3, 3), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const rucklidge= {
+    name: "Rucklidge",
+    kappa: 2,
+    alpha: 6.7,
+    scl: 20,
+    dt: 0.03,
+    dx: function (x, y, z) {
+        return (-this.kappa*x + this.alpha*y - y*z) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (x) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (-z + y*y) * this.dt;
+    },
+    tracerColor: function () {
+        return color(325, 100, 50);
+    },
+    particleColor: function () {
+        return color(random(200, 256), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const qiChen = {
+    name: "Qi-Chen",
+    alpha: 38,
+    beta: 8/3,
+    sigma: 80,
+    scl: 2,
+    dt: 0.001,
+    dx: function (x, y, z) {
+        return (this.alpha*(y-x) + y*z ) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (this.sigma*x + y - x*z) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (x*y - this.beta*z) * this.dt;
+    },
+    tracerColor: function () {
+        return color(325, 100, 50);
+    },
+    particleColor: function () {
+        return color(random(200, 256), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-20, 20), 2);
+        let y = round(random(-20, 20), 2);
+        let z = round(random(-20, 20), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const wangSun = {
+    name: "Wang-Sun",
+    alpha: 0.2,
+    beta: -0.01,
+    sigma: 1,
+    delta: -0.4,
+    epsilon: -1,
+    zeta: -1,
+    scl: 100,
+    dt: 0.08,
+    dx: function (x, y, z) {
+        return (x*this.alpha + this.sigma*y*z) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (this.beta*x + this.delta*y -x*z) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (this.epsilon*z +this.zeta*x*y) * this.dt;
+    },
+    tracerColor: function () {
+        return color(325, 100, 50);
+    },
+    particleColor: function () {
+        return color(random(200, 256), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
 
 const circular = {
     r: function () {
@@ -892,8 +1100,19 @@ let tracers = [];
 let particles = [];
 let attractor;
 // let attractors = {}
+//wang sun is idential to fourwing
 let attractors = {
     // dequanLi:dequanLi,
+
+    // wangSun:wangSun,
+
+    qiChen:qiChen,
+    rucklidge:rucklidge,rucklidge,
+
+    anishchenkoAstakhov:anishchenkoAstakhov,
+
+    lorenzMod2:lorenzMod2,
+    lorenzMod1:lorenzMod1,
 
     hadley:hadley,
 
@@ -932,6 +1151,9 @@ function setup() {
     let hld = document.getElementById("holder");
     let pause = document.querySelector(".logo");
     let title = document.getElementById("attractor-name");
+    let dx = document.getElementById("dx")
+    let dy = document.getElementById("dy")
+    let dz = document.getElementById("dz")
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -941,7 +1163,7 @@ function setup() {
     const attractorNamesArray = Object.keys(attractors);
     const mainInfoContainer = document.querySelector(".navbar-nav");
 
-    for (let i = 0; i < attractorNamesArray.length; i++) {
+    for (let i = 0; i < attractorNamesArray.length; i++) {// this is for the sidebar
         const li = document.createElement("li");
         li.setAttribute("class", "nav-item");
         li.setAttribute("id", attractorNamesArray[i]);
@@ -963,10 +1185,14 @@ function setup() {
     }
 
     //initial attractor
-    // attractor = lorenz;
+    attractor = lorenz;
+    title.textContent = lorenz.name
+    dx.textContent += lorenz.dxdt
+    dy.textContent += lorenz.dydt
+    dz.textContent += lorenz.dzdt
     //random selection at start
-    attractor = attractors[random(attractorNamesArray)];
-    title.textContent = attractor["name"];
+    // attractor = attractors[random(attractorNamesArray)];
+    // title.textContent = attractor["name"];
 
     c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);

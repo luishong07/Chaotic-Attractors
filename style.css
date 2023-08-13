@@ -149,7 +149,37 @@ body::-webkit-scrollbar-thumb {
 }
 .equ{
     background-color: blue;
+    flex-direction: column;
+    justify-content: center;
+    /* text-align: center; */
+}
+.equ-list{
+    display: grid;
+    grid-template-rows:  auto;
+    height: 100%;
+    text-align: left;
+    align-items: center;
+    margin: 0;
+
+}
+.equ-list >li {
+    font-size: 1.5rem
+    /* vertical-align: middle; */
+    /* text-align: center; */
+    /* background: pink; */
 }
 .para{
     background-color: green;
+}
+.para-list{
+    display: grid;
+    grid-template-rows:  auto;
+    height: 100%;
+    text-align: left;
+    align-items: center;
+    margin: 0;
+}
+.para-list > li {
+    font-size: 1.5rem
+
 }
