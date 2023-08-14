@@ -1,30 +1,29 @@
-const alpha = "\u03B1"
-const beta ="\u03B2"
-const gamma = "\u03B3"
-const delta = "\u03B4"
-const epsilon = "\u03B5"
-const zeta = "\u03B6"
-const eta = "\u03B7"
-const theta = "\u03B8"
-const iota = "\u03B9"
-const kappa = "\u03BA"
-const lambda = "\u03BB"
-const mu = "\u03BC"
-const nu = "\u03BD"
-const xi = "\u03BE"
-const omicron = "\u03BF"
-const pi = "\u03C0"
-const rho = "\u03C1"
-const sigma = "\u03C2"
-const tau = "\u03C4"
-const upsilon = "\u03C5"
-const phi = "\u03C6"
-const hi = "\u03C7"
-const psi = "\u03C8"
-const omega = "\u03C9"
-const squared = "\u00B2"
-const cubed = "\u00B3"
-
+const alpha = "\u03B1";
+const beta = "\u03B2";
+const gamma = "\u03B3";
+const delta = "\u03B4";
+const epsilon = "\u03B5";
+const zeta = "\u03B6";
+const eta = "\u03B7";
+const theta = "\u03B8";
+const iota = "\u03B9";
+const kappa = "\u03BA";
+const lambda = "\u03BB";
+const mu = "\u03BC";
+const nu = "\u03BD";
+const xi = "\u03BE";
+const omicron = "\u03BF";
+const pi = "\u03C0";
+const rho = "\u03C1";
+const sigma = "\u03C2";
+const tau = "\u03C4";
+const upsilon = "\u03C5";
+const phi = "\u03C6";
+const hi = "\u03C7";
+const psi = "\u03C8";
+const omega = "\u03C9";
+const squared = "\u00B2";
+const cubed = "\u00B3";
 
 const lorenz = {
     name: "Lorenz",
@@ -141,8 +140,8 @@ const rabinovichFabrikant = {
     // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
     // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
     name: "Rabinovich-Fabrikant",
-    dxdt: "y(z - 1 + x"+"\u00B2"+") + γx",
-    dydt: "x(3z + 1 - x"+"\u00B2"+") + γy",
+    dxdt: "y(z - 1 + x" + "\u00B2" + ") + γx",
+    dydt: "x(3z + 1 - x" + "\u00B2" + ") + γy",
     dzdt: "-2z( α + xy)",
     alpha: 0.14,
     // gamma: 0.065,
@@ -178,8 +177,8 @@ const rabinovichFabrikant = {
 const sprott = {
     name: "Sprott",
     dxdt: "y + αxy + xz",
-    dydt: "1 - βx"+squared+"+yz",
-    dzdt: "x-x"+squared+"-y"+squared,
+    dydt: "1 - βx" + squared + "+yz",
+    dzdt: "x-x" + squared + "-y" + squared,
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
     // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
     // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
@@ -258,7 +257,15 @@ const aizawa = {
     name: "Aizawa",
     dxdt: "(z-β)x - δy",
     dydt: "δx + (z-β)y",
-    dzdt: "γ + αz - z"+cubed+"/3 -(x"+squared+"-y"+squared+")(1+εz)+ζzx"+cubed,
+    dzdt:
+        "γ + αz - z" +
+        cubed +
+        "/3 -(x" +
+        squared +
+        "-y" +
+        squared +
+        ")(1+εz)+ζzx" +
+        cubed,
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
     // let dy = ((d*p.x) + p.y*(p.z - b))*dt
     // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
@@ -469,7 +476,7 @@ const threeScroll = {
 };
 const lorenz83 = {
     name: "Lorenz 83",
-    dxdt: "-αx - y"+squared+" - z"+squared+" + αε",
+    dxdt: "-αx - y" + squared + " - z" + squared + " + αε",
     dydt: "-y + xy - βxz + ξ",
     dzdt: "-z + βxy + xz",
     // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
@@ -509,9 +516,9 @@ const lorenz83 = {
 };
 const newtonLeipnik = {
     name: "Newton Leipnik",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-αx + y+ 10yz",
+    dydt: "-x - αy + 5xz",
+    dzdt: "βz - 5xy",
     //dt value contigent on initial conditions
     //for higher dt values like 0.03, smaller values better for initial conditions
     a: 0.4,
@@ -546,9 +553,9 @@ const newtonLeipnik = {
 };
 const noseHoover = {
     name: "Nose-Hoover",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "y",
+    dydt: "-x + yz",
+    dzdt: "α - y"+squared,
     // dx = y
     // dy = -x+y*z
     // dz = a-y*y
@@ -584,9 +591,9 @@ const noseHoover = {
 };
 const bouali = {
     name: "Bouali",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "x(4-y) + αz",
+    dydt: "-y(1-x"+squared+")",
+    dzdt: "-x(1.5-ςz) - 0.05z",
     // dx = x*(4-y)+a*z
     // dy = -y*(1-x^2)
     // dz = -x (1.5 - s*z) - 0.05*z
@@ -594,9 +601,6 @@ const bouali = {
     //s = 1.0
     a: 0.3,
     s: 1.0,
-    tracerColor: function () {
-        return color(169, 100, 50);
-    },
     scl: 40,
     dt: 0.025,
     dx: function (x, y, z) {
@@ -607,6 +611,9 @@ const bouali = {
     },
     dz: function (x, y, z) {
         return (-x * (1.5 - this.s * z) - 0.05 * z) * this.dt;
+    },
+    tracerColor: function () {
+        return color(169, 100, 50);
     },
     particleColor: function () {
         return color(random(0, 57), 100, 50);
@@ -625,18 +632,15 @@ const bouali = {
 };
 const coullet = {
     name: "Coullet",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "y",
+    dydt: "z",
+    dzdt: "αx + βu + ςz + δx"+cubed,
     a: 0.8,
     b: -1.1,
     c: -0.45,
     d: -1,
     scl: 100,
     dt: 0.03,
-    tracerColor: function () {
-        return color(169, 100, 50);
-    },
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -645,6 +649,9 @@ const coullet = {
     },
     dz: function (x, y, z) {
         return (0.8 * x + -1.1 * y + -0.45 * z + -1 * x * x * x) * this.dt;
+    },
+    tracerColor: function () {
+        return color(169, 100, 50);
     },
     particleColor: function () {
         return color(random(0, 57), 100, 50);
@@ -663,9 +670,9 @@ const coullet = {
 };
 const finance = {
     name: "Finance",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "z + xy + x(1/β - α)",
+    dydt: "-βy - x"+squared,
+    dzdt: "-x - ςz",
     //dx = ((1/b) - a)* x + z +x*y
     // dy = -b*y -X^2
     // dz = -x - c *z
@@ -706,9 +713,9 @@ const finance = {
 };
 const arneodo = {
     name: "Arneodo",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "y",
+    dydt: "z",
+    dzdt: "-αx - βy - z +δx"+cubed,
     a: -5.5,
     b: 3.5,
     c: -1,
@@ -742,9 +749,9 @@ const arneodo = {
 };
 const rayleighBenard = {
     name: "Rayleigh-Benard",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-αx + αy",
+    dydt: "τx - y - xz",
+    dzdt: "xy - βz",
     a: 9.0,
     b: 12,
     c: 0.5,
@@ -815,22 +822,22 @@ const dequanLi = {
     },
 };
 const genesioTesi = {
-    name: 'Genesio Tesi',
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    name: "Genesio Tesi",
+    dxdt: "y",
+    dydt: "z",
+    dzdt: "-δx - βy -αz +x"+squared,
     a: -1.1,
     b: -0.44,
     scl: 200,
     dt: 0.018,
     dx: function (x, y, z) {
-        return (y * this.dt);
+        return y * this.dt;
     },
     dy: function (x, y, z) {
-        return (z * this.dt);
+        return z * this.dt;
     },
     dz: function (x, y, z) {
-        return (-x + (this.a * y) + (this.b * z) + (x * x)) * this.dt;
+        return (-x + this.a * y + this.b * z + x * x) * this.dt;
     },
     tracerColor: () => {
         return color(188, 50, 50);
@@ -840,9 +847,9 @@ const genesioTesi = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-0.2, 0.2),2);
-        let y = round(random(-0.2, 0.2),2);
-        let z = round(random(-0.2, 0.2),2);
+        let x = round(random(-0.2, 0.2), 2);
+        let y = round(random(-0.2, 0.2), 2);
+        let z = round(random(-0.2, 0.2), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -850,22 +857,22 @@ const genesioTesi = {
     },
 };
 const burkeShaw = {
-    name: 'Burke-Shaw',
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
-    a: 10,
-    b: 4.272,
+    name: "Burke-Shaw",
+    dxdt: "-η(x+y)",
+    dydt: "-y-ηxz",
+    dzdt: "ηxy + μ",
+    a: 10,//eta
+    b: 4.272,//mu
     dt: 0.01,
     scl: 50,
-    dx: function(x,y,z){
-        return (-this.a*(x+y))*this.dt
+    dx: function (x, y, z) {
+        return -this.a * (x + y) * this.dt;
     },
-    dy: function(x,y,z){
-        return (-y-this.a*x*z)*this.dt
+    dy: function (x, y, z) {
+        return (-y - this.a * x * z) * this.dt;
     },
-    dz: function(x,y,z){
-        return (this.a*x*y + this.b)*this.dt
+    dz: function (x, y, z) {
+        return (this.a * x * y + this.b) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -883,11 +890,9 @@ const burkeShaw = {
         position["z"] = z;
         return position;
     },
-
-
-}
+};
 const chua = {
-    name: 'Chua',
+    name: "Chua",
     dxdt: "",
     dydt: "",
     dzdt: "",
@@ -897,14 +902,14 @@ const chua = {
     d: 3,
     dt: 0.005,
     scl: 5,
-    dx: function(x,y,z){
-        return (this.a*(y-x))*this.dt
+    dx: function (x, y, z) {
+        return this.a * (y - x) * this.dt;
     },
-    dy: function(x,y,z){
-        return (-this.b*x - x*z + this.c*y)*this.dt
+    dy: function (x, y, z) {
+        return (-this.b * x - x * z + this.c * y) * this.dt;
     },
-    dz: function(x,y,z){
-        return (x*y - this.d*z)*this.dt
+    dz: function (x, y, z) {
+        return (x * y - this.d * z) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -922,9 +927,9 @@ const chua = {
         position["z"] = z;
         return position;
     },
-}
+};
 const hadley = {
-    name: 'Hadley',
+    name: "Hadley",
     dxdt: "",
     dydt: "",
     dzdt: "",
@@ -934,14 +939,14 @@ const hadley = {
     d: 8,
     dt: 0.02,
     scl: 100,
-    dx: function(x,y,z){
-        return (-(y*y) - (z*z) - this.c*x + this.d*this.c)*this.dt
+    dx: function (x, y, z) {
+        return (-(y * y) - z * z - this.c * x + this.d * this.c) * this.dt;
     },
-    dy: function(x,y,z){
-        return (x*y -this.a*z*x - y + this.b)*this.dt
+    dy: function (x, y, z) {
+        return (x * y - this.a * z * x - y + this.b) * this.dt;
     },
-    dz: function(x,y,z){
-        return (this.a*x*y + x*z - z)*this.dt
+    dz: function (x, y, z) {
+        return (this.a * x * y + x * z - z) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -959,9 +964,9 @@ const hadley = {
         position["z"] = z;
         return position;
     },
-}
+};
 const lorenzMod1 = {
-    name: 'Lorenz Mod 1',
+    name: "Lorenz Mod 1",
     dxdt: "",
     dydt: "",
     dzdt: "",
@@ -971,14 +976,14 @@ const lorenzMod1 = {
     d: 0.08,
     dt: 0.005,
     scl: 20,
-    dx: function(x,y,z){
-        return (-this.a*x + (y*y) -(z*z) + this.a*this.c)*this.dt
+    dx: function (x, y, z) {
+        return (-this.a * x + y * y - z * z + this.a * this.c) * this.dt;
     },
-    dy: function(x,y,z){
-        return (x*(y - this.b*z) + this.d)*this.dt
+    dy: function (x, y, z) {
+        return (x * (y - this.b * z) + this.d) * this.dt;
     },
-    dz: function(x,y,z){
-        return (z + x*(this.b*y + z))*this.dt
+    dz: function (x, y, z) {
+        return (z + x * (this.b * y + z)) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -996,9 +1001,9 @@ const lorenzMod1 = {
         position["z"] = z;
         return position;
     },
-}
+};
 const lorenzMod2 = {
-    name: 'Lorenz Mod 2',
+    name: "Lorenz Mod 2",
     dxdt: "",
     dydt: "",
     dzdt: "",
@@ -1008,14 +1013,14 @@ const lorenzMod2 = {
     d: 1,
     dt: 0.005,
     scl: 20,
-    dx: function(x,y,z){
-        return (-this.a*x + (y*y) -(z*z) + this.a*this.c)*this.dt
+    dx: function (x, y, z) {
+        return (-this.a * x + y * y - z * z + this.a * this.c) * this.dt;
     },
-    dy: function(x,y,z){
-        return (x*(y - this.b*z) + this.d)*this.dt
+    dy: function (x, y, z) {
+        return (x * (y - this.b * z) + this.d) * this.dt;
     },
-    dz: function(x,y,z){
-        return (-z + x*(this.b*y + z))*this.dt
+    dz: function (x, y, z) {
+        return (-z + x * (this.b * y + z)) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1032,8 +1037,8 @@ const lorenzMod2 = {
         position["y"] = y;
         position["z"] = z;
         return position;
-    }
-}
+    },
+};
 const anishchenkoAstakhov = {
     name: "Anishchenko Astakhov",
     dxdt: "",
@@ -1044,19 +1049,19 @@ const anishchenkoAstakhov = {
     scl: 20,
     dt: 0.02,
     dx: function (x, y, z) {
-        return (this.nu*x + y - x*z) * this.dt;
+        return (this.nu * x + y - x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-x) * this.dt;
+        return -x * this.dt;
     },
     dz: function (x, y, z) {
-        let newX 
-        if(x>0){
-            newX = 1
-        }else{
-            newX = 0
+        let newX;
+        if (x > 0) {
+            newX = 1;
+        } else {
+            newX = 0;
         }
-        return (-this.nu*z + this.nu*(newX)*x*x) * this.dt;
+        return (-this.nu * z + this.nu * newX * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1074,8 +1079,8 @@ const anishchenkoAstakhov = {
         position["z"] = z;
         return position;
     },
-}
-const rucklidge= {
+};
+const rucklidge = {
     name: "Rucklidge",
     dxdt: "",
     dydt: "",
@@ -1085,13 +1090,13 @@ const rucklidge= {
     scl: 20,
     dt: 0.03,
     dx: function (x, y, z) {
-        return (-this.kappa*x + this.alpha*y - y*z) * this.dt;
+        return (-this.kappa * x + this.alpha * y - y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x) * this.dt;
+        return x * this.dt;
     },
     dz: function (x, y, z) {
-        return (-z + y*y) * this.dt;
+        return (-z + y * y) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1109,25 +1114,25 @@ const rucklidge= {
         position["z"] = z;
         return position;
     },
-}
+};
 const qiChen = {
     name: "Qi-Chen",
     dxdt: "",
     dydt: "",
     dzdt: "",
     alpha: 38,
-    beta: 8/3,
+    beta: 8 / 3,
     sigma: 80,
     scl: 2,
     dt: 0.001,
     dx: function (x, y, z) {
-        return (this.alpha*(y-x) + y*z ) * this.dt;
+        return (this.alpha * (y - x) + y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.sigma*x + y - x*z) * this.dt;
+        return (this.sigma * x + y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x*y - this.beta*z) * this.dt;
+        return (x * y - this.beta * z) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1145,7 +1150,7 @@ const qiChen = {
         position["z"] = z;
         return position;
     },
-}
+};
 const wangSun = {
     name: "Wang-Sun",
     dxdt: "",
@@ -1160,13 +1165,13 @@ const wangSun = {
     scl: 100,
     dt: 0.08,
     dx: function (x, y, z) {
-        return (x*this.alpha + this.sigma*y*z) * this.dt;
+        return (x * this.alpha + this.sigma * y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.beta*x + this.delta*y -x*z) * this.dt;
+        return (this.beta * x + this.delta * y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.epsilon*z +this.zeta*x*y) * this.dt;
+        return (this.epsilon * z + this.zeta * x * y) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1184,7 +1189,7 @@ const wangSun = {
         position["z"] = z;
         return position;
     },
-}
+};
 
 const circular = {
     r: function () {
@@ -1222,20 +1227,20 @@ let attractors = {
 
     // wangSun:wangSun,
 
-    qiChen:qiChen,
-    rucklidge:rucklidge,rucklidge,
+    qiChen: qiChen,
+    rucklidge: rucklidge,
+    rucklidge,
 
-    anishchenkoAstakhov:anishchenkoAstakhov,
+    anishchenkoAstakhov: anishchenkoAstakhov,
 
-    lorenzMod2:lorenzMod2,
-    lorenzMod1:lorenzMod1,
+    lorenzMod2: lorenzMod2,
+    lorenzMod1: lorenzMod1,
 
-    hadley:hadley,
+    hadley: hadley,
 
-    
     genesioTesi: genesioTesi,
-    
-    chua:chua,
+
+    chua: chua,
     burkeShaw: burkeShaw,
     rayleighBenard: rayleighBenard,
     newtonLeipnik: newtonLeipnik,
@@ -1267,9 +1272,9 @@ function setup() {
     let hld = document.getElementById("holder");
     let pause = document.querySelector(".logo");
     let title = document.getElementById("attractor-name");
-    let dx = document.getElementById("dx")
-    let dy = document.getElementById("dy")
-    let dz = document.getElementById("dz")
+    let dx = document.getElementById("dx");
+    let dy = document.getElementById("dy");
+    let dz = document.getElementById("dz");
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -1279,7 +1284,8 @@ function setup() {
     const attractorNamesArray = Object.keys(attractors);
     const mainInfoContainer = document.querySelector(".navbar-nav");
 
-    for (let i = 0; i < attractorNamesArray.length; i++) {// this is for the sidebar
+    for (let i = 0; i < attractorNamesArray.length; i++) {
+        // this is for the sidebar
         const li = document.createElement("li");
         li.setAttribute("class", "nav-item");
         li.setAttribute("id", attractorNamesArray[i]);
@@ -1302,11 +1308,11 @@ function setup() {
 
     //initial attractor
     attractor = lorenz83;
-    title.textContent = attractor.name
-    dx.textContent += attractor.dxdt
-    dy.textContent += attractor.dydt
-    dz.textContent += attractor.dzdt
-    
+    title.textContent = attractor.name;
+    dx.textContent += attractor.dxdt;
+    dy.textContent += attractor.dydt;
+    dz.textContent += attractor.dzdt;
+
     //random selection at start
     // attractor = attractors[random(attractorNamesArray)];
     // title.textContent = attractor["name"];
@@ -1347,14 +1353,14 @@ function windowResized() {
 
 function changeAttractor(name) {
     let title = document.getElementById("attractor-name");
-    let dx = document.getElementById("dx")
-    let dy = document.getElementById("dy")
-    let dz = document.getElementById("dz")
+    let dx = document.getElementById("dx");
+    let dy = document.getElementById("dy");
+    let dz = document.getElementById("dz");
     att = name;
     let titleName = attractors[att].name;
-    dx.textContent = attractors[att].dxdt
-    dy.textContent = attractors[att].dydt
-    dz.textContent = attractors[att].dzdt
+    dx.textContent = attractors[att].dxdt;
+    dy.textContent = attractors[att].dydt;
+    dz.textContent = attractors[att].dzdt;
 
     title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
     for (let p of particles) {
@@ -1384,8 +1390,8 @@ function draw() {
     stroke("yellow");
     line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
 
-    stroke('purple')
-    line(0,0,0,innerWidth / 2,innerWidth / 2,innerWidth / 2)
+    stroke("purple");
+    line(0, 0, 0, innerWidth / 2, innerWidth / 2, innerWidth / 2);
 
     // rotateY(angle)
     // rotate(angle+=0.01,[1,1,1])
