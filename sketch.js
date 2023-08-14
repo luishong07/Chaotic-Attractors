@@ -23,13 +23,14 @@ const hi = "\u03C7"
 const psi = "\u03C8"
 const omega = "\u03C9"
 const squared = "\u00B2"
+const cubed = "\u00B3"
 
 
 const lorenz = {
     name: "Lorenz",
-    dxdt: sigma+"(y-x)",
-    dydt: "x("+rho+"-z)-y",
-    dzdt: "xy-"+beta+"z",
+    dxdt: "σ(y-x)",
+    dydt: "x(ρ-z)-y",
+    dzdt: "xy-βz",
     sigma: 10,
     rho: 28,
     beta: 8 / 3,
@@ -63,8 +64,8 @@ const lorenz = {
 };
 const fourwing = {
     name: "Fourwing",
-    dxdt: alpha+"x + yz",
-    dydt: "\u03B2"+"x + " + "\u03B4"+"y - xz",
+    dxdt: "αx + yz",
+    dydt: "βx + δy - xz",
     dzdt: "-z - xy",
     a: 0.2,
     b: 0.01,
@@ -100,9 +101,9 @@ const fourwing = {
 };
 const halvorsen = {
     name: "Halvorsen",
-    dxdt: "-"+"\u03B1" + "x - 4y - 4z -y" + "\u00B2",
-    dydt: "-"+"\u03B1" + "y - 4z - 4x -z" + "\u00B2",
-    dzdt: "-"+"\u03B1" + "z - 4x - 4y -x" + "\u00B2",
+    dxdt: "-αx - 4y - 4z -y" + "\u00B2",
+    dydt: "-αy - 4z - 4x -z" + "\u00B2",
+    dzdt: "-αz - 4x - 4y -x" + "\u00B2",
     // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
@@ -140,9 +141,9 @@ const rabinovichFabrikant = {
     // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
     // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
     name: "Rabinovich-Fabrikant",
-    dxdt: "y(z-1+x"+"\u00B2"+")+"+"\u03B3"+"x",
-    dydt: "x(3z+1-x"+"\u00B2"+")+"+"\u03B3"+"y",
-    dzdt: "-2z("+"\u03B1" + "+xy)",
+    dxdt: "y(z - 1 + x"+"\u00B2"+") + γx",
+    dydt: "x(3z + 1 - x"+"\u00B2"+") + γy",
+    dzdt: "-2z( α + xy)",
     alpha: 0.14,
     // gamma: 0.065,
     gamma: 0.1,
@@ -176,8 +177,8 @@ const rabinovichFabrikant = {
 };
 const sprott = {
     name: "Sprott",
-    dxdt: "y + "+ alpha+"xy + xz",
-    dydt: "1 - "+beta +"x"+squared+"+yz",
+    dxdt: "y + αxy + xz",
+    dydt: "1 - βx"+squared+"+yz",
     dzdt: "x-x"+squared+"-y"+squared,
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
     // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
@@ -214,9 +215,9 @@ const sprott = {
 };
 const dadras = {
     name: "Dadras",
-    dxdt: "y - " + rho+"x + "+sigma+"yz",
-    dydt: tau+"y - xz + z",
-    dzdt: zeta+"xy - "+epsilon+"z",
+    dxdt: "y - ρx + σyz",
+    dydt: "τy - xz + z",
+    dzdt: "ζxy - εz",
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
@@ -255,9 +256,9 @@ const dadras = {
 };
 const aizawa = {
     name: "Aizawa",
-    dxdt: "β",
-    dydt: "",
-    dzdt: "",
+    dxdt: "(z-β)x - δy",
+    dydt: "δx + (z-β)y",
+    dzdt: "γ + αz - z"+cubed+"/3 -(x"+squared+"-y"+squared+")(1+εz)+ζzx"+cubed,
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
     // let dy = ((d*p.x) + p.y*(p.z - b))*dt
     // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
@@ -306,9 +307,9 @@ const aizawa = {
 };
 const chen = {
     name: "Chen",
-    dxdt: alpha+"x-yz",
-    dydt: beta+"y+xz",
-    dzdt: delta+"z+xy/3",
+    dxdt: "αx-yz",
+    dydt: "βy+xz",
+    dzdt: "δz+xy/3",
     // let dx = (alpha * p.x - p.y * p.z) * dt;
     // let dy = (beta * p.y + p.x * p.z) * dt;
     // let dz = (delta * p.z + (p.x * p.y) / 3) * dt;
@@ -346,9 +347,9 @@ const chen = {
 };
 const thomas = {
     name: "Thomas",
-    dxdt: "sin(y)-"+"\u03B2"+"x",
-    dydt: "sin(x)-"+"\u03B2"+"y",
-    dzdt: "sin(z)-"+"\u03B2"+"z",
+    dxdt: "sin(y)-βx",
+    dydt: "sin(x)-βy",
+    dzdt: "sin(z)-βz",
     // dt = 0.0001;
     // let dx = sin(p.y) - bee*p.x
     // let dy = sin(p.z) - bee*p.y
@@ -385,8 +386,8 @@ const thomas = {
 const rossler = {
     name: "Rossler",
     dxdt: "-(y+z)",
-    dydt: "x+" + "\u03B1"+"y",
-    dzdt: "\u03B2"+ "+z(x-"+"\u03C2"+")",
+    dydt: "x+αy",
+    dzdt: "β+z(x-ς)",
     // dt = 0.05;
     // let dx = (-p.y - p.z) * dt;
     // let dy = (p.x + a * p.y) * dt;
@@ -468,9 +469,9 @@ const threeScroll = {
 };
 const lorenz83 = {
     name: "Lorenz 83",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-αx - y"+squared+" - z"+squared+" + αε",
+    dydt: "-y + xy - βxz + ξ",
+    dzdt: "-z + βxy + xz",
     // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
     // let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
     // let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
@@ -1300,7 +1301,7 @@ function setup() {
     }
 
     //initial attractor
-    attractor = aizawa;
+    attractor = lorenz83;
     title.textContent = attractor.name
     dx.textContent += attractor.dxdt
     dy.textContent += attractor.dydt
