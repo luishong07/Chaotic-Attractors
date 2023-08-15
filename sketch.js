@@ -452,8 +452,8 @@ const threeScroll2 = {
     delta: 0.13,
     epsilon: 0.57,
     zeta: 14.7,
-    scl: 1.5,
-    dt: 0.00025,
+    scl: 1,
+    dt: 0.0003,
     dx: function (x, y, z) {
         return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
     },
@@ -471,9 +471,9 @@ const threeScroll2 = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-50, 50),2);
-        let y = round(random(-50, 50),2);
-        let z = round(random(10, 30),2);
+        let x = round(random(-80, 80),2);
+        let y = round(random(-80, 80),2);
+        let z = round(random(50, 200),2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
