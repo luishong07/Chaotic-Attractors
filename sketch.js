@@ -432,30 +432,36 @@ const rossler = {
         return position;
     },
 };
-const threeScroll = {
-    name: "3-Scroll Unified System",
+const threeScroll2 = {
+    name: "3-Scroll Unified System 2",
     dxdt: "",
     dydt: "",
     dzdt: "",
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
-    a: 32.48,
-    b: 45.84,
-    c: 1.18,
-    d: 0.13,
-    e: 0.57,
-    f: 14.7,
-    scl: 0.5,
+    // alpha: 40,
+    // sigma: 55,
+    // beta: 1.833,
+    // delta: 0.16,
+    // epsilon: 0.65,
+    // zeta: 20,
+    alpha: 32.48,
+    sigma: 45.84,
+    beta: 1.18,
+    delta: 0.13,
+    epsilon: 0.57,
+    zeta: 14.7,
+    scl: 1.5,
     dt: 0.00025,
     dx: function (x, y, z) {
-        return (this.a * (y - x) + this.d * x * z) * this.dt;
+        return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.b * x - x * z + this.f * y) * this.dt;
+        return (this.sigma * x - x * z + this.zeta * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.c * z + x * y - this.e * x ** 2) * this.dt;
+        return (this.beta * z + x * y - this.epsilon * x ** 2) * this.dt;
     },
     tracerColor: function () {
         return color(260, 100, 50);
@@ -465,9 +471,9 @@ const threeScroll = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-100, 100));
-        let y = round(random(-100, 100));
-        let z = round(random(-100, 100));
+        let x = round(random(-50, 50),2);
+        let y = round(random(-50, 50),2);
+        let z = round(random(10, 30),2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -891,8 +897,8 @@ const burkeShaw = {
         return position;
     },
 };
-const chua = {
-    name: "Chua",
+const chua1 = {
+    name: "Chua 1",
     dxdt: "",
     dydt: "",
     dzdt: "",
@@ -930,9 +936,9 @@ const chua = {
 };
 const hadley = {
     name: "Hadley",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-y"+squared+" - z"+squared+" - αx + αζ",
+    dydt: "-xy - βxz -y + δ",
+    dzdt: "βxy + xz - z",
     a: 4,
     b: 1,
     c: 0.2,
@@ -1082,9 +1088,9 @@ const anishchenkoAstakhov = {
 };
 const rucklidge = {
     name: "Rucklidge",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-kx + ay - yz",
+    dydt: "x",
+    dzdt: "-z + y"+squared,
     kappa: 2,
     alpha: 6.7,
     scl: 20,
@@ -1117,9 +1123,9 @@ const rucklidge = {
 };
 const qiChen = {
     name: "Qi-Chen",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "α(y - x) + yz",
+    dydt: "ςx + y - xz",
+    dzdt: "xy - βz",
     alpha: 38,
     beta: 8 / 3,
     sigma: 80,
@@ -1190,31 +1196,156 @@ const wangSun = {
         return position;
     },
 };
-
-const circular = {
-    r: function () {
-        return random(1, 50);
+//sakarya similar to newton but it only creates one attractor instead of two like the newton
+const sakarya = {
+    name: "Sakarya",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
+    alpha: 0.4,
+    beta: 0.3,
+    scl: 20,
+    dt: 0.005,
+    dx: function (x, y, z) {
+        return (-x + y+ y*z) * this.dt;
     },
-    theta: function () {
-        return random(0, TWO_PI);
+    dy: function (x, y, z) {
+        return (-x-y+this.alpha*x*z) * this.dt;
     },
-    dx: function (r, theta) {
-        return this.r * cos(this.theta);
-    },
-    dy: function (r, theta) {
-        return this.r * sin(this.theta);
-    },
-    dz: function () {
-        return 0;
+    dz: function (x, y, z) {
+        return (z-  this.beta*x*y) * this.dt;
     },
     tracerColor: function () {
-        return color(0, 100, 30);
+        return color(325, 100, 50);
     },
     particleColor: function () {
-        return color(random(22, 66), 100, 49);
+        return color(random(200, 256), 100, 50);
     },
-};
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(-2, 2), 2);
+        let z = round(random(-2, 2), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const yuWang = {
+    name: "Yu-Wang",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
+    alpha: 10,
+    beta: 40,
+    sigma: 2,
+    delta: 2.5,
+    scl: 20,
+    dt: 0.0004,
+    dx: function (x, y, z) {
+        return (10*(y-x)) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (40*x - 2*x*z) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (2.71828**(x*y) - 2.5*z)* this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(160, 205), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        let z = round(random(-1, 1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const luChen = {
+    name: "Lu-Chen",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
+    alpha: 10,
+    beta: 4,
+    sigma: 18.1,
+    delta: 20/7,
+    scl: 7,
+    dt: 0.003,
+    dx: function (x, y, z) {
+        return (-this.beta*x  +z*y)*this.dt;
+        // return (this.delta*x - y*z  + this.sigma)*this.dt;
 
+    },
+    dy: function (x, y, z) {
+        return (-this.alpha*y + z*x)*this.dt;
+    },
+    dz: function (x, y, z) {
+        // return (-this.beta*z  +x*y)*this.dt;
+        return (this.delta*z - y*x  + this.sigma)*this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(160, 205), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-3, 3), 2);
+        let y = round(random(-3, 3), 2);
+        let z = round(random(-3, 3), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
+const chua2 = { 
+    name: "Chua 2",
+    dxdt: "a(y - x - d(|x + 1|-|x - 1|))",
+    dydt: "",
+    dzdt: "",
+    alpha: 15.6,
+    beta: 1,
+    sigma: 25.58,
+    delta: -1,
+    dt: 0.01,
+    scl: 70,
+    dx: function (x, y, z) {
+        return (this.alpha*(y -x - this.delta*(Math.abs(x+1) - Math.abs(x-1)))) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (this.beta*(x-y+z)) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (-this.sigma*y) * this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    particleColor: function () {
+        return color(random(1, 50), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-0.5, 0.5), 2);
+        let y = round(random(-0.5, 0.5), 2);
+        let z = round(random(-0.5, 0.5), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+}
 let c1;
 let c2;
 let tracers = [];
@@ -1222,14 +1353,22 @@ let particles = [];
 let attractor;
 // let attractors = {}
 //wang sun is idential to fourwing
+//yuwang exponential out of control
+//hadley idential to lorenz83
 let attractors = {
     // dequanLi:dequanLi,
 
     // wangSun:wangSun,
+    // yuWang:yuWang,
+
+    chua2:chua2,
+
+    luChen:luChen,
+    sakarya:sakarya,
 
     qiChen: qiChen,
     rucklidge: rucklidge,
-    rucklidge,
+    
 
     anishchenkoAstakhov: anishchenkoAstakhov,
 
@@ -1240,7 +1379,7 @@ let attractors = {
 
     genesioTesi: genesioTesi,
 
-    chua: chua,
+    chua1: chua1,
     burkeShaw: burkeShaw,
     rayleighBenard: rayleighBenard,
     newtonLeipnik: newtonLeipnik,
@@ -1257,7 +1396,7 @@ let attractors = {
     chen: chen,
     thomas: thomas,
     rossler: rossler,
-    threeScroll: threeScroll,
+    threeScroll2: threeScroll2,
     lorenz83: lorenz83,
 
     noseHoover: noseHoover,
@@ -1307,7 +1446,7 @@ function setup() {
     }
 
     //initial attractor
-    attractor = lorenz83;
+    attractor = threeScroll2;
     title.textContent = attractor.name;
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
