@@ -480,6 +480,53 @@ const threeScroll2 = {
         return position;
     },
 };
+const threeScroll1 = {
+    name: "3-Scroll Unified System 1",
+    dxdt: "",
+    dydt: "",
+    dzdt: "",
+    // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
+    // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
+    // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
+    // alpha: 40,
+    // sigma: 55,
+    // beta: 1.833,
+    // delta: 0.16,
+    // epsilon: 0.65,
+    // zeta: 20,
+    alpha: 40,
+    beta: 0.833,
+    delta: 0.5,
+    epsilon: 0.65,
+    zeta: 20,
+    scl: 2,
+    dt: 0.0015,
+    dx: function (x, y, z) {
+        return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
+    },
+    dy: function (x, y, z) {
+        return (this.zeta * y - x * z ) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (this.beta * z + x * y - this.epsilon * x * x) * this.dt;
+    },
+    tracerColor: function () {
+        return color(260, 100, 50);
+    },
+    particleColor: function () {
+        return color(random(261, 291), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-7, 7),2);
+        let y = round(random(-7, 7),2);
+        let z = round(random(30, 50),2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
 const lorenz83 = {
     name: "Lorenz 83",
     dxdt: "-αx - y" + squared + " - z" + squared + " + αε",
@@ -1360,6 +1407,7 @@ let attractors = {
 
     // wangSun:wangSun,
     // yuWang:yuWang,
+    threeScroll1:threeScroll1,
 
     chua2:chua2,
 
@@ -1446,7 +1494,7 @@ function setup() {
     }
 
     //initial attractor
-    attractor = threeScroll2;
+    attractor = threeScroll1;
     title.textContent = attractor.name;
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
