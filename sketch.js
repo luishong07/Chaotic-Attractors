@@ -35,6 +35,7 @@ const lorenz = {
     beta: 8 / 3,
     scl: 8,
     dt: 0.01,
+    pathLength:75,
     dx: function (x, y) {
         return this.sigma * (y - x) * this.dt;
     },
@@ -69,11 +70,12 @@ const fourwing = {
     a: 0.2,
     b: 0.01,
     c: -0.4,
+    scl: 100,
+    dt: 0.1,
+    pathLength:110,
     tracerColor: function () {
         return color(169, 100, 50);
     },
-    scl: 100,
-    dt: 0.1,
     dx: function (x, y, z) {
         return (this.a * x + y * z) * this.dt;
     },
@@ -107,11 +109,12 @@ const halvorsen = {
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
     a: 1.89,
+    scl: 40,
+    dt: 0.01,
+    pathLength:100,
     tracerColor: function () {
         return color(230, 100, 76);
     },
-    scl: 40,
-    dt: 0.01,
     dx: function (x, y, z) {
         return (-1 * this.a * x - 4 * y - 4 * z - y ** 2) * this.dt;
     },
@@ -146,11 +149,12 @@ const rabinovichFabrikant = {
     alpha: 0.14,
     // gamma: 0.065,
     gamma: 0.1,
+    scl: 100,
+    dt: 0.015,
+    pathLength:120,
     tracerColor: function () {
         return color(325, 100, 50);
     },
-    scl: 100,
-    dt: 0.015,
     dx: function (x, y, z) {
         return (y * (z - 1 + x ** 2) + this.gamma * x) * this.dt;
     },
@@ -184,11 +188,12 @@ const sprott = {
     // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
     a: 2.07,
     b: 1.79,
+    scl: 100,
+    dt: 0.05,
+    pathLength:110,
     tracerColor: function () {
         return color(57, 100, 50);
     },
-    scl: 100,
-    dt: 0.05,
     dx: function (x, y, z) {
         return (y + this.a * x * y + x * z) * this.dt;
     },
@@ -227,6 +232,7 @@ const dadras = {
     epsilon: 9,
     scl: 20,
     dt: 0.01,
+    pathLength:120,
     tracerColor: function () {
         return color(282, 100, 84);
     },
@@ -278,6 +284,7 @@ const aizawa = {
     f: 0.1,
     scl: 100,
     dt: 0.015,
+    pathLength:110,
     tracerColor: function () {
         return color(0, 96, 37);
     },
@@ -326,6 +333,7 @@ const chen = {
     delta: -0.38,
     scl: 20,
     dt: 0.008,
+    pathLength:120,
     dx: function (x, y, z) {
         return (this.alpha * x - y * z) * this.dt;
     },
@@ -364,6 +372,7 @@ const thomas = {
     b: 0.208186,
     scl: 90,
     dt: 0.15,
+    pathLength:100,
     dx: function (x, y, z) {
         return (sin(y) - this.b * x) * this.dt;
     },
@@ -405,6 +414,7 @@ const rossler = {
     c: 5.7,
     scl: 15,
     dt: 0.04,
+    pathLength:100,
     dx: function (x, y, z) {
         return (-y - z) * this.dt;
     },
@@ -434,9 +444,9 @@ const rossler = {
 };
 const threeScroll2 = {
     name: "3-Scroll Unified System 2",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "α(y - x) + δxz",
+    dydt: "ςx - xz + ζy",
+    dzdt: "βz + xy - εx"+squared,
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -453,7 +463,8 @@ const threeScroll2 = {
     epsilon: 0.57,
     zeta: 14.7,
     scl: 1,
-    dt: 0.0003,
+    dt: 0.0002,
+    pathLength:120,
     dx: function (x, y, z) {
         return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
     },
@@ -461,7 +472,7 @@ const threeScroll2 = {
         return (this.sigma * x - x * z + this.zeta * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.beta * z + x * y - this.epsilon * x ** 2) * this.dt;
+        return (this.beta * z + x * y - this.epsilon * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(260, 100, 50);
@@ -471,9 +482,16 @@ const threeScroll2 = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-80, 80),2);
-        let y = round(random(-80, 80),2);
-        let z = round(random(50, 200),2);
+        // let x = round(random(-100, 100),2);
+        // let y = round(random(-100, 100),2);
+        // let z = round(random(-20, 200),2);
+        let x = round(random(-50, 50),2);
+        let y = round(random(-50, 50),2);
+        let z = round(random(-50, 200),2);
+
+        // let x = round(random(-80, 80),2);
+        // let y = round(random(-80, 80),2);
+        // let z = round(random(50, 200),2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -482,9 +500,9 @@ const threeScroll2 = {
 };
 const threeScroll1 = {
     name: "3-Scroll Unified System 1",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "α(y -x) + δxz",
+    dydt: "ςx - xz + ζy",
+    dzdt: "βz + xy - εx"+squared,
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -499,8 +517,9 @@ const threeScroll1 = {
     delta: 0.5,
     epsilon: 0.65,
     zeta: 20,
-    scl: 2,
+    scl: 3,
     dt: 0.0015,
+    pathLength:120,
     dx: function (x, y, z) {
         return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
     },
@@ -541,6 +560,7 @@ const lorenz83 = {
     g: 4.66,
     scl: 50,
     dt: 0.01,
+    pathLength:80,
     dx: function (x, y, z) {
         return (-1 * this.a * x - y ** 2 - z ** 2 + this.a * this.f) * this.dt;
     },
@@ -577,7 +597,8 @@ const newtonLeipnik = {
     a: 0.4,
     b: 0.175,
     scl: 250,
-    dt: 0.05,
+    dt: 0.04,
+    pathLength:100,
     dx: function (x, y, z) {
         return (-this.a * x + y + 10 * y * z) * this.dt;
     },
@@ -616,6 +637,7 @@ const noseHoover = {
     a: 1.5,
     scl: 50,
     dt: 0.02,
+    pathLength:150,
     tracerColor: () => {
         return color(188, 50, 50);
     },
@@ -655,7 +677,8 @@ const bouali = {
     a: 0.3,
     s: 1.0,
     scl: 40,
-    dt: 0.025,
+    dt: 0.02,
+    pathLength:90,
     dx: function (x, y, z) {
         return (x * (4 - y) + this.a * z) * this.dt;
     },
@@ -694,6 +717,7 @@ const coullet = {
     d: -1,
     scl: 100,
     dt: 0.03,
+    pathLength:100,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -737,6 +761,7 @@ const finance = {
     c: 1.1,
     scl: 50,
     dt: 0.05,
+    pathLength:100,
     dx: function (x, y, z) {
         return ((1 / this.b - this.a) * x + z + x * y) * this.dt;
     },
@@ -774,6 +799,7 @@ const arneodo = {
     c: -1,
     scl: 30,
     dt: 0.01,
+    pathLength:125,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -808,8 +834,9 @@ const rayleighBenard = {
     a: 9.0,
     b: 12,
     c: 0.5,
-    scl: 20,
+    scl: 10,
     dt: 0.02,
+    pathLength:80,
     dx: function (x, y, z) {
         return (-this.a * x + this.a * y) * this.dt;
     },
@@ -848,6 +875,7 @@ const dequanLi = {
     zeta: 20,
     scl: 0.75,
     dt: 0.0005,
+    pathLength:100,
     dx: function (x, y, z) {
         return (this.alpha * (y - x) + this.delta * (x * z)) * this.dt;
     },
@@ -883,6 +911,7 @@ const genesioTesi = {
     b: -0.44,
     scl: 200,
     dt: 0.018,
+    pathLength:100,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -946,15 +975,16 @@ const burkeShaw = {
 };
 const chua1 = {
     name: "Chua 1",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "α(y - x)",
+    dydt: "-εx -xz + λy",
+    dzdt: "xy - μz",
     a: 40,
     b: 12,
     c: 28,
     d: 3,
     dt: 0.005,
     scl: 5,
+    pathLength:80,
     dx: function (x, y, z) {
         return this.a * (y - x) * this.dt;
     },
@@ -1020,15 +1050,16 @@ const hadley = {
 };
 const lorenzMod1 = {
     name: "Lorenz Mod 1",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-αx + y"+squared+" - z"+squared+" + αζ",
+    dydt: "x(y - βz) + δ",
+    dzdt: "z + x(βy + z)",
     a: 0.1,
     b: 4,
     c: 14,
     d: 0.08,
     dt: 0.005,
-    scl: 20,
+    scl: 10,
+    pathLength:80,
     dx: function (x, y, z) {
         return (-this.a * x + y * y - z * z + this.a * this.c) * this.dt;
     },
@@ -1057,15 +1088,16 @@ const lorenzMod1 = {
 };
 const lorenzMod2 = {
     name: "Lorenz Mod 2",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-αx + y"+squared+" - z"+squared+" + αζ",
+    dydt: "α(y - βz) + δ",
+    dzdt: "-z + x(βy + z)",
     a: 0.9,
     b: 5,
     c: 9.9,
     d: 1,
-    dt: 0.005,
-    scl: 20,
+    dt: 0.004,
+    scl: 10,
+    pathLength:80,
     dx: function (x, y, z) {
         return (-this.a * x + y * y - z * z + this.a * this.c) * this.dt;
     },
@@ -1101,6 +1133,7 @@ const anishchenkoAstakhov = {
     eta: 0.5,
     scl: 20,
     dt: 0.02,
+    pathLength:120,
     dx: function (x, y, z) {
         return (this.nu * x + y - x * z) * this.dt;
     },
@@ -1124,9 +1157,9 @@ const anishchenkoAstakhov = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-3, 3), 2);
-        let y = round(random(-3, 3), 2);
-        let z = round(random(-3, 3), 2);
+        let x = round(random(-5, 0), 2);
+        let y = round(random(0, 5), 2);
+        let z = round(random(0,0), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -1135,13 +1168,14 @@ const anishchenkoAstakhov = {
 };
 const rucklidge = {
     name: "Rucklidge",
-    dxdt: "-kx + ay - yz",
+    dxdt: "-κx + αy - yz",
     dydt: "x",
     dzdt: "-z + y"+squared,
     kappa: 2,
     alpha: 6.7,
     scl: 20,
     dt: 0.03,
+    pathLength:100,
     dx: function (x, y, z) {
         return (-this.kappa * x + this.alpha * y - y * z) * this.dt;
     },
@@ -1178,6 +1212,7 @@ const qiChen = {
     sigma: 80,
     scl: 2,
     dt: 0.001,
+    pathLength:100,
     dx: function (x, y, z) {
         return (this.alpha * (y - x) + y * z) * this.dt;
     },
@@ -1217,6 +1252,7 @@ const wangSun = {
     zeta: -1,
     scl: 100,
     dt: 0.08,
+    pathLength:100,
     dx: function (x, y, z) {
         return (x * this.alpha + this.sigma * y * z) * this.dt;
     },
@@ -1246,13 +1282,14 @@ const wangSun = {
 //sakarya similar to newton but it only creates one attractor instead of two like the newton
 const sakarya = {
     name: "Sakarya",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-x + y +yz",
+    dydt: "-x - y + αxz",
+    dzdt: "z -βxy",
     alpha: 0.4,
     beta: 0.3,
-    scl: 20,
+    scl: 10,
     dt: 0.005,
+    pathLength:100,
     dx: function (x, y, z) {
         return (-x + y+ y*z) * this.dt;
     },
@@ -1290,6 +1327,7 @@ const yuWang = {
     delta: 2.5,
     scl: 20,
     dt: 0.0004,
+    pathLength:100,
     dx: function (x, y, z) {
         return (10*(y-x)) * this.dt;
     },
@@ -1318,15 +1356,16 @@ const yuWang = {
 }
 const luChen = {
     name: "Lu-Chen",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "-βx + zy",
+    dydt: "-αy + zx",
+    dzdt: "δz - yx + ς",
     alpha: 10,
     beta: 4,
     sigma: 18.1,
     delta: 20/7,
     scl: 7,
-    dt: 0.003,
+    dt: 0.0035,
+    pathLength:100,
     dx: function (x, y, z) {
         return (-this.beta*x  +z*y)*this.dt;
         // return (this.delta*x - y*z  + this.sigma)*this.dt;
@@ -1358,15 +1397,16 @@ const luChen = {
 }
 const chua2 = { 
     name: "Chua 2",
-    dxdt: "a(y - x - d(|x + 1|-|x - 1|))",
-    dydt: "",
-    dzdt: "",
+    dxdt: "α(y - x - δ(|x + 1|-|x - 1|))",
+    dydt: "β(x - y + z)",
+    dzdt: "-ςy",
     alpha: 15.6,
     beta: 1,
     sigma: 25.58,
     delta: -1,
     dt: 0.01,
     scl: 70,
+    pathLength:100,
     dx: function (x, y, z) {
         return (this.alpha*(y -x - this.delta*(Math.abs(x+1) - Math.abs(x-1)))) * this.dt;
     },
@@ -1494,7 +1534,7 @@ function setup() {
     }
 
     //initial attractor
-    attractor = threeScroll1;
+    attractor = lorenz;
     title.textContent = attractor.name;
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
@@ -1516,7 +1556,8 @@ function setup() {
         let p = new Particle(
             attractor.particleColor(),
             attractor.scl,
-            attractor.initialCoordinates
+            attractor.initialCoordinates,
+            attractor.pathLength
         );
         particles.push(p);
     }
@@ -1555,10 +1596,12 @@ function changeAttractor(name) {
         p.initialCoordinates = attractors[att].initialCoordinates;
         p.path = [];
         p.scl = attractors[att].scl;
+        p.pathLength = attractors[att].pathLength
         p.color = attractors[att].particleColor();
         p.x = newParticleCoordinate.x;
         p.y = newParticleCoordinate.y;
         p.z = newParticleCoordinate.z;
+
     }
     attractor = attractors[att];
 }
@@ -1579,7 +1622,7 @@ function draw() {
 
     stroke("purple");
     line(0, 0, 0, innerWidth / 2, innerWidth / 2, innerWidth / 2);
-
+    
     // rotateY(angle)
     // rotate(angle+=0.01,[1,1,1])
     // angle+=0.01

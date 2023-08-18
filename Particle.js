@@ -1,5 +1,5 @@
 class Particle {
-    constructor(clr, scl, initialCoordinates) {
+    constructor(clr, scl, initialCoordinates, pathLength) {
         this.x = initialCoordinates().x;
         this.y = initialCoordinates().y;
         this.z = initialCoordinates().z;
@@ -10,9 +10,11 @@ class Particle {
         this.color = clr;
         this.path = [];
         this.initialCoordinates = initialCoordinates;
+        this.pathLength = pathLength
     }
 
     show(x, y, z) {
+
         this.x = x;
         this.y = y;
         this.z = z;
@@ -31,7 +33,7 @@ class Particle {
             this.z = newCoordinate.z;
         }
         this.path.push(createVector(this.x, this.y, this.z));
-        if (this.path.length > 200) {
+        if (this.path.length > this.pathLength) {
             this.path.shift();
         }
         noFill();
