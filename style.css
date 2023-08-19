@@ -163,23 +163,28 @@ body::-webkit-scrollbar-thumb {
 
 }
 .equ-list >li {
-    font-size: 1.5rem
+    font-size: 1.5rem;
+    list-style-type: none;
+
     /* vertical-align: middle; */
     /* text-align: center; */
     /* background: pink; */
 }
 .para{
     background-color: green;
+    /* padding: auto; */
 }
 .para-list{
-    display: grid;
-    grid-template-rows:  auto;
+    /* display: grid; */
+    /* grid-template-rows:  auto; */
     height: 100%;
     text-align: left;
     align-items: center;
-    margin: 0;
+    margin: 0.5em auto;
+    columns:  2;
 }
 .para-list > li {
-    font-size: 1.5rem
-
+    font-size: 1.5rem;
+    margin: .5em auto;
+    list-style-type: none;
 }

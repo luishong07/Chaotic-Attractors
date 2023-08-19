@@ -33,6 +33,11 @@ const lorenz = {
     sigma: 10,
     rho: 28,
     beta: 8 / 3,
+    parameters:{
+        σ:"10",
+        ρ:"28",
+        β:"8/3"
+    },
     scl: 8,
     dt: 0.01,
     pathLength:75,
@@ -947,6 +952,7 @@ const burkeShaw = {
     b: 4.272,//mu
     dt: 0.01,
     scl: 50,
+    pathLength: 100,
     dx: function (x, y, z) {
         return -this.a * (x + y) * this.dt;
     },
@@ -1502,6 +1508,7 @@ function setup() {
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
+    let params = document.querySelector(".para-list")
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -1539,6 +1546,12 @@ function setup() {
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
     dz.textContent += attractor.dzdt;
+
+    for(const key in attractor.parameters){
+        const li = document.createElement("li");
+        li.textContent = `${key} = ${attractor.parameters[key]}`
+        params.append(li)
+    }
 
     //random selection at start
     // attractor = attractors[random(attractorNamesArray)];

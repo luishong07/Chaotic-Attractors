@@ -1,8 +1,9 @@
 class Particle {
     constructor(clr, scl, initialCoordinates, pathLength) {
-        this.x = initialCoordinates().x;
-        this.y = initialCoordinates().y;
-        this.z = initialCoordinates().z;
+        this.startPoint = initialCoordinates()
+        this.x = this.startPoint.x;
+        this.y = this.startPoint.y;
+        this.z = this.startPoint.z;
         this.r = random(255);
         this.g = random(255);
         this.b = random(255);
