@@ -33,14 +33,14 @@ const lorenz = {
     sigma: 10,
     rho: 28,
     beta: 8 / 3,
-    parameters:{
-        σ:"10",
-        ρ:"28",
-        β:"8/3"
+    parameters: {
+        σ: "10",
+        ρ: "28",
+        β: "8/3",
     },
     scl: 8,
     dt: 0.01,
-    pathLength:75,
+    pathLength: 75,
     dx: function (x, y) {
         return this.sigma * (y - x) * this.dt;
     },
@@ -72,20 +72,25 @@ const fourwing = {
     dxdt: "αx + yz",
     dydt: "βx + δy - xz",
     dzdt: "-z - xy",
-    a: 0.2,
-    b: 0.01,
-    c: -0.4,
+    α: 0.2,
+    β: 0.01,
+    δ: -0.4,
+    parameters: {
+        α: "0.2",
+        β: "0.01",
+        δ: "-0.4",
+    },
     scl: 100,
     dt: 0.1,
-    pathLength:110,
+    pathLength: 110,
     tracerColor: function () {
         return color(169, 100, 50);
     },
     dx: function (x, y, z) {
-        return (this.a * x + y * z) * this.dt;
+        return (this.α * x + y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.b * x + this.c * y - x * z) * this.dt;
+        return (this.β * x + this.δ * y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
         return (-z - x * y) * this.dt;
@@ -114,9 +119,12 @@ const halvorsen = {
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
     a: 1.89,
+    parameters: {
+        α: "1.89",
+    },
     scl: 40,
     dt: 0.01,
-    pathLength:100,
+    pathLength: 100,
     tracerColor: function () {
         return color(230, 100, 76);
     },
@@ -154,9 +162,13 @@ const rabinovichFabrikant = {
     alpha: 0.14,
     // gamma: 0.065,
     gamma: 0.1,
+    parameters: {
+        α: "0.14",
+        γ: "0.1",
+    },
     scl: 100,
     dt: 0.015,
-    pathLength:120,
+    pathLength: 120,
     tracerColor: function () {
         return color(325, 100, 50);
     },
@@ -191,19 +203,23 @@ const sprott = {
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
     // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
     // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
-    a: 2.07,
-    b: 1.79,
+    α: 2.07,
+    β: 1.79,
+    parameters: {
+        α: "2.07",
+        β: "1.79",
+    },
     scl: 100,
     dt: 0.05,
-    pathLength:110,
+    pathLength: 110,
     tracerColor: function () {
         return color(57, 100, 50);
     },
     dx: function (x, y, z) {
-        return (y + this.a * x * y + x * z) * this.dt;
+        return (y + this.α * x * y + x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (1 - this.b * (x * x) + y * z) * this.dt;
+        return (1 - this.β * (x * x) + y * z) * this.dt;
     },
     dz: function (x, y, z) {
         return (x - x * x - y * y) * this.dt;
@@ -235,9 +251,16 @@ const dadras = {
     tau: 1.7,
     zeta: 2,
     epsilon: 9,
+    parameters: {
+        ρ: "3",
+        σ: "2.7",
+        τ: "1.7",
+        ζ: "2",
+        ε: "9",
+    },
     scl: 20,
     dt: 0.01,
-    pathLength:120,
+    pathLength: 120,
     tracerColor: function () {
         return color(282, 100, 84);
     },
@@ -268,44 +291,52 @@ const aizawa = {
     name: "Aizawa",
     dxdt: "(z-β)x - δy",
     dydt: "δx + (z-β)y",
-    dzdt:
-        "γ + αz - z" +
-        cubed +
-        "/3 -(x" +
-        squared +
-        "-y" +
-        squared +
-        ")(1+εz)+ζzx" +
-        cubed,
+    dzdt:"γ + αz - z" +cubed +"/3 -(x" +squared +"-y" +squared +")(1+εz)+ζzx" +cubed,
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
     // let dy = ((d*p.x) + p.y*(p.z - b))*dt
     // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
     //note: consider making the starting values in the z axis only positives
-    a: 0.95,
-    b: 0.7,
-    c: 0.6,
-    d: 3.5,
+    α: 0.95,
+    β: 0.7,
+    γ: 0.6,
+    δ: 3.5,
     e: 0.25,
-    f: 0.1,
+    ζ: 0.1,
+    parameters: {
+        α: "0.95",
+        β: "0.7",
+        γ: "0.6",
+        δ: "3.5",
+        ε: "0.25",
+        ζ: "0.1",
+    },
     scl: 100,
     dt: 0.015,
-    pathLength:110,
+    pathLength: 110,
     tracerColor: function () {
         return color(0, 96, 37);
     },
     dx: function (x, y, z) {
-        return ((z - this.b) * x - this.d * y) * this.dt;
+        console.log(((z - this.β) * x - this.δ * y) * this.dt)
+        return ((z - this.β) * x - this.δ * y) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.d * x + y * (z - this.b)) * this.dt;
+        console.log((this.δ * x + y * (z - this.β)) * this.dt)
+        return (this.δ * x + y * (z - this.β)) * this.dt;
     },
     dz: function (x, y, z) {
+        console.log((this.γ +
+            this.α * z -
+            (z * z * z) / 3 -
+            (x * x + y * y) * (1 + this.ε * z) +
+            this.ζ * z * x * x * x) *
+        this.dt)
         return (
-            (this.c +
-                this.a * z -
+            (this.γ +
+                this.α * z -
                 (z * z * z) / 3 -
-                (x * x + y * y) * (1 + this.e * z) +
-                this.f * z * x * x * x) *
+                (x * x + y * y) * (1 + this.ε * z) +
+                this.ζ * z * x * x * x) *
             this.dt
         );
     },
@@ -316,6 +347,8 @@ const aizawa = {
         let position = {};
         let x = round(random(-1, 1), 2);
         let y = round(random(-1, 1), 2);
+        // let z = round(random(-1, 1), 2);
+
         // let z = round(random(-0.25,1),2)
         let z = 0;
         position["x"] = x;
@@ -333,20 +366,25 @@ const chen = {
     // let dy = (beta * p.y + p.x * p.z) * dt;
     // let dz = (delta * p.z + (p.x * p.y) / 3) * dt;
     // good starting coordenates 5, -5, -5
-    alpha: 5,
-    beta: -10,
-    delta: -0.38,
+    α: 5,
+    β: -10,
+    δ: -0.38,
+    parameters:{
+        α: "5",
+        β: "-10",
+        δ: "-0.38",
+    },
     scl: 20,
     dt: 0.008,
-    pathLength:120,
+    pathLength: 120,
     dx: function (x, y, z) {
-        return (this.alpha * x - y * z) * this.dt;
+        return (this.α * x - y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.beta * y + x * z) * this.dt;
+        return (this.β * y + x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.delta * z + (x * y) / 3) * this.dt;
+        return (this.δ * z + (x * y) / 3) * this.dt;
     },
     tracerColor: function () {
         return color(0, 100, 80);
@@ -374,18 +412,21 @@ const thomas = {
     // let dx = sin(p.y) - bee*p.x
     // let dy = sin(p.z) - bee*p.y
     // let dz = sin(p.x) - bee*p.z
-    b: 0.208186,
+    β: 0.208186,
+    parameters:{
+        β: "0.208186",
+    },
     scl: 90,
     dt: 0.15,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (sin(y) - this.b * x) * this.dt;
+        return (sin(y) - this.β * x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (sin(z) - this.b * y) * this.dt;
+        return (sin(z) - this.β * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (sin(x) - this.b * z) * this.dt;
+        return (sin(x) - this.β * z) * this.dt;
     },
     tracerColor: function () {
         return color(174, 66, 39);
@@ -414,20 +455,25 @@ const rossler = {
     // let dy = (p.x + a * p.y) * dt;
     // let dz = (b + p.z * (p.x - c)) * dt;
     // for initial condition with negative z, particle goes out of control sometimes
-    a: 1 / 5,
-    b: 1 / 5,
-    c: 5.7,
+    α: 0.2,
+    β: 0.2,
+    ς: 5.7,
+    parameters:{
+        α: "0.2",
+        β: "0.2",
+        ς: "5.7",
+    },
     scl: 15,
     dt: 0.04,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
         return (-y - z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x + this.a * y) * this.dt;
+        return (x + this.α * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.b + z * (x - this.c)) * this.dt;
+        return (this.β + z * (x - this.ς)) * this.dt;
         // return 0
     },
     tracerColor: function () {
@@ -451,7 +497,7 @@ const threeScroll2 = {
     name: "3-Scroll Unified System 2",
     dxdt: "α(y - x) + δxz",
     dydt: "ςx - xz + ζy",
-    dzdt: "βz + xy - εx"+squared,
+    dzdt: "βz + xy - εx" + squared,
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -461,23 +507,31 @@ const threeScroll2 = {
     // delta: 0.16,
     // epsilon: 0.65,
     // zeta: 20,
-    alpha: 32.48,
-    sigma: 45.84,
-    beta: 1.18,
-    delta: 0.13,
-    epsilon: 0.57,
-    zeta: 14.7,
+    α: 32.48,
+    ς: 45.84,
+    β: 1.18,
+    δ: 0.13,
+    ε: 0.57,
+    ζ: 14.7,
+    parameters:{
+        α: "32.48",
+        ς: "45.84",
+        β: "1.18",
+        δ: "0.13",
+        ε: "0.57",
+        ζ: "14.7",
+    },
     scl: 1,
     dt: 0.0002,
-    pathLength:120,
+    pathLength: 120,
     dx: function (x, y, z) {
-        return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
+        return (this.α * (y - x) + this.δ * x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.sigma * x - x * z + this.zeta * y) * this.dt;
+        return (this.ς * x - x * z + this.ζ * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.beta * z + x * y - this.epsilon * x * x) * this.dt;
+        return (this.β * z + x * y - this.ε * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(260, 100, 50);
@@ -490,9 +544,9 @@ const threeScroll2 = {
         // let x = round(random(-100, 100),2);
         // let y = round(random(-100, 100),2);
         // let z = round(random(-20, 200),2);
-        let x = round(random(-50, 50),2);
-        let y = round(random(-50, 50),2);
-        let z = round(random(-50, 200),2);
+        let x = round(random(-50, 50), 2);
+        let y = round(random(-50, 50), 2);
+        let z = round(random(-50, 200), 2);
 
         // let x = round(random(-80, 80),2);
         // let y = round(random(-80, 80),2);
@@ -507,7 +561,7 @@ const threeScroll1 = {
     name: "3-Scroll Unified System 1",
     dxdt: "α(y -x) + δxz",
     dydt: "ςx - xz + ζy",
-    dzdt: "βz + xy - εx"+squared,
+    dzdt: "βz + xy - εx" + squared,
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -517,22 +571,29 @@ const threeScroll1 = {
     // delta: 0.16,
     // epsilon: 0.65,
     // zeta: 20,
-    alpha: 40,
-    beta: 0.833,
-    delta: 0.5,
-    epsilon: 0.65,
-    zeta: 20,
+    α: 40,
+    β: 0.833,
+    δ: 0.5,
+    ε: 0.65,
+    ζ: 20,
+    parameters:{
+        α: "40",
+        β: "0.833",
+        δ: "0.5",
+        ε: "0.65",
+        ζ: "20",
+    },
     scl: 3,
     dt: 0.0015,
-    pathLength:120,
+    pathLength: 120,
     dx: function (x, y, z) {
-        return (this.alpha * (y - x) + this.delta * x * z) * this.dt;
+        return (this.α * (y - x) + this.δ * x * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.zeta * y - x * z ) * this.dt;
+        return (this.ζ * y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.beta * z + x * y - this.epsilon * x * x) * this.dt;
+        return (this.β * z + x * y - this.ε * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(260, 100, 50);
@@ -542,9 +603,9 @@ const threeScroll1 = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-7, 7),2);
-        let y = round(random(-7, 7),2);
-        let z = round(random(30, 50),2);
+        let x = round(random(-7, 7), 2);
+        let y = round(random(-7, 7), 2);
+        let z = round(random(30, 50), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -559,21 +620,27 @@ const lorenz83 = {
     // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
     // let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
     // let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
-    a: 0.95,
-    b: 7.91,
-    f: 4.83,
-    g: 4.66,
+    α: 0.95,
+    β: 7.91,
+    ε: 4.83,
+    ξ: 4.66,
+    parameters: {
+        α: "0.95",
+        β: "7.91",
+        ε: "4.83",
+        ξ: "4.66",
+    },
     scl: 50,
     dt: 0.01,
-    pathLength:80,
+    pathLength: 80,
     dx: function (x, y, z) {
-        return (-1 * this.a * x - y ** 2 - z ** 2 + this.a * this.f) * this.dt;
+        return (-1 * this.α * x - y ** 2 - z ** 2 + this.α * this.ε) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-1 * y + x * y - this.b * x * z + this.g) * this.dt;
+        return (-1 * y + x * y - this.β * x * z + this.ξ) * this.dt;
     },
     dz: function (x, y, z) {
-        return (-1 * z + this.b * x * y + x * z) * this.dt;
+        return (-1 * z + this.β * x * y + x * z) * this.dt;
     },
     tracerColor: function () {
         return color(0, 100, 30);
@@ -599,19 +666,23 @@ const newtonLeipnik = {
     dzdt: "βz - 5xy",
     //dt value contigent on initial conditions
     //for higher dt values like 0.03, smaller values better for initial conditions
-    a: 0.4,
-    b: 0.175,
+    α: 0.4,
+    β: 0.175,
+    parameters:{
+        α: "0.4",
+        β: "0.175",
+    },
     scl: 250,
     dt: 0.04,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (-this.a * x + y + 10 * y * z) * this.dt;
+        return (-this.α * x + y + 10 * y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-x - this.a * y + 5 * x * z) * this.dt;
+        return (-x - this.α * y + 5 * x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.b * z - 5 * x * y) * this.dt;
+        return (this.β * z - 5 * x * y) * this.dt;
     },
     tracerColor: function () {
         return color(0, 100, 30);
@@ -634,15 +705,18 @@ const noseHoover = {
     name: "Nose-Hoover",
     dxdt: "y",
     dydt: "-x + yz",
-    dzdt: "α - y"+squared,
+    dzdt: "α - y" + squared,
     // dx = y
     // dy = -x+y*z
     // dz = a-y*y
     // a = 1.5
-    a: 1.5,
+    α: 1.5,
+    parameters:{
+        α:"1.5"
+    },
     scl: 50,
     dt: 0.02,
-    pathLength:150,
+    pathLength: 150,
     tracerColor: () => {
         return color(188, 50, 50);
     },
@@ -653,7 +727,7 @@ const noseHoover = {
         return (-x + y * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.a - y * y) * this.dt;
+        return (this.α - y * y) * this.dt;
     },
     particleColor: function () {
         return color(random(40, 120), 100, 50);
@@ -672,26 +746,30 @@ const noseHoover = {
 const bouali = {
     name: "Bouali",
     dxdt: "x(4-y) + αz",
-    dydt: "-y(1-x"+squared+")",
+    dydt: "-y(1-x" + squared + ")",
     dzdt: "-x(1.5-ςz) - 0.05z",
     // dx = x*(4-y)+a*z
     // dy = -y*(1-x^2)
     // dz = -x (1.5 - s*z) - 0.05*z
     //a = 0.3
     //s = 1.0
-    a: 0.3,
-    s: 1.0,
+    α: 0.3,
+    ς: 1.0,
+    parameters:{
+        α: "0.3",
+        ς: "1.0",
+    },
     scl: 40,
     dt: 0.02,
-    pathLength:90,
+    pathLength: 90,
     dx: function (x, y, z) {
-        return (x * (4 - y) + this.a * z) * this.dt;
+        return (x * (4 - y) + this.α * z) * this.dt;
     },
     dy: function (x, y, z) {
         return -y * (1 - x * x) * this.dt;
     },
     dz: function (x, y, z) {
-        return (-x * (1.5 - this.s * z) - 0.05 * z) * this.dt;
+        return (-x * (1.5 - this.ς * z) - 0.05 * z) * this.dt;
     },
     tracerColor: function () {
         return color(169, 100, 50);
@@ -715,14 +793,20 @@ const coullet = {
     name: "Coullet",
     dxdt: "y",
     dydt: "z",
-    dzdt: "αx + βu + ςz + δx"+cubed,
-    a: 0.8,
-    b: -1.1,
-    c: -0.45,
-    d: -1,
+    dzdt: "αx + βy + ςz + δx" + cubed,
+    α: 0.8,
+    β: -1.1,
+    ς: -0.45,
+    δ: -1,
+    parameters:{
+        α: "0.8",
+        β: "-1.1",
+        ς: "-0.45",
+        δ: "-1",
+    },
     scl: 100,
     dt: 0.03,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -730,7 +814,7 @@ const coullet = {
         return z * this.dt;
     },
     dz: function (x, y, z) {
-        return (0.8 * x + -1.1 * y + -0.45 * z + -1 * x * x * x) * this.dt;
+        return (this.α * x + this.β * y +this.ς* z + this.δ* x * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(169, 100, 50);
@@ -753,7 +837,7 @@ const coullet = {
 const finance = {
     name: "Finance",
     dxdt: "z + xy + x(1/β - α)",
-    dydt: "-βy - x"+squared,
+    dydt: "-βy - x" + squared,
     dzdt: "-x - ςz",
     //dx = ((1/b) - a)* x + z +x*y
     // dy = -b*y -X^2
@@ -761,20 +845,25 @@ const finance = {
     // a = 0.001
     // b= 0.2
     // c =1.1
-    a: 0.001,
-    b: 0.2,
-    c: 1.1,
+    α: 0.001,
+    β: 0.2,
+    ς: 1.1,
+    parameters:{
+        α: "0.001",
+        β: "0.2",
+        ς: "1.1",
+    },
     scl: 50,
     dt: 0.05,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return ((1 / this.b - this.a) * x + z + x * y) * this.dt;
+        return ((1 / this.β - this.α) * x + z + x * y) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-this.b * y - x * x) * this.dt;
+        return (-this.β * y - x * x) * this.dt;
     },
     dz: function (x, y, z) {
-        return (-x - this.c * z) * this.dt;
+        return (-x - this.ς * z) * this.dt;
     },
     tracerColor: function () {
         return color(169, 100, 50);
@@ -798,13 +887,18 @@ const arneodo = {
     name: "Arneodo",
     dxdt: "y",
     dydt: "z",
-    dzdt: "-αx - βy - z +δx"+cubed,
-    a: -5.5,
-    b: 3.5,
-    c: -1,
+    dzdt: "-αx - βy - z +δx" + cubed,
+    α: -5.5,
+    β: 3.5,
+    δ: -1,
+    parameters:{
+        α: "-5.5",
+        β: "3.5",
+        δ: "-1",
+    },
     scl: 30,
     dt: 0.01,
-    pathLength:125,
+    pathLength: 125,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -812,7 +906,7 @@ const arneodo = {
         return z * this.dt;
     },
     dz: function (x, y, z) {
-        return (-this.a * x - this.b * y - z + this.c * x * x * x) * this.dt;
+        return (-this.α * x - this.β * y - z + this.δ * x * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -836,20 +930,25 @@ const rayleighBenard = {
     dxdt: "-αx + αy",
     dydt: "τx - y - xz",
     dzdt: "xy - βz",
-    a: 9.0,
-    b: 12,
-    c: 0.5,
+    α: 9.0,
+    β: 12,
+    τ: 0.5,
+    parameters:{
+        α: "9.0",
+        β: "12",
+        τ: "0.5",
+    },
     scl: 10,
     dt: 0.02,
-    pathLength:80,
+    pathLength: 80,
     dx: function (x, y, z) {
-        return (-this.a * x + this.a * y) * this.dt;
+        return (-this.α * x + this.α * y) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.b * x - y - x * z) * this.dt;
+        return (this.β * x - y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x * y - this.c * z) * this.dt;
+        return (x * y - this.τ * z) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -880,7 +979,7 @@ const dequanLi = {
     zeta: 20,
     scl: 0.75,
     dt: 0.0005,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
         return (this.alpha * (y - x) + this.delta * (x * z)) * this.dt;
     },
@@ -911,12 +1010,16 @@ const genesioTesi = {
     name: "Genesio Tesi",
     dxdt: "y",
     dydt: "z",
-    dzdt: "-δx - βy -αz +x"+squared,
-    a: -1.1,
-    b: -0.44,
+    dzdt: "-x - βy -αz +x" + squared,
+    α: -1.1,
+    β: -0.44,
+    parameters: {
+        α: "-1.1",
+        β: "-0.44",
+    },
     scl: 200,
     dt: 0.018,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -948,19 +1051,23 @@ const burkeShaw = {
     dxdt: "-η(x+y)",
     dydt: "-y-ηxz",
     dzdt: "ηxy + μ",
-    a: 10,//eta
-    b: 4.272,//mu
+    η: 10, //eta
+    μ: 4.272, //mu
+    parameters:{
+        η: "10", //eta
+        μ: "4.272", //mu
+    },
     dt: 0.01,
     scl: 50,
     pathLength: 100,
     dx: function (x, y, z) {
-        return -this.a * (x + y) * this.dt;
+        return -this.η * (x + y) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-y - this.a * x * z) * this.dt;
+        return (-y - this.η * x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.a * x * y + this.b) * this.dt;
+        return (this.η * x * y + this.μ) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -984,21 +1091,27 @@ const chua1 = {
     dxdt: "α(y - x)",
     dydt: "-εx -xz + λy",
     dzdt: "xy - μz",
-    a: 40,
-    b: 12,
-    c: 28,
-    d: 3,
+    α: 40,
+    ε: 12,
+    λ: 28,
+    μ: 3,
+    parameters:{
+        α: "40",
+        ε: "12",
+        λ: "28",
+        μ: "3",
+    },
     dt: 0.005,
     scl: 5,
-    pathLength:80,
+    pathLength: 80,
     dx: function (x, y, z) {
-        return this.a * (y - x) * this.dt;
+        return this.α * (y - x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-this.b * x - x * z + this.c * y) * this.dt;
+        return (-this.ε * x - x * z + this.λ * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x * y - this.d * z) * this.dt;
+        return (x * y - this.μ * z) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1019,23 +1132,30 @@ const chua1 = {
 };
 const hadley = {
     name: "Hadley",
-    dxdt: "-y"+squared+" - z"+squared+" - αx + αζ",
+    dxdt: "-y" + squared + " - z" + squared + " - αx + αζ",
     dydt: "-xy - βxz -y + δ",
     dzdt: "βxy + xz - z",
-    a: 4,
-    b: 1,
-    c: 0.2,
-    d: 8,
+    α: 0.2,
+    β: 4,
+    ζ: 8,
+    δ: 1,
+    parameters:{
+        α: "0.2",
+        β: "4",
+        ζ: "8",
+        δ: "1",
+    },
+    pathLength:100,
     dt: 0.02,
     scl: 100,
     dx: function (x, y, z) {
-        return (-(y * y) - z * z - this.c * x + this.d * this.c) * this.dt;
+        return (-(y * y) - z * z - this.α * x + this.α * this.ζ) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x * y - this.a * z * x - y + this.b) * this.dt;
+        return (x * y - this.β * z * x - y + this.δ) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.a * x * y + x * z - z) * this.dt;
+        return (this.β * x * y + x * z - z) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1056,24 +1176,30 @@ const hadley = {
 };
 const lorenzMod1 = {
     name: "Lorenz Mod 1",
-    dxdt: "-αx + y"+squared+" - z"+squared+" + αζ",
+    dxdt: "-αx + y" + squared + " - z" + squared + " + αζ",
     dydt: "x(y - βz) + δ",
     dzdt: "z + x(βy + z)",
-    a: 0.1,
-    b: 4,
-    c: 14,
-    d: 0.08,
+    α: 0.1,
+    β: 4,
+    ζ: 14,
+    δ: 0.08,
+    parameters:{
+        α: "0.1",
+        β: "4",
+        ζ: "14",
+        δ: "0.08",
+    },
     dt: 0.005,
     scl: 10,
-    pathLength:80,
+    pathLength: 80,
     dx: function (x, y, z) {
-        return (-this.a * x + y * y - z * z + this.a * this.c) * this.dt;
+        return (-this.α* x + y * y - z * z + this.α* this.ζ) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x * (y - this.b * z) + this.d) * this.dt;
+        return (x * (y - this.β * z) + this.δ) * this.dt;
     },
     dz: function (x, y, z) {
-        return (z + x * (this.b * y + z)) * this.dt;
+        return (z + x * (this.β * y + z)) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1094,24 +1220,30 @@ const lorenzMod1 = {
 };
 const lorenzMod2 = {
     name: "Lorenz Mod 2",
-    dxdt: "-αx + y"+squared+" - z"+squared+" + αζ",
+    dxdt: "-αx + y" + squared + " - z" + squared + " + αζ",
     dydt: "α(y - βz) + δ",
     dzdt: "-z + x(βy + z)",
-    a: 0.9,
-    b: 5,
-    c: 9.9,
-    d: 1,
+    α: 0.9,
+    β: 5,
+    ζ: 9.9,
+    δ: 1,
+    parameters:{
+        α: "0.9",
+        β: "5",
+        ζ: "9.9",
+        δ: "1",
+    },
     dt: 0.004,
     scl: 10,
-    pathLength:80,
+    pathLength: 80,
     dx: function (x, y, z) {
-        return (-this.a * x + y * y - z * z + this.a * this.c) * this.dt;
+        return (-this.α * x + y * y - z * z + this.α * this.ζ) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x * (y - this.b * z) + this.d) * this.dt;
+        return (x * (y - this.β * z) + this.δ) * this.dt;
     },
     dz: function (x, y, z) {
-        return (-z + x * (this.b * y + z)) * this.dt;
+        return (-z + x * (this.β * y + z)) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1139,7 +1271,7 @@ const anishchenkoAstakhov = {
     eta: 0.5,
     scl: 20,
     dt: 0.02,
-    pathLength:120,
+    pathLength: 120,
     dx: function (x, y, z) {
         return (this.nu * x + y - x * z) * this.dt;
     },
@@ -1165,7 +1297,7 @@ const anishchenkoAstakhov = {
         let position = {};
         let x = round(random(-5, 0), 2);
         let y = round(random(0, 5), 2);
-        let z = round(random(0,0), 2);
+        let z = round(random(0, 0), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -1176,14 +1308,18 @@ const rucklidge = {
     name: "Rucklidge",
     dxdt: "-κx + αy - yz",
     dydt: "x",
-    dzdt: "-z + y"+squared,
-    kappa: 2,
-    alpha: 6.7,
+    dzdt: "-z + y" + squared,
+    κ: 2,
+    α: 6.7,
+    parameters:{
+        κ: "2",
+        α: "6.7",
+    },
     scl: 20,
     dt: 0.03,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (-this.kappa * x + this.alpha * y - y * z) * this.dt;
+        return (-this.κ * x + this.α * y - y * z) * this.dt;
     },
     dy: function (x, y, z) {
         return x * this.dt;
@@ -1213,20 +1349,25 @@ const qiChen = {
     dxdt: "α(y - x) + yz",
     dydt: "ςx + y - xz",
     dzdt: "xy - βz",
-    alpha: 38,
-    beta: 8 / 3,
-    sigma: 80,
+    α: 38,
+    β: 8 / 3,
+    ς: 80,
+    parameters:{
+        α: "38",
+        β: "8 / 3",
+        ς: "80",
+    },
     scl: 2,
     dt: 0.001,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (this.alpha * (y - x) + y * z) * this.dt;
+        return (this.α * (y - x) + y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.sigma * x + y - x * z) * this.dt;
+        return (this.ς * x + y - x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x * y - this.beta * z) * this.dt;
+        return (x * y - this.β * z) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1258,7 +1399,7 @@ const wangSun = {
     zeta: -1,
     scl: 100,
     dt: 0.08,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
         return (x * this.alpha + this.sigma * y * z) * this.dt;
     },
@@ -1295,15 +1436,15 @@ const sakarya = {
     beta: 0.3,
     scl: 10,
     dt: 0.005,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (-x + y+ y*z) * this.dt;
+        return (-x + y + y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-x-y+this.alpha*x*z) * this.dt;
+        return (-x - y + this.alpha * x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (z-  this.beta*x*y) * this.dt;
+        return (z - this.beta * x * y) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1321,7 +1462,7 @@ const sakarya = {
         position["z"] = z;
         return position;
     },
-}
+};
 const yuWang = {
     name: "Yu-Wang",
     dxdt: "",
@@ -1333,15 +1474,15 @@ const yuWang = {
     delta: 2.5,
     scl: 20,
     dt: 0.0004,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (10*(y-x)) * this.dt;
+        return 10 * (y - x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (40*x - 2*x*z) * this.dt;
+        return (40 * x - 2 * x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (2.71828**(x*y) - 2.5*z)* this.dt;
+        return (2.71828 ** (x * y) - 2.5 * z) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1359,30 +1500,35 @@ const yuWang = {
         position["z"] = z;
         return position;
     },
-}
+};
 const luChen = {
     name: "Lu-Chen",
     dxdt: "-βx + zy",
     dydt: "-αy + zx",
     dzdt: "δz - yx + ς",
-    alpha: 10,
-    beta: 4,
-    sigma: 18.1,
-    delta: 20/7,
+    α: 10,
+    β: 4,
+    ς: 18.1,
+    δ: 20 / 7,
+    parameters:{
+        α: "10",
+        β: "4",
+        ς: "18.1",
+        δ: "20/7",
+    },
     scl: 7,
     dt: 0.0035,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (-this.beta*x  +z*y)*this.dt;
-        // return (this.delta*x - y*z  + this.sigma)*this.dt;
-
+        return (-this.β * x + z * y) * this.dt;
+        // return (this.δ*x - y*z  + this.ς)*this.dt;
     },
     dy: function (x, y, z) {
-        return (-this.alpha*y + z*x)*this.dt;
+        return (-this.α * y + z * x) * this.dt;
     },
     dz: function (x, y, z) {
         // return (-this.beta*z  +x*y)*this.dt;
-        return (this.delta*z - y*x  + this.sigma)*this.dt;
+        return (this.δ * z - y * x + this.ς) * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1400,27 +1546,37 @@ const luChen = {
         position["z"] = z;
         return position;
     },
-}
-const chua2 = { 
+};
+const chua2 = {
     name: "Chua 2",
     dxdt: "α(y - x - δ(|x + 1|-|x - 1|))",
     dydt: "β(x - y + z)",
     dzdt: "-ςy",
-    alpha: 15.6,
-    beta: 1,
-    sigma: 25.58,
-    delta: -1,
+    α: 15.6,
+    β: 1,
+    ς: 25.58,
+    δ: -1,
+    parameters:{
+        α: "15.6",
+        β: "1",
+        ς: "25.58",
+        δ: "-1",
+    },
     dt: 0.01,
     scl: 70,
-    pathLength:100,
+    pathLength: 100,
     dx: function (x, y, z) {
-        return (this.alpha*(y -x - this.delta*(Math.abs(x+1) - Math.abs(x-1)))) * this.dt;
+        return (
+            this.α *
+            (y - x - this.δ * (Math.abs(x + 1) - Math.abs(x - 1))) *
+            this.dt
+        );
     },
     dy: function (x, y, z) {
-        return (this.beta*(x-y+z)) * this.dt;
+        return this.β * (x - y + z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (-this.sigma*y) * this.dt;
+        return -this.ς * y * this.dt;
     },
     tracerColor: function () {
         return color(230, 100, 76);
@@ -1438,7 +1594,7 @@ const chua2 = {
         position["z"] = z;
         return position;
     },
-}
+};
 let c1;
 let c2;
 let tracers = [];
@@ -1453,16 +1609,15 @@ let attractors = {
 
     // wangSun:wangSun,
     // yuWang:yuWang,
-    threeScroll1:threeScroll1,
+    threeScroll1: threeScroll1,
 
-    chua2:chua2,
+    chua2: chua2,
 
-    luChen:luChen,
-    sakarya:sakarya,
+    luChen: luChen,
+    sakarya: sakarya,
 
     qiChen: qiChen,
     rucklidge: rucklidge,
-    
 
     anishchenkoAstakhov: anishchenkoAstakhov,
 
@@ -1508,7 +1663,7 @@ function setup() {
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
-    let params = document.querySelector(".para-list")
+    let params = document.querySelector(".para-list");
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -1541,16 +1696,19 @@ function setup() {
     }
 
     //initial attractor
-    attractor = lorenz;
-    title.textContent = attractor.name;
+    // attractor = attractors[random(attractorNamesArray)];
+    attractor = aizawa
+    title.textContent = attractor["name"];
+    // attractor = lorenz;
+    // title.textContent = attractor.name;
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
     dz.textContent += attractor.dzdt;
 
-    for(const key in attractor.parameters){
+    for (const key in attractor.parameters) {
         const li = document.createElement("li");
-        li.textContent = `${key} = ${attractor.parameters[key]}`
-        params.append(li)
+        li.textContent = `${key} = ${attractor.parameters[key]}`;
+        params.append(li);
     }
 
     //random selection at start
@@ -1593,11 +1751,21 @@ function windowResized() {
 }
 
 function changeAttractor(name) {
+    att = name;
     let title = document.getElementById("attractor-name");
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
-    att = name;
+    let params = document.querySelector(".para-list");
+    while(params.hasChildNodes()){
+        params.removeChild(params.firstChild)
+    }
+    // console.log(attractors[att].parameters)
+    for (const key in attractors[att].parameters) {
+        const li = document.createElement("li");
+        li.textContent = `${key} = ${attractors[att].parameters[key]}`;
+        params.append(li);
+    }
     let titleName = attractors[att].name;
     dx.textContent = attractors[att].dxdt;
     dy.textContent = attractors[att].dydt;
@@ -1609,12 +1777,11 @@ function changeAttractor(name) {
         p.initialCoordinates = attractors[att].initialCoordinates;
         p.path = [];
         p.scl = attractors[att].scl;
-        p.pathLength = attractors[att].pathLength
+        p.pathLength = attractors[att].pathLength;
         p.color = attractors[att].particleColor();
         p.x = newParticleCoordinate.x;
         p.y = newParticleCoordinate.y;
         p.z = newParticleCoordinate.z;
-
     }
     attractor = attractors[att];
 }
@@ -1635,7 +1802,7 @@ function draw() {
 
     stroke("purple");
     line(0, 0, 0, innerWidth / 2, innerWidth / 2, innerWidth / 2);
-    
+
     // rotateY(angle)
     // rotate(angle+=0.01,[1,1,1])
     // angle+=0.01
