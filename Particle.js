@@ -1,6 +1,7 @@
 class Particle {
     constructor(clr, scl, initialCoordinates, pathLength) {
         this.startPoint = initialCoordinates()
+        console.log(this.startPoint)
         this.x = this.startPoint.x;
         this.y = this.startPoint.y;
         this.z = this.startPoint.z;
@@ -40,7 +41,7 @@ class Particle {
         noFill();
         stroke(this.color);
         strokeWeight(5);
-        point(x * this.scl, y * this.scl, z * this.scl);
+        point(x * this.scl, y * this.scl, z * this.scl );
 
         beginShape();
         for (let i = 1; i < this.path.length; i++) {
@@ -49,7 +50,7 @@ class Particle {
             vertex(
                 this.path[i].x * this.scl,
                 this.path[i].y * this.scl,
-                this.path[i].z * this.scl
+                this.path[i].z * this.scl 
             );
         }
         endShape();
