@@ -410,6 +410,7 @@ const chen = {
     },
 };
 const thomas = {
+    // rotate(angle+=0.01,[1,1,1])
     name: "Thomas",
     dxdt: "dx/dt = sin(y) - βx",
     dydt: "dy/dt = sin(x) - βy",
@@ -452,6 +453,8 @@ const thomas = {
     },
 };
 const rossler = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,1])
     name: "Rossler",
     dxdt: "dx/dt = -(y+z)",
     dydt: "dy/dt = x+αy",
@@ -500,6 +503,8 @@ const rossler = {
     },
 };
 const threeScroll2 = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,1])
     name: "3-Scroll Unified System 2",
     dxdt: "dx/dt = α(y - x) + δxz",
     dydt: "dy/dt = ςx - xz + ζy",
@@ -621,6 +626,8 @@ const threeScroll1 = {
     },
 };
 const lorenz83 = {
+    // rotateZ(-PI/2)
+    // rotate(angle+=0.01,[1,0,0])
     name: "Lorenz 83",
     dxdt: "dx/dt = -αx - y" + squared + " - z" + squared + " + αε",
     dydt: "dy/dt = -y + xy - βxz + ξ",
@@ -668,6 +675,8 @@ const lorenz83 = {
     },
 };
 const newtonLeipnik = {
+    // rotateY(-PI/2)
+    // rotate(angle+=0.01,[0,0,1])
     name: "Newton Leipnik",
     dxdt: "dx/dt = -αx + y+ 10yz",
     dydt: "dy/dt = -x - αy + 5xz",
@@ -710,6 +719,8 @@ const newtonLeipnik = {
     },
 };
 const noseHoover = {
+    // rotateX(-PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
     name: "Nose-Hoover",
     dxdt: "dx/dt = y",
     dydt: "dy/dt = -x + yz",
@@ -752,6 +763,10 @@ const noseHoover = {
     },
 };
 const bouali = {
+    // -125 yOffSet
+    // rotateZ(PI)
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
     name: "Bouali",
     dxdt: "dx/dt = x(4-y) + αz",
     dydt: "dy/dt = -y(1-x" + squared + ")",
@@ -767,7 +782,7 @@ const bouali = {
         α: "0.3",
         ς: "1.0",
     },
-    scl: 40,
+    scl: 35,
     dt: 0.02,
     pathLength: 90,
     dx: function (x, y, z) {
@@ -798,6 +813,8 @@ const bouali = {
     },
 };
 const coullet = {
+    // rotateZ(-PI/2)
+    // rotate(angle+=0.01,[1,0,0])
     name: "Coullet",
     dxdt: "dx/dt = y",
     dydt: "dy/dt = z",
@@ -843,6 +860,8 @@ const coullet = {
     },
 };
 const finance = {
+    // rotate(angle+=0.01,[0,1,0])
+    // +200 yOffSet
     name: "Finance",
     dxdt: "dx/dt = z + xy + x(1/β - α)",
     dydt: "dy/dt = -βy - x" + squared,
@@ -892,6 +911,8 @@ const finance = {
     },
 };
 const arneodo = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,1])
     name: "Arneodo",
     dxdt: "dx/dt = y",
     dydt: "dy/dt = z",
@@ -934,6 +955,9 @@ const arneodo = {
     },
 };
 const rayleighBenard = {
+    // rotateX(-PI/2)
+    // rotate(angle+=0.01,[0,0,1])
+    // -110 zOffSet
     name: "Rayleigh-Benard",
     dxdt: "dx/dt = -αx + αy",
     dydt: "dy/dt = τx - y - xz",
@@ -946,7 +970,7 @@ const rayleighBenard = {
         β: "12",
         τ: "0.5",
     },
-    scl: 10,
+    scl: 12,
     dt: 0.02,
     pathLength: 80,
     dx: function (x, y, z) {
@@ -1015,6 +1039,8 @@ const dequanLi = {
     },
 };
 const genesioTesi = {
+    // rotate(angle+=0.01,[0,1,0])
+    // rotate(PI*7/16,[1,0,-1])
     name: "Genesio Tesi",
     dxdt: "dx/dt = y",
     dydt: "dy/dt = z",
@@ -1035,7 +1061,7 @@ const genesioTesi = {
         return z * this.dt;
     },
     dz: function (x, y, z) {
-        return (-x + this.a * y + this.b * z + x * x) * this.dt;
+        return (-x + this.α * y + this.β * z + x * x) * this.dt;
     },
     tracerColor: () => {
         return color(188, 50, 50);
@@ -1055,6 +1081,8 @@ const genesioTesi = {
     },
 };
 const burkeShaw = {
+    // rotateX(-PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
     name: "Burke-Shaw",
     dxdt: "dx/dt = -η(x+y)",
     dydt: "dy/dt = -y-ηxz",
@@ -1095,6 +1123,9 @@ const burkeShaw = {
     },
 };
 const chua1 = {
+    // rotateX(-PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
+    // -100 zOffset
     name: "Chua 1",
     dxdt: "dx/dt = α(y - x)",
     dydt: "dy/dt = -εx -xz + λy",
@@ -1139,6 +1170,8 @@ const chua1 = {
     },
 };
 const hadley = {
+    // rotateZ(PI/2)
+    // rotate(angle+=0.01,[1,0,0])
     name: "Hadley",
     dxdt: "dx/dt = -y" + squared + " - z" + squared + " - αx + αζ",
     dydt: "dy/dt = -xy - βxz -y + δ",
@@ -1183,6 +1216,8 @@ const hadley = {
     },
 };
 const lorenzMod1 = {
+    // rotateY(PI/2)
+    // rotate(angle+=0.01,[-1,0,0])
     name: "Lorenz Mod 1",
     dxdt: "dx/dt = -αx + y" + squared + " - z" + squared + " + αζ",
     dydt: "dy/dt = x(y - βz) + δ",
@@ -1227,6 +1262,8 @@ const lorenzMod1 = {
     },
 };
 const lorenzMod2 = {
+    // rotate(angle+=0.01,[0,1,0])
+    // rotateX(-PI/4)
     name: "Lorenz Mod 2",
     dxdt: "dx/dt = -αx + y" + squared + " - z" + squared + " + αζ",
     dydt: "dy/dt = α(y - βz) + δ",
@@ -1313,6 +1350,9 @@ const anishchenkoAstakhov = {
     },
 };
 const rucklidge = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
+    // -140 zOffSet
     name: "Rucklidge",
     dxdt: "dx/dt = -κx + αy - yz",
     dydt: "dy/dt = x",
@@ -1353,6 +1393,8 @@ const rucklidge = {
     },
 };
 const qiChen = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
     name: "Qi-Chen",
     dxdt: "dx/dt = α(y - x) + yz",
     dydt: "dy/dt = ςx + y - xz",
@@ -1436,6 +1478,8 @@ const wangSun = {
 };
 //sakarya similar to newton but it only creates one attractor instead of two like the newton
 const sakarya = {
+    // rotateZ(PI/2)
+    // rotate(angle+=0.01,[-1,0,0])
     name: "Sakarya",
     dxdt: "dx/dt = -x + y +yz",
     dydt: "dy/dt = -x - y + αxz",
@@ -1510,6 +1554,8 @@ const yuWang = {
     },
 };
 const luChen = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
     name: "Lu-Chen",
     dxdt: "dx/dt = -βx + zy",
     dydt: "dy/dt = -αy + zx",
@@ -1556,6 +1602,8 @@ const luChen = {
     },
 };
 const chua2 = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
     name: "Chua 2",
     dxdt: "dx/dt = α(y - x - δ(|x + 1|-|x - 1|))",
     dydt: "dy/dt = β(x - y + z)",
@@ -1571,7 +1619,7 @@ const chua2 = {
         δ: "-1",
     },
     dt: 0.01,
-    scl: 70,
+    scl: 55,
     pathLength: 100,
     dx: function (x, y, z) {
         return (
@@ -1705,7 +1753,7 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = lorenz
+    attractor = chua2
     title.textContent = attractor["name"];
     // attractor = lorenz;
     // title.textContent = attractor.name;
@@ -1799,7 +1847,7 @@ function draw() {
     frameRate(30);
     orbitControl();
 
-    angleMode(DEGREES)
+    // angleMode(DEGREES)
 
     stroke("red");
     line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
@@ -1822,10 +1870,10 @@ function draw() {
     stroke("magenta");
     line(0, 0, 0, 
     -1*innerWidth / 2, -1*innerWidth / 2, -1*innerWidth / 2);
-
-    // rotateY(-135)
-    // rotateX(90)
-    // rotate(angle+=0.3,[0,0,1])
+    // rotate(angle+=0.01,[0,1,0])
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
+    // rotate(I*7/16,[1,0,-1])
     // stroke("green");
     // line(0, 0, 0, 
     //     1*innerWidth / 2, 1*innerWidth / 2, 1*innerWidth / 2);
@@ -1843,7 +1891,8 @@ function draw() {
     //     let newZ = t.z + dz;
     //     t.show(newX, newY, newZ);
     // }
-    console.log(particles[0].y,particles[0].x)
+    // console.log(particles[0].y,particles[0].x)
+    // rotate(angle+=0.01,[0,1,0])
     for (let p of particles) {
         let dx = attractor.dx(p.x, p.y, p.z);
         let dy = attractor.dy(p.x, p.y, p.z);
@@ -1852,6 +1901,9 @@ function draw() {
         let newX = p.x + dx;
         let newY = p.y + dy;
         let newZ = p.z + dz;
+        // console.log(newX, newY, newZ)
         p.show(newX, newY, newZ);
     }
+    // noLoop()
+
 }

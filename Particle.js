@@ -1,6 +1,6 @@
 class Particle {
     constructor(clr, scl, initialCoordinates, pathLength) {
-        this.startPoint = initialCoordinates()
+        this.startPoint = initialCoordinates();
         this.x = this.startPoint.x;
         this.y = this.startPoint.y;
         this.z = this.startPoint.z;
@@ -8,15 +8,14 @@ class Particle {
         this.color = clr;
         this.path = [];
         this.initialCoordinates = initialCoordinates;
-        this.pathLength = pathLength
+        this.pathLength = pathLength;
     }
 
     show(x, y, z) {
-
         this.x = x;
         this.y = y;
         this.z = z;
-        
+
         if (
             this.z * this.scl > innerWidth / 2 ||
             this.z * this.scl < -innerWidth / 2 ||
@@ -35,22 +34,23 @@ class Particle {
         if (this.path.length > this.pathLength) {
             this.path.shift();
         }
+
         noFill();
         stroke(this.color);
         strokeWeight(5);
-        point(x * this.scl, y * this.scl, z * this.scl );
+        point(x * this.scl, y * this.scl, z * this.scl);
 
         beginShape();
+
         for (let i = 1; i < this.path.length; i++) {
             stroke(this.color);
             strokeWeight(1);
             vertex(
                 this.path[i].x * this.scl,
                 this.path[i].y * this.scl,
-                this.path[i].z * this.scl 
+                this.path[i].z * this.scl
             );
         }
         endShape();
-        
     }
 }
