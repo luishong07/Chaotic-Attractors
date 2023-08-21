@@ -27,9 +27,9 @@ const cubed = "\u00B3";
 
 const lorenz = {
     name: "Lorenz",
-    dxdt: "σ(y-x)",
-    dydt: "x(ρ-z)-y",
-    dzdt: "xy-βz",
+    dxdt: "dx/dt = σ(y-x)",
+    dydt: "dy/dt = x(ρ-z)-y",
+    dzdt: "dz/dt = xy-βz",
     sigma: 10,
     rho: 28,
     beta: 8 / 3,
@@ -69,9 +69,9 @@ const lorenz = {
 };
 const fourwing = {
     name: "Fourwing",
-    dxdt: "αx + yz",
-    dydt: "βx + δy - xz",
-    dzdt: "-z - xy",
+    dxdt: "dx/dt = αx + yz",
+    dydt: "dy/dt = βx + δy - xz",
+    dzdt: "dz/dt = -z - xy",
     α: 0.2,
     β: 0.01,
     δ: -0.4,
@@ -111,10 +111,13 @@ const fourwing = {
     },
 };
 const halvorsen = {
+    // rotateY(145)
+    // rotateX(45)
+    // rotate(angle-=0.1,[1,1,1])
     name: "Halvorsen",
-    dxdt: "-αx - 4y - 4z -y" + "\u00B2",
-    dydt: "-αy - 4z - 4x -z" + "\u00B2",
-    dzdt: "-αz - 4x - 4y -x" + "\u00B2",
+    dxdt: "dx/dt = -αx - 4y - 4z -y" + "\u00B2",
+    dydt: "dy/dt = -αy - 4z - 4x -z" + "\u00B2",
+    dzdt: "dz/dt = -αz - 4x - 4y -x" + "\u00B2",
     // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
@@ -152,13 +155,15 @@ const halvorsen = {
     },
 };
 const rabinovichFabrikant = {
+    // rotateX(90)
+    // rotate(angle-=0.3,[0,0,1])
     // let dx = (p.y * (p.z - 1 + p.x ** 2) + sigma * p.x) * dt;
     // let dy = (p.x * (3 * p.z + 1 - p.x ** 2) + sigma * p.y) * dt;
     // let dz = -2 * p.z * (alpha + p.x * p.y) * dt;
     name: "Rabinovich-Fabrikant",
-    dxdt: "y(z - 1 + x" + "\u00B2" + ") + γx",
-    dydt: "x(3z + 1 - x" + "\u00B2" + ") + γy",
-    dzdt: "-2z( α + xy)",
+    dxdt: "dx/dt = y(z - 1 + x" + "\u00B2" + ") + γx",
+    dydt: "dy/dt = x(3z + 1 - x" + "\u00B2" + ") + γy",
+    dzdt: "dz/dt = -2z( α + xy)",
     alpha: 0.14,
     // gamma: 0.065,
     gamma: 0.1,
@@ -196,10 +201,13 @@ const rabinovichFabrikant = {
     },
 };
 const sprott = {
+    // -0.76 xOffSet
+    // rotateX(90)
+    // rotate(angle-=0.3,[0,0,1])
     name: "Sprott",
-    dxdt: "y + αxy + xz",
-    dydt: "1 - βx" + squared + "+yz",
-    dzdt: "x-x" + squared + "-y" + squared,
+    dxdt: "dx/dt = y + αxy + xz",
+    dydt: "dy/dt = 1 - βx" + squared + "+yz",
+    dzdt: "dz/dt = x-x" + squared + "-y" + squared,
     // let dx = (p.y + a * p.x * p.y + p.x * p.z) * dt;
     // let dy = (1 - b * p.x ** 2 + p.y * p.z) * dt;
     // let dz = (p.x - p.x ** 2 - p.y ** 2) * dt;
@@ -239,10 +247,12 @@ const sprott = {
     },
 };
 const dadras = {
+    //     rotate(angle-=0.3,[0,1,0])
+
     name: "Dadras",
-    dxdt: "y - ρx + σyz",
-    dydt: "τy - xz + z",
-    dzdt: "ζxy - εz",
+    dxdt: "dx/dt = y - ρx + σyz",
+    dydt: "dy/dt = τy - xz + z",
+    dzdt: "dz/dt = ζxy - εz",
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
@@ -288,10 +298,12 @@ const dadras = {
     },
 };
 const aizawa = {
+    // rotateX(90)
+    // rotate(angle+=0.3,[0,0,1])
     name: "Aizawa",
-    dxdt: "(z-β)x - δy",
-    dydt: "δx + (z-β)y",
-    dzdt:"γ + αz - z" +cubed +"/3 -(x" +squared +"-y" +squared +")(1+εz)+ζzx" +cubed,
+    dxdt: "dx/dt = (z-β)x - δy",
+    dydt: "dy/dt = δx + (z-β)y",
+    dzdt: "dz/dt = γ + αz - z" +cubed +"/3 -(x" +squared +"-y" +squared +")(1+εz)+ζzx" +cubed,
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
     // let dy = ((d*p.x) + p.y*(p.z - b))*dt
     // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
@@ -300,7 +312,7 @@ const aizawa = {
     β: 0.7,
     γ: 0.6,
     δ: 3.5,
-    e: 0.25,
+    ε: 0.25,
     ζ: 0.1,
     parameters: {
         α: "0.95",
@@ -317,20 +329,12 @@ const aizawa = {
         return color(0, 96, 37);
     },
     dx: function (x, y, z) {
-        console.log(((z - this.β) * x - this.δ * y) * this.dt)
         return ((z - this.β) * x - this.δ * y) * this.dt;
     },
     dy: function (x, y, z) {
-        console.log((this.δ * x + y * (z - this.β)) * this.dt)
         return (this.δ * x + y * (z - this.β)) * this.dt;
     },
     dz: function (x, y, z) {
-        console.log((this.γ +
-            this.α * z -
-            (z * z * z) / 3 -
-            (x * x + y * y) * (1 + this.ε * z) +
-            this.ζ * z * x * x * x) *
-        this.dt)
         return (
             (this.γ +
                 this.α * z -
@@ -358,10 +362,12 @@ const aizawa = {
     },
 };
 const chen = {
+    // rotateX(90)
+    // rotate(angle+=0.3,[0,0,1])
     name: "Chen",
-    dxdt: "αx-yz",
-    dydt: "βy+xz",
-    dzdt: "δz+xy/3",
+    dxdt: "dx/dt = αx-yz",
+    dydt: "dy/dt = βy+xz",
+    dzdt: "dz/dt = δz+xy/3",
     // let dx = (alpha * p.x - p.y * p.z) * dt;
     // let dy = (beta * p.y + p.x * p.z) * dt;
     // let dz = (delta * p.z + (p.x * p.y) / 3) * dt;
@@ -405,16 +411,16 @@ const chen = {
 };
 const thomas = {
     name: "Thomas",
-    dxdt: "sin(y)-βx",
-    dydt: "sin(x)-βy",
-    dzdt: "sin(z)-βz",
+    dxdt: "dx/dt = sin(y) - βx",
+    dydt: "dy/dt = sin(x) - βy",
+    dzdt: "dz/dt = sin(z) - βz",
     // dt = 0.0001;
     // let dx = sin(p.y) - bee*p.x
     // let dy = sin(p.z) - bee*p.y
     // let dz = sin(p.x) - bee*p.z
-    β: 0.208186,
+    β: 0.208,
     parameters:{
-        β: "0.208186",
+        β: "0.208",
     },
     scl: 90,
     dt: 0.15,
@@ -447,9 +453,9 @@ const thomas = {
 };
 const rossler = {
     name: "Rossler",
-    dxdt: "-(y+z)",
-    dydt: "x+αy",
-    dzdt: "β+z(x-ς)",
+    dxdt: "dx/dt = -(y+z)",
+    dydt: "dy/dt = x+αy",
+    dzdt: "dz/dt = β+z(x-ς)",
     // dt = 0.05;
     // let dx = (-p.y - p.z) * dt;
     // let dy = (p.x + a * p.y) * dt;
@@ -495,9 +501,9 @@ const rossler = {
 };
 const threeScroll2 = {
     name: "3-Scroll Unified System 2",
-    dxdt: "α(y - x) + δxz",
-    dydt: "ςx - xz + ζy",
-    dzdt: "βz + xy - εx" + squared,
+    dxdt: "dx/dt = α(y - x) + δxz",
+    dydt: "dy/dt = ςx - xz + ζy",
+    dzdt: "dz/dt = βz + xy - εx" + squared,
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -558,10 +564,12 @@ const threeScroll2 = {
     },
 };
 const threeScroll1 = {
+    // rotateX(90)
+    // rotate(angle-=0.3,[0,0,1])
     name: "3-Scroll Unified System 1",
-    dxdt: "α(y -x) + δxz",
-    dydt: "ςx - xz + ζy",
-    dzdt: "βz + xy - εx" + squared,
+    dxdt: "dx/dt = α(y -x) + δxz",
+    dydt: "dy/dt = ςx - xz + ζy",
+    dzdt: "dz/dt = βz + xy - εx" + squared,
     // let dx = (a * (p.y - p.x) + d * p.x * p.z) * dt;
     // let dy = (b * p.x - p.x * p.z + f * p.y) * dt;
     // let dz = (c * p.z + p.x * p.y - e * p.x ** 2) * dt;
@@ -614,9 +622,9 @@ const threeScroll1 = {
 };
 const lorenz83 = {
     name: "Lorenz 83",
-    dxdt: "-αx - y" + squared + " - z" + squared + " + αε",
-    dydt: "-y + xy - βxz + ξ",
-    dzdt: "-z + βxy + xz",
+    dxdt: "dx/dt = -αx - y" + squared + " - z" + squared + " + αε",
+    dydt: "dy/dt = -y + xy - βxz + ξ",
+    dzdt: "dz/dt = -z + βxy + xz",
     // let dx = (-1 * a * p.x - p.y ** 2 - p.z ** 2 + a * f) * dt;
     // let dy = (-1 * p.y + p.x * p.y - b * p.x * p.z + g) * dt;
     // let dz = (-1 * p.z + b * p.x * p.y + p.x * p.z) * dt;
@@ -661,9 +669,9 @@ const lorenz83 = {
 };
 const newtonLeipnik = {
     name: "Newton Leipnik",
-    dxdt: "-αx + y+ 10yz",
-    dydt: "-x - αy + 5xz",
-    dzdt: "βz - 5xy",
+    dxdt: "dx/dt = -αx + y+ 10yz",
+    dydt: "dy/dt = -x - αy + 5xz",
+    dzdt: "dz/dt = βz - 5xy",
     //dt value contigent on initial conditions
     //for higher dt values like 0.03, smaller values better for initial conditions
     α: 0.4,
@@ -703,9 +711,9 @@ const newtonLeipnik = {
 };
 const noseHoover = {
     name: "Nose-Hoover",
-    dxdt: "y",
-    dydt: "-x + yz",
-    dzdt: "α - y" + squared,
+    dxdt: "dx/dt = y",
+    dydt: "dy/dt = -x + yz",
+    dzdt: "dz/dt = α - y" + squared,
     // dx = y
     // dy = -x+y*z
     // dz = a-y*y
@@ -745,9 +753,9 @@ const noseHoover = {
 };
 const bouali = {
     name: "Bouali",
-    dxdt: "x(4-y) + αz",
-    dydt: "-y(1-x" + squared + ")",
-    dzdt: "-x(1.5-ςz) - 0.05z",
+    dxdt: "dx/dt = x(4-y) + αz",
+    dydt: "dy/dt = -y(1-x" + squared + ")",
+    dzdt: "dz/dt = -x(1.5-ςz) - 0.05z",
     // dx = x*(4-y)+a*z
     // dy = -y*(1-x^2)
     // dz = -x (1.5 - s*z) - 0.05*z
@@ -791,9 +799,9 @@ const bouali = {
 };
 const coullet = {
     name: "Coullet",
-    dxdt: "y",
-    dydt: "z",
-    dzdt: "αx + βy + ςz + δx" + cubed,
+    dxdt: "dx/dt = y",
+    dydt: "dy/dt = z",
+    dzdt: "dz/dt = αx + βy + ςz + δx" + cubed,
     α: 0.8,
     β: -1.1,
     ς: -0.45,
@@ -806,7 +814,7 @@ const coullet = {
     },
     scl: 100,
     dt: 0.03,
-    pathLength: 100,
+    pathLength: 150,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -836,9 +844,9 @@ const coullet = {
 };
 const finance = {
     name: "Finance",
-    dxdt: "z + xy + x(1/β - α)",
-    dydt: "-βy - x" + squared,
-    dzdt: "-x - ςz",
+    dxdt: "dx/dt = z + xy + x(1/β - α)",
+    dydt: "dy/dt = -βy - x" + squared,
+    dzdt: "dz/dt = -x - ςz",
     //dx = ((1/b) - a)* x + z +x*y
     // dy = -b*y -X^2
     // dz = -x - c *z
@@ -885,9 +893,9 @@ const finance = {
 };
 const arneodo = {
     name: "Arneodo",
-    dxdt: "y",
-    dydt: "z",
-    dzdt: "-αx - βy - z +δx" + cubed,
+    dxdt: "dx/dt = y",
+    dydt: "dy/dt = z",
+    dzdt: "dz/dt = -αx - βy - z +δx" + cubed,
     α: -5.5,
     β: 3.5,
     δ: -1,
@@ -927,9 +935,9 @@ const arneodo = {
 };
 const rayleighBenard = {
     name: "Rayleigh-Benard",
-    dxdt: "-αx + αy",
-    dydt: "τx - y - xz",
-    dzdt: "xy - βz",
+    dxdt: "dx/dt = -αx + αy",
+    dydt: "dy/dt = τx - y - xz",
+    dzdt: "dz/dt = xy - βz",
     α: 9.0,
     β: 12,
     τ: 0.5,
@@ -1008,9 +1016,9 @@ const dequanLi = {
 };
 const genesioTesi = {
     name: "Genesio Tesi",
-    dxdt: "y",
-    dydt: "z",
-    dzdt: "-x - βy -αz +x" + squared,
+    dxdt: "dx/dt = y",
+    dydt: "dy/dt = z",
+    dzdt: "dz/dt = -x - βy -αz +x" + squared,
     α: -1.1,
     β: -0.44,
     parameters: {
@@ -1048,9 +1056,9 @@ const genesioTesi = {
 };
 const burkeShaw = {
     name: "Burke-Shaw",
-    dxdt: "-η(x+y)",
-    dydt: "-y-ηxz",
-    dzdt: "ηxy + μ",
+    dxdt: "dx/dt = -η(x+y)",
+    dydt: "dy/dt = -y-ηxz",
+    dzdt: "dz/dt = ηxy + μ",
     η: 10, //eta
     μ: 4.272, //mu
     parameters:{
@@ -1088,9 +1096,9 @@ const burkeShaw = {
 };
 const chua1 = {
     name: "Chua 1",
-    dxdt: "α(y - x)",
-    dydt: "-εx -xz + λy",
-    dzdt: "xy - μz",
+    dxdt: "dx/dt = α(y - x)",
+    dydt: "dy/dt = -εx -xz + λy",
+    dzdt: "dz/dt = xy - μz",
     α: 40,
     ε: 12,
     λ: 28,
@@ -1132,9 +1140,9 @@ const chua1 = {
 };
 const hadley = {
     name: "Hadley",
-    dxdt: "-y" + squared + " - z" + squared + " - αx + αζ",
-    dydt: "-xy - βxz -y + δ",
-    dzdt: "βxy + xz - z",
+    dxdt: "dx/dt = -y" + squared + " - z" + squared + " - αx + αζ",
+    dydt: "dy/dt = -xy - βxz -y + δ",
+    dzdt: "dz/dt = βxy + xz - z",
     α: 0.2,
     β: 4,
     ζ: 8,
@@ -1176,9 +1184,9 @@ const hadley = {
 };
 const lorenzMod1 = {
     name: "Lorenz Mod 1",
-    dxdt: "-αx + y" + squared + " - z" + squared + " + αζ",
-    dydt: "x(y - βz) + δ",
-    dzdt: "z + x(βy + z)",
+    dxdt: "dx/dt = -αx + y" + squared + " - z" + squared + " + αζ",
+    dydt: "dy/dt = x(y - βz) + δ",
+    dzdt: "dz/dt = z + x(βy + z)",
     α: 0.1,
     β: 4,
     ζ: 14,
@@ -1220,9 +1228,9 @@ const lorenzMod1 = {
 };
 const lorenzMod2 = {
     name: "Lorenz Mod 2",
-    dxdt: "-αx + y" + squared + " - z" + squared + " + αζ",
-    dydt: "α(y - βz) + δ",
-    dzdt: "-z + x(βy + z)",
+    dxdt: "dx/dt = -αx + y" + squared + " - z" + squared + " + αζ",
+    dydt: "dy/dt = α(y - βz) + δ",
+    dzdt: "dz/dt = -z + x(βy + z)",
     α: 0.9,
     β: 5,
     ζ: 9.9,
@@ -1264,9 +1272,9 @@ const lorenzMod2 = {
 };
 const anishchenkoAstakhov = {
     name: "Anishchenko Astakhov",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
+    dxdt: "dx/dt = ",
+    dydt: "dy/dt = ",
+    dzdt: "dz/dt = ",
     nu: 1.2,
     eta: 0.5,
     scl: 20,
@@ -1306,9 +1314,9 @@ const anishchenkoAstakhov = {
 };
 const rucklidge = {
     name: "Rucklidge",
-    dxdt: "-κx + αy - yz",
-    dydt: "x",
-    dzdt: "-z + y" + squared,
+    dxdt: "dx/dt = -κx + αy - yz",
+    dydt: "dy/dt = x",
+    dzdt: "dz/dt = -z + y" + squared,
     κ: 2,
     α: 6.7,
     parameters:{
@@ -1346,9 +1354,9 @@ const rucklidge = {
 };
 const qiChen = {
     name: "Qi-Chen",
-    dxdt: "α(y - x) + yz",
-    dydt: "ςx + y - xz",
-    dzdt: "xy - βz",
+    dxdt: "dx/dt = α(y - x) + yz",
+    dydt: "dy/dt = ςx + y - xz",
+    dzdt: "dz/dt = xy - βz",
     α: 38,
     β: 8 / 3,
     ς: 80,
@@ -1429,9 +1437,9 @@ const wangSun = {
 //sakarya similar to newton but it only creates one attractor instead of two like the newton
 const sakarya = {
     name: "Sakarya",
-    dxdt: "-x + y +yz",
-    dydt: "-x - y + αxz",
-    dzdt: "z -βxy",
+    dxdt: "dx/dt = -x + y +yz",
+    dydt: "dy/dt = -x - y + αxz",
+    dzdt: "dz/dt = z -βxy",
     alpha: 0.4,
     beta: 0.3,
     scl: 10,
@@ -1503,9 +1511,9 @@ const yuWang = {
 };
 const luChen = {
     name: "Lu-Chen",
-    dxdt: "-βx + zy",
-    dydt: "-αy + zx",
-    dzdt: "δz - yx + ς",
+    dxdt: "dx/dt = -βx + zy",
+    dydt: "dy/dt = -αy + zx",
+    dzdt: "dz/dt = δz - yx + ς",
     α: 10,
     β: 4,
     ς: 18.1,
@@ -1549,9 +1557,9 @@ const luChen = {
 };
 const chua2 = {
     name: "Chua 2",
-    dxdt: "α(y - x - δ(|x + 1|-|x - 1|))",
-    dydt: "β(x - y + z)",
-    dzdt: "-ςy",
+    dxdt: "dx/dt = α(y - x - δ(|x + 1|-|x - 1|))",
+    dydt: "dy/dt = β(x - y + z)",
+    dzdt: "dz/dt = -ςy",
     α: 15.6,
     β: 1,
     ς: 25.58,
@@ -1697,7 +1705,7 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = aizawa
+    attractor = lorenz
     title.textContent = attractor["name"];
     // attractor = lorenz;
     // title.textContent = attractor.name;
@@ -1791,20 +1799,36 @@ function draw() {
     frameRate(30);
     orbitControl();
 
+    angleMode(DEGREES)
+
     stroke("red");
     line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
+    line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
+
 
     stroke("blue");
     line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
+    line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
 
     stroke("yellow");
     line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
+    line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
 
     stroke("purple");
-    line(0, 0, 0, innerWidth / 2, innerWidth / 2, innerWidth / 2);
+    // line(0, 0, 0, 0, -innerWidth / 2, innerWidth / 2);
+    line(0, 0, 0, 
+    1*innerWidth / 2, 1*innerWidth / 2, 1*innerWidth / 2);
+    
+    stroke("magenta");
+    line(0, 0, 0, 
+    -1*innerWidth / 2, -1*innerWidth / 2, -1*innerWidth / 2);
 
-    // rotateY(angle)
-    // rotate(angle+=0.01,[1,1,1])
+    // rotateY(-135)
+    // rotateX(90)
+    // rotate(angle+=0.3,[0,0,1])
+    // stroke("green");
+    // line(0, 0, 0, 
+    //     1*innerWidth / 2, 1*innerWidth / 2, 1*innerWidth / 2);
     // angle+=0.01
     // // rotateX(angle)
     // rotateY(angle)
@@ -1819,7 +1843,7 @@ function draw() {
     //     let newZ = t.z + dz;
     //     t.show(newX, newY, newZ);
     // }
-
+    console.log(particles[0].y,particles[0].x)
     for (let p of particles) {
         let dx = attractor.dx(p.x, p.y, p.z);
         let dy = attractor.dy(p.x, p.y, p.z);

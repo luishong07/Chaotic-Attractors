@@ -1,13 +1,9 @@
 class Particle {
     constructor(clr, scl, initialCoordinates, pathLength) {
         this.startPoint = initialCoordinates()
-        console.log(this.startPoint)
         this.x = this.startPoint.x;
         this.y = this.startPoint.y;
         this.z = this.startPoint.z;
-        this.r = random(255);
-        this.g = random(255);
-        this.b = random(255);
         this.scl = scl;
         this.color = clr;
         this.path = [];
@@ -20,6 +16,7 @@ class Particle {
         this.x = x;
         this.y = y;
         this.z = z;
+        
         if (
             this.z * this.scl > innerWidth / 2 ||
             this.z * this.scl < -innerWidth / 2 ||
@@ -54,5 +51,6 @@ class Particle {
             );
         }
         endShape();
+        
     }
 }
