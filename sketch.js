@@ -38,6 +38,20 @@ const lorenz = {
         ρ: "28",
         β: "8/3",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:-27
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,1,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: 0
+    },
     scl: 8,
     dt: 0.01,
     pathLength: 75,
@@ -79,6 +93,15 @@ const fourwing = {
         α: "0.2",
         β: "0.01",
         δ: "-0.4",
+    },
+    offSet:{
+        // x:0,
+        // y:0,
+        // z:-27
+    },
+    motion: {
+        // vel: 0.01,
+        // axis: [0,1,0]
     },
     scl: 100,
     dt: 0.1,
@@ -170,6 +193,20 @@ const rabinovichFabrikant = {
     parameters: {
         α: "0.14",
         γ: "0.1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0
     },
     scl: 100,
     dt: 0.015,
@@ -303,7 +340,15 @@ const aizawa = {
     name: "Aizawa",
     dxdt: "dx/dt = (z-β)x - δy",
     dydt: "dy/dt = δx + (z-β)y",
-    dzdt: "dz/dt = γ + αz - z" +cubed +"/3 -(x" +squared +"-y" +squared +")(1+εz)+ζzx" +cubed,
+    dzdt:
+        "dz/dt = γ + αz - z" +
+        cubed +
+        "/3 -(x" +
+        squared +
+        "-y" +
+        squared +
+        ")(1+εz)+ζzx" +
+        cubed,
     // let dx = ((p.z-b)*p.x - d*p.y)*dt
     // let dy = ((d*p.x) + p.y*(p.z - b))*dt
     // let dz = (c + (a*p.z) -((p.z*p.z*p.z)/3) - (((p.x*p.x)+(p.y*p.y))*(1+(e*p.z))) +(f*p.z*p.x*p.x*p.x))*dt
@@ -375,7 +420,7 @@ const chen = {
     α: 5,
     β: -10,
     δ: -0.38,
-    parameters:{
+    parameters: {
         α: "5",
         β: "-10",
         δ: "-0.38",
@@ -420,7 +465,7 @@ const thomas = {
     // let dy = sin(p.z) - bee*p.y
     // let dz = sin(p.x) - bee*p.z
     β: 0.208,
-    parameters:{
+    parameters: {
         β: "0.208",
     },
     scl: 90,
@@ -467,7 +512,7 @@ const rossler = {
     α: 0.2,
     β: 0.2,
     ς: 5.7,
-    parameters:{
+    parameters: {
         α: "0.2",
         β: "0.2",
         ς: "5.7",
@@ -524,7 +569,7 @@ const threeScroll2 = {
     δ: 0.13,
     ε: 0.57,
     ζ: 14.7,
-    parameters:{
+    parameters: {
         α: "32.48",
         ς: "45.84",
         β: "1.18",
@@ -589,7 +634,7 @@ const threeScroll1 = {
     δ: 0.5,
     ε: 0.65,
     ζ: 20,
-    parameters:{
+    parameters: {
         α: "40",
         β: "0.833",
         δ: "0.5",
@@ -685,7 +730,7 @@ const newtonLeipnik = {
     //for higher dt values like 0.03, smaller values better for initial conditions
     α: 0.4,
     β: 0.175,
-    parameters:{
+    parameters: {
         α: "0.4",
         β: "0.175",
     },
@@ -730,8 +775,8 @@ const noseHoover = {
     // dz = a-y*y
     // a = 1.5
     α: 1.5,
-    parameters:{
-        α:"1.5"
+    parameters: {
+        α: "1.5",
     },
     scl: 50,
     dt: 0.02,
@@ -778,7 +823,7 @@ const bouali = {
     //s = 1.0
     α: 0.3,
     ς: 1.0,
-    parameters:{
+    parameters: {
         α: "0.3",
         ς: "1.0",
     },
@@ -823,7 +868,7 @@ const coullet = {
     β: -1.1,
     ς: -0.45,
     δ: -1,
-    parameters:{
+    parameters: {
         α: "0.8",
         β: "-1.1",
         ς: "-0.45",
@@ -839,7 +884,10 @@ const coullet = {
         return z * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.α * x + this.β * y +this.ς* z + this.δ* x * x * x) * this.dt;
+        return (
+            (this.α * x + this.β * y + this.ς * z + this.δ * x * x * x) *
+            this.dt
+        );
     },
     tracerColor: function () {
         return color(169, 100, 50);
@@ -875,7 +923,7 @@ const finance = {
     α: 0.001,
     β: 0.2,
     ς: 1.1,
-    parameters:{
+    parameters: {
         α: "0.001",
         β: "0.2",
         ς: "1.1",
@@ -920,7 +968,7 @@ const arneodo = {
     α: -5.5,
     β: 3.5,
     δ: -1,
-    parameters:{
+    parameters: {
         α: "-5.5",
         β: "3.5",
         δ: "-1",
@@ -965,7 +1013,7 @@ const rayleighBenard = {
     α: 9.0,
     β: 12,
     τ: 0.5,
-    parameters:{
+    parameters: {
         α: "9.0",
         β: "12",
         τ: "0.5",
@@ -1089,7 +1137,7 @@ const burkeShaw = {
     dzdt: "dz/dt = ηxy + μ",
     η: 10, //eta
     μ: 4.272, //mu
-    parameters:{
+    parameters: {
         η: "10", //eta
         μ: "4.272", //mu
     },
@@ -1134,7 +1182,7 @@ const chua1 = {
     ε: 12,
     λ: 28,
     μ: 3,
-    parameters:{
+    parameters: {
         α: "40",
         ε: "12",
         λ: "28",
@@ -1180,13 +1228,13 @@ const hadley = {
     β: 4,
     ζ: 8,
     δ: 1,
-    parameters:{
+    parameters: {
         α: "0.2",
         β: "4",
         ζ: "8",
         δ: "1",
     },
-    pathLength:100,
+    pathLength: 100,
     dt: 0.02,
     scl: 100,
     dx: function (x, y, z) {
@@ -1226,7 +1274,7 @@ const lorenzMod1 = {
     β: 4,
     ζ: 14,
     δ: 0.08,
-    parameters:{
+    parameters: {
         α: "0.1",
         β: "4",
         ζ: "14",
@@ -1236,7 +1284,7 @@ const lorenzMod1 = {
     scl: 10,
     pathLength: 80,
     dx: function (x, y, z) {
-        return (-this.α* x + y * y - z * z + this.α* this.ζ) * this.dt;
+        return (-this.α * x + y * y - z * z + this.α * this.ζ) * this.dt;
     },
     dy: function (x, y, z) {
         return (x * (y - this.β * z) + this.δ) * this.dt;
@@ -1272,7 +1320,7 @@ const lorenzMod2 = {
     β: 5,
     ζ: 9.9,
     δ: 1,
-    parameters:{
+    parameters: {
         α: "0.9",
         β: "5",
         ζ: "9.9",
@@ -1359,7 +1407,7 @@ const rucklidge = {
     dzdt: "dz/dt = -z + y" + squared,
     κ: 2,
     α: 6.7,
-    parameters:{
+    parameters: {
         κ: "2",
         α: "6.7",
     },
@@ -1402,7 +1450,7 @@ const qiChen = {
     α: 38,
     β: 8 / 3,
     ς: 80,
-    parameters:{
+    parameters: {
         α: "38",
         β: "8 / 3",
         ς: "80",
@@ -1564,7 +1612,7 @@ const luChen = {
     β: 4,
     ς: 18.1,
     δ: 20 / 7,
-    parameters:{
+    parameters: {
         α: "10",
         β: "4",
         ς: "18.1",
@@ -1612,7 +1660,7 @@ const chua2 = {
     β: 1,
     ς: 25.58,
     δ: -1,
-    parameters:{
+    parameters: {
         α: "15.6",
         β: "1",
         ς: "25.58",
@@ -1753,7 +1801,7 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = chua2
+    attractor = lorenz;
     title.textContent = attractor["name"];
     // attractor = lorenz;
     // title.textContent = attractor.name;
@@ -1784,13 +1832,15 @@ function setup() {
             attractor.particleColor(),
             attractor.scl,
             attractor.initialCoordinates,
-            attractor.pathLength
+            attractor.pathLength,
+            attractor.offSet
         );
         particles.push(p);
     }
 }
 let angle = 0;
-
+let vel = 0
+let axis = [0,0,0]
 function halt() {
     //pause the whole drawing
     if (isLooping()) {
@@ -1813,8 +1863,8 @@ function changeAttractor(name) {
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let params = document.querySelector(".para-list");
-    while(params.hasChildNodes()){
-        params.removeChild(params.firstChild)
+    while (params.hasChildNodes()) {
+        params.removeChild(params.firstChild);
     }
     // console.log(attractors[att].parameters)
     for (const key in attractors[att].parameters) {
@@ -1826,12 +1876,13 @@ function changeAttractor(name) {
     dx.textContent = attractors[att].dxdt;
     dy.textContent = attractors[att].dydt;
     dz.textContent = attractors[att].dzdt;
-
+    // console.log(attractors[att].offSet)
     title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
     for (let p of particles) {
         let newParticleCoordinate = attractors[att].initialCoordinates();
         p.initialCoordinates = attractors[att].initialCoordinates;
         p.path = [];
+        p.offSet = attractors[att].offSet
         p.scl = attractors[att].scl;
         p.pathLength = attractors[att].pathLength;
         p.color = attractors[att].particleColor();
@@ -1853,7 +1904,6 @@ function draw() {
     line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
     line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
 
-
     stroke("blue");
     line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
     line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
@@ -1864,18 +1914,30 @@ function draw() {
 
     stroke("purple");
     // line(0, 0, 0, 0, -innerWidth / 2, innerWidth / 2);
-    line(0, 0, 0, 
-    1*innerWidth / 2, 1*innerWidth / 2, 1*innerWidth / 2);
-    
+    line(
+        0,
+        0,
+        0,
+        (1 * innerWidth) / 2,
+        (1 * innerWidth) / 2,
+        (1 * innerWidth) / 2
+    );
+
     stroke("magenta");
-    line(0, 0, 0, 
-    -1*innerWidth / 2, -1*innerWidth / 2, -1*innerWidth / 2);
+    line(
+        0,
+        0,
+        0,
+        (-1 * innerWidth) / 2,
+        (-1 * innerWidth) / 2,
+        (-1 * innerWidth) / 2
+    );
     // rotate(angle+=0.01,[0,1,0])
     // rotateX(PI/2)
     // rotate(angle+=0.01,[0,0,-1])
     // rotate(I*7/16,[1,0,-1])
     // stroke("green");
-    // line(0, 0, 0, 
+    // line(0, 0, 0,
     //     1*innerWidth / 2, 1*innerWidth / 2, 1*innerWidth / 2);
     // angle+=0.01
     // // rotateX(angle)
@@ -1893,6 +1955,14 @@ function draw() {
     // }
     // console.log(particles[0].y,particles[0].x)
     // rotate(angle+=0.01,[0,1,0])
+    // attractor.motion
+    if(angle > TWO_PI) {
+        angle = 0
+    }
+    rotateX(attractor.tilt.x)
+    rotateY(attractor.tilt.y)
+    rotateZ(attractor.tilt.z)
+    rotate(angle+=attractor.motion.vel, attractor.motion.axis)
     for (let p of particles) {
         let dx = attractor.dx(p.x, p.y, p.z);
         let dy = attractor.dy(p.x, p.y, p.z);
@@ -1905,5 +1975,4 @@ function draw() {
         p.show(newX, newY, newZ);
     }
     // noLoop()
-
 }
