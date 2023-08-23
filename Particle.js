@@ -9,10 +9,10 @@ class Particle {
         this.path = [];
         this.initialCoordinates = initialCoordinates;
         this.pathLength = pathLength;
-        this.offSet = offSet
-        // for(const axis in offSet){
-        //     this.offSet[axis] = offSet[axis]*this.scl
-        // }
+        this.offSet = {}
+        for(const axis in offSet){
+            this.offSet[axis] = offSet[axis]*this.scl
+        }
         // console.log(this.offSet)
     }
 

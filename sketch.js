@@ -50,7 +50,9 @@ const lorenz = {
     tilt:{
         x: 0,
         y: 0,
-        z: 0
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 8,
     dt: 0.01,
@@ -148,7 +150,23 @@ const halvorsen = {
     parameters: {
         α: "1.89",
     },
-    scl: 40,
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,1,1],
+    },
+    tilt:{
+        x: 0,
+        y: Math.PI*3/4,
+        z: 0,
+        otherTilt: Math.PI/4,
+        otherAxis: [1,0,-1]
+    },
+    scl: 25,
     dt: 0.01,
     pathLength: 100,
     tracerColor: function () {
@@ -206,7 +224,9 @@ const rabinovichFabrikant = {
     tilt:{
         x: Math.PI/2,
         y: 0,
-        z: 0
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 100,
     dt: 0.015,
@@ -305,6 +325,22 @@ const dadras = {
         ζ: "2",
         ε: "9",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,1,1],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 20,
     dt: 0.01,
     pathLength: 120,
@@ -367,6 +403,22 @@ const aizawa = {
         ε: "0.25",
         ζ: "0.1",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 100,
     dt: 0.015,
     pathLength: 110,
@@ -425,6 +477,22 @@ const chen = {
         β: "-10",
         δ: "-0.38",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 20,
     dt: 0.008,
     pathLength: 120,
@@ -467,6 +535,22 @@ const thomas = {
     β: 0.208,
     parameters: {
         β: "0.208",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,1,1],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 90,
     dt: 0.15,
@@ -516,6 +600,23 @@ const rossler = {
         α: "0.2",
         β: "0.2",
         ς: "5.7",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0,
+        
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 15,
     dt: 0.04,
@@ -576,6 +677,23 @@ const threeScroll2 = {
         δ: "0.13",
         ε: "0.57",
         ζ: "14.7",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:-40,
+        
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 1,
     dt: 0.0002,
@@ -641,6 +759,23 @@ const threeScroll1 = {
         ε: "0.65",
         ζ: "20",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0,
+        
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 3,
     dt: 0.0015,
     pathLength: 120,
@@ -690,6 +825,22 @@ const lorenz83 = {
         ε: "4.83",
         ξ: "4.66",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,0,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: -Math.PI/2,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 50,
     dt: 0.01,
     pathLength: 80,
@@ -734,7 +885,23 @@ const newtonLeipnik = {
         α: "0.4",
         β: "0.175",
     },
-    scl: 250,
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: 0,
+        y: -Math.PI/2,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
+    scl: 400,
     dt: 0.04,
     pathLength: 100,
     dx: function (x, y, z) {
@@ -777,6 +944,22 @@ const noseHoover = {
     α: 1.5,
     parameters: {
         α: "1.5",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,-1],
+    },
+    tilt:{
+        x: -Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 50,
     dt: 0.02,
@@ -827,6 +1010,22 @@ const bouali = {
         α: "0.3",
         ς: "1.0",
     },
+    offSet:{
+        x:0,
+        y:-5,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: -Math.PI/2,
+        y: 0,
+        z: Math.PI,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 35,
     dt: 0.02,
     pathLength: 90,
@@ -873,6 +1072,22 @@ const coullet = {
         β: "-1.1",
         ς: "-0.45",
         δ: "-1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,0,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: -Math.PI/2,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 100,
     dt: 0.03,
@@ -928,7 +1143,23 @@ const finance = {
         β: "0.2",
         ς: "1.1",
     },
-    scl: 50,
+    offSet:{
+        x:0,
+        y:4,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,1,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
+    scl: 60,
     dt: 0.05,
     pathLength: 100,
     dx: function (x, y, z) {
@@ -972,6 +1203,22 @@ const arneodo = {
         α: "-5.5",
         β: "3.5",
         δ: "-1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 30,
     dt: 0.01,
@@ -1018,7 +1265,23 @@ const rayleighBenard = {
         β: "12",
         τ: "0.5",
     },
-    scl: 12,
+    offSet:{
+        x:0,
+        y:0,
+        z:-10
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: -Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
+    scl: 20,
     dt: 0.02,
     pathLength: 80,
     dx: function (x, y, z) {
@@ -1099,6 +1362,22 @@ const genesioTesi = {
         α: "-1.1",
         β: "-0.44",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: -Math.PI/4,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 200,
     dt: 0.018,
     pathLength: 100,
@@ -1140,6 +1419,22 @@ const burkeShaw = {
     parameters: {
         η: "10", //eta
         μ: "4.272", //mu
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,-1],
+    },
+    tilt:{
+        x: -Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     dt: 0.01,
     scl: 50,
@@ -1188,8 +1483,24 @@ const chua1 = {
         λ: "28",
         μ: "3",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:-15
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: -Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     dt: 0.005,
-    scl: 5,
+    scl: 8,
     pathLength: 80,
     dx: function (x, y, z) {
         return this.α * (y - x) * this.dt;
@@ -1233,6 +1544,22 @@ const hadley = {
         β: "4",
         ζ: "8",
         δ: "1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,0,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: Math.PI/2,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     pathLength: 100,
     dt: 0.02,
@@ -1280,6 +1607,22 @@ const lorenzMod1 = {
         ζ: "14",
         δ: "0.08",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [1,0,0],
+    },
+    tilt:{
+        x: 0,
+        y: Math.PI/2,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     dt: 0.005,
     scl: 10,
     pathLength: 80,
@@ -1325,6 +1668,22 @@ const lorenzMod2 = {
         β: "5",
         ζ: "9.9",
         δ: "1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,1,0],
+    },
+    tilt:{
+        x: -Math.PI/4,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     dt: 0.004,
     scl: 10,
@@ -1411,6 +1770,22 @@ const rucklidge = {
         κ: "2",
         α: "6.7",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:-7
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 20,
     dt: 0.03,
     pathLength: 100,
@@ -1455,7 +1830,23 @@ const qiChen = {
         β: "8 / 3",
         ς: "80",
     },
-    scl: 2,
+    offSet:{
+        x:0,
+        y:0,
+        z:-100
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: -Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
+    scl: 4,
     dt: 0.001,
     pathLength: 100,
     dx: function (x, y, z) {
@@ -1532,8 +1923,28 @@ const sakarya = {
     dxdt: "dx/dt = -x + y +yz",
     dydt: "dy/dt = -x - y + αxz",
     dzdt: "dz/dt = z -βxy",
-    alpha: 0.4,
-    beta: 0.3,
+    α: 0.4,
+    β: 0.3,
+    parameters:{
+        α: "0.4",
+        β: "0.3",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: 0.01,
+        axis: [-1,0,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: Math.PI/2,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 10,
     dt: 0.005,
     pathLength: 100,
@@ -1541,10 +1952,10 @@ const sakarya = {
         return (-x + y + y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-x - y + this.alpha * x * z) * this.dt;
+        return (-x - y + this.α * x * z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (z - this.beta * x * y) * this.dt;
+        return (z - this.β * x * y) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
@@ -1618,6 +2029,22 @@ const luChen = {
         ς: "18.1",
         δ: "20/7",
     },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,-1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 7,
     dt: 0.0035,
     pathLength: 100,
@@ -1665,6 +2092,22 @@ const chua2 = {
         β: "1",
         ς: "25.58",
         δ: "-1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,-1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     dt: 0.01,
     scl: 55,
@@ -1801,7 +2244,7 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = lorenz;
+    attractor = halvorsen;
     title.textContent = attractor["name"];
     // attractor = lorenz;
     // title.textContent = attractor.name;
@@ -1876,7 +2319,11 @@ function changeAttractor(name) {
     dx.textContent = attractors[att].dxdt;
     dy.textContent = attractors[att].dydt;
     dz.textContent = attractors[att].dzdt;
-    // console.log(attractors[att].offSet)
+    for(const axis in attractors[att].offSet){
+        attractors[att].offSet[axis] = attractors[att].offSet[axis]*attractors[att].scl
+    }
+    console.log(attractors[att].offSet)
+
     title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
     for (let p of particles) {
         let newParticleCoordinate = attractors[att].initialCoordinates();
@@ -1900,38 +2347,39 @@ function draw() {
 
     // angleMode(DEGREES)
 
-    stroke("red");
-    line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
-    line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
+    // stroke("red");
+    // line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
+    // line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
 
-    stroke("blue");
-    line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
-    line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
+    // stroke("blue");
+    // line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
+    // line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
+    // line(0, 0, 0, -innerWidth / 2, 0, -innerWidth / 2)
 
-    stroke("yellow");
-    line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
-    line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
+    // stroke("yellow");
+    // line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
+    // line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
 
-    stroke("purple");
-    // line(0, 0, 0, 0, -innerWidth / 2, innerWidth / 2);
-    line(
-        0,
-        0,
-        0,
-        (1 * innerWidth) / 2,
-        (1 * innerWidth) / 2,
-        (1 * innerWidth) / 2
-    );
+    // stroke("purple");
+    // // line(0, 0, 0, 0, -innerWidth / 2, innerWidth / 2);
+    // line(
+    //     0,
+    //     0,
+    //     0,
+    //     (1 * innerWidth) / 2,
+    //     0,
+    //     (1 * innerWidth) / 2
+    // );
 
-    stroke("magenta");
-    line(
-        0,
-        0,
-        0,
-        (-1 * innerWidth) / 2,
-        (-1 * innerWidth) / 2,
-        (-1 * innerWidth) / 2
-    );
+    // stroke("magenta");
+    // line(
+    //     0,
+    //     0,
+    //     0,
+    //     (-1 * innerWidth) / 2,
+    //     (-1 * innerWidth) / 2,
+    //     (-1 * innerWidth) / 2
+    // );
     // rotate(angle+=0.01,[0,1,0])
     // rotateX(PI/2)
     // rotate(angle+=0.01,[0,0,-1])
@@ -1962,6 +2410,9 @@ function draw() {
     rotateX(attractor.tilt.x)
     rotateY(attractor.tilt.y)
     rotateZ(attractor.tilt.z)
+    rotate(attractor.tilt.otherTilt,attractor.tilt.otherAxis)
+    // stroke('yellow')
+    // line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
     rotate(angle+=attractor.motion.vel, attractor.motion.axis)
     for (let p of particles) {
         let dx = attractor.dx(p.x, p.y, p.z);
@@ -1974,5 +2425,17 @@ function draw() {
         // console.log(newX, newY, newZ)
         p.show(newX, newY, newZ);
     }
+    // stroke('green')
+    // line(
+    //     0,
+    //     0,
+    //     0,
+    //     (1 * innerWidth) / 2,
+    //     0,
+    //     (1 * innerWidth) / 2
+    // );
+    // line(0, 0, 0, -innerWidth / 2, 0, 0)
+    
+
     // noLoop()
 }
