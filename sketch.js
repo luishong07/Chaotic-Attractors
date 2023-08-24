@@ -2081,18 +2081,40 @@ const sakarya = {
 };
 const yuWang = {
     name: "Yu-Wang",
-    dxdt: "",
-    dydt: "",
+    dxdt: "α(y - x)",
+    dydt: "βx - ςxz",
     dzdt: "",
-    alpha: 10,
-    beta: 40,
-    sigma: 2,
-    delta: 2.5,
+    α: 10,
+    β: 40,
+    ς: 2,
+    δ: 2.5,
+    parameters:{
+        α: "10",
+        β: "40",
+        ς: "2",
+        δ: "2.5",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: 0.0,
+        axis: [-1,0,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
     scl: 20,
-    dt: 0.0004,
+    dt: 0.001,
     pathLength: 100,
     dx: function (x, y, z) {
-        return 10 * (y - x) * this.dt;
+        return (10 * (y - x)) * this.dt;
     },
     dy: function (x, y, z) {
         return (40 * x - 2 * x * z) * this.dt;
@@ -2103,14 +2125,16 @@ const yuWang = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:360,
+    lowHue: 270,
     particleColor: function () {
-        return color(random(160, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-1, 1), 2);
-        let y = round(random(-1, 1), 2);
-        let z = round(random(-1, 1), 2);
+        let x = round(random(-5, 5), 2);
+        let y = round(random(-5, 5), 2);
+        let z = round(random(-5, 5), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -2251,6 +2275,197 @@ const chua2 = {
         return position;
     },
 };
+const shimizuMorioka = {
+    
+    name: "Shimizo-Morioka",
+    dxdt: "dx/dt =  y",
+    dydt: "dy/dt = (1 - z)x - αy",
+    dzdt: "dz/dt = -βz + x" +squared,
+    α: 0.75,
+    β: 0.45,
+    parameters: {
+        α: "0.75",
+        β: "0.45",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:-2
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,-1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,0,1]
+    },
+    dt: 0.1,
+    scl: 150,
+    pathLength: 150,
+    dx: function (x, y, z) {
+        return (y*this.dt);
+    },
+    dy: function (x, y, z) {
+        return ((1-z)*x - this.α*y) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (x*x - z*this.β) * this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    highHue:57,
+    lowHue: 0,
+    particleColor: function () {
+        return color(random(this.lowHue, this.highHue), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-1, 1), 2);
+        let y = round(random(-1, 1), 2);
+        let z = round(random(-1, 1), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
+const liuChen = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
+    name: "Chua 2",
+    dxdt: "dx/dt = α(y - x - δ(|x + 1|-|x - 1|))",
+    dydt: "dy/dt = β(x - y + z)",
+    dzdt: "dz/dt = -ςy",
+    α: 15.6,
+    β: 1,
+    ς: 25.58,
+    δ: -1,
+    parameters: {
+        α: "15.6",
+        β: "1",
+        ς: "25.58",
+        δ: "-1",
+    },
+    offSet:{
+        x:0,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,0,-1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
+    dt: 0.01,
+    scl: 55,
+    pathLength: 100,
+    dx: function (x, y, z) {
+        return (
+            this.α *
+            (y - x - this.δ * (Math.abs(x + 1) - Math.abs(x - 1))) *
+            this.dt
+        );
+    },
+    dy: function (x, y, z) {
+        return this.β * (x - y + z) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return -this.ς * y * this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    highHue:57,
+    lowHue: 0,
+    particleColor: function () {
+        return color(random(this.lowHue, this.highHue), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-0.5, 0.5), 2);
+        let y = round(random(-0.5, 0.5), 2);
+        let z = round(random(-0.5, 0.5), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
+const bouali2 = {
+    // rotateX(PI/2)
+    // rotate(angle+=0.01,[0,0,-1])
+    name: "Bouali 2",
+    dxdt: "dx/dt = αx(1 - y) - βz",
+    dydt: "dy/dt = -γy(1 - x"+squared+")",
+    dzdt: "dz/dt = μx",
+    α: 3,
+    β: 2.2,
+    γ: 1,
+    μ: 0.001,
+    parameters: {
+        α: "3",
+        β: "2.2",
+        γ: "1",
+        μ: "0.001",
+    },
+    offSet:{
+        x:0,
+        y:-1,
+        z:0
+    },
+    motion: {
+        vel: 0.01,
+        axis: [0,1,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: Math.PI,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
+    },
+    dt: 0.02,
+    scl: 100,
+    pathLength: 100,
+    dx: function (x, y, z) {
+        return ( (this.α*x*(1-y)-this.β*z)*this.dt);
+    },
+    dy: function (x, y, z) {
+        return (-this.γ*y*(1-x*x)) * this.dt;
+    },
+    dz: function (x, y, z) {
+        return (this.μ*x)* this.dt;
+    },
+    tracerColor: function () {
+        return color(230, 100, 76);
+    },
+    highHue:57,
+    lowHue: 0,
+    particleColor: function () {
+        return color(random(this.lowHue, this.highHue), 100, 50);
+    },
+    initialCoordinates: function () {
+        let position = {};
+        let x = round(random(-2, 2), 2);
+        let y = round(random(0, 2), 2);
+        let z = round(random(-0.2, 0.2), 2);
+        position["x"] = x;
+        position["y"] = y;
+        position["z"] = z;
+        return position;
+    },
+};
 let c1;
 let c2;
 let tracers = [];
@@ -2264,7 +2479,9 @@ let attractors = {
     // dequanLi:dequanLi,
 
     // wangSun:wangSun,
-    // yuWang:yuWang,
+    bouali2:bouali2,
+    yuWang:yuWang,
+    shimizuMorioka:shimizuMorioka,
     threeScroll1: threeScroll1,
 
     chua2: chua2,
@@ -2355,7 +2572,7 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = lorenz;
+    attractor = attractors[random(attractorNamesArray)];
     title.textContent = attractor["name"];
     // attractor = lorenz;
     // title.textContent = attractor.name;
@@ -2424,24 +2641,24 @@ function windowResized() {
 }
 
 function changeAttractor(name) {
+    if(attractor.name == attractors[name].name){//if trying to click on current attractor just return and do nothing
+        return
+    }
     att = name;
-    // console.log(att)
     let r = document.querySelector(':root')
     let title = document.getElementById("attractor-name");
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let params = document.querySelector(".para-list");
-    let newHighHue = complementaryHue(attractors[att].highHue)  
 
+    let newHighHue = complementaryHue(attractors[att].highHue)  
     let newLowHue =  complementaryHue(attractors[att].lowHue)  
-    // console.log(newHighHue, newLowHue)
     r.style.setProperty("--hiHue",`hsl(${newHighHue}, 100%,50%)`)
     r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
     while (params.hasChildNodes()) {
         params.removeChild(params.firstChild);
     }
-    // console.log(attractors[att].parameters)
     for (const key in attractors[att].parameters) {
         const li = document.createElement("li");
         li.textContent = `${key} = ${attractors[att].parameters[key]}`;
@@ -2454,7 +2671,6 @@ function changeAttractor(name) {
     for(const axis in attractors[att].offSet){
         attractors[att].offSet[axis] = attractors[att].offSet[axis]*attractors[att].scl
     }
-    // console.log(attractors[att])
 
     title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
     for (let p of particles) {
