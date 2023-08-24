@@ -9,6 +9,8 @@ html {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
     --transition-speed: 600ms;
+    --hiHue: hsl(0, 0%, 100%);
+    --lowHue: hsl(0, 0%, 100%);
 }
 body {
     color: black;
@@ -128,13 +130,22 @@ body::-webkit-scrollbar-thumb {
     border-radius: 0.5rem;
     /* outline: grey solid 1px; */
     /* justify-items: center; */
+    /* background: white; */
+    background: linear-gradient(
+        to top,
+        var(--hiHue),
+        var(--lowHue)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
 }
 
 .name {
     display: grid;
     /* background-color: red; */
     text-align: center;
-    color: red;
+    /* color: red; */
     /* background-image: linear-gradient(to right, red , yellow); */
     /* background: linear-gradient(
         to right,
@@ -153,7 +164,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     justify-content: center;
     /* text-align: center; */
-    color: blue;
+    /* color: blue; */
 }
 .equ-list {
     display: grid;
@@ -173,7 +184,7 @@ body::-webkit-scrollbar-thumb {
 }
 .para {
     /* background-color: green; */
-    color: green;
+    /* color: green; */
     /* padding: auto; */
 }
 .para-list {

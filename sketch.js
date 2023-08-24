@@ -69,8 +69,10 @@ const lorenz = {
     tracerColor: () => {
         return color(188, 50, 50);
     },
+    highHue:120,
+    lowHue: 60,
     particleColor: function () {
-        return color(random(40, 120), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -97,13 +99,21 @@ const fourwing = {
         δ: "-0.4",
     },
     offSet:{
-        // x:0,
-        // y:0,
-        // z:-27
+        x:0,
+        y:0,
+        z:0
     },
     motion: {
-        // vel: 0.01,
-        // axis: [0,1,0]
+        vel: 0.01,
+        axis: [1,0,0],
+        
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: Math.PI/2,
+        otherTilt: 0,
+        otherAxis: [0,1,0]
     },
     scl: 100,
     dt: 0.1,
@@ -120,8 +130,10 @@ const fourwing = {
     dz: function (x, y, z) {
         return (-z - x * y) * this.dt;
     },
+    highHue:57,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 57), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -181,8 +193,10 @@ const halvorsen = {
     dz: function (x, y, z) {
         return (-1 * this.a * z - 4 * x - 4 * y - x ** 2) * this.dt;
     },
+    highHue: 205,
+    lowHue: 160,
     particleColor: function () {
-        return color(random(160, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -243,6 +257,8 @@ const rabinovichFabrikant = {
     dz: function (x, y, z) {
         return -2 * z * (this.alpha + x * y) * this.dt;
     },
+    highHue:205,
+    lowHue: 170,
     particleColor: function () {
         return color(random(170, 205), 100, 50);
     },
@@ -274,9 +290,25 @@ const sprott = {
         α: "2.07",
         β: "1.79",
     },
+    offSet:{
+        x:-0.76,
+        y:0,
+        z:0
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,0,1],
+    },
+    tilt:{
+        x: Math.PI/2,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [1,0,0]
+    },
     scl: 100,
     dt: 0.05,
-    pathLength: 110,
+    pathLength: 135,
     tracerColor: function () {
         return color(57, 100, 50);
     },
@@ -289,8 +321,10 @@ const sprott = {
     dz: function (x, y, z) {
         return (x - x * x - y * y) * this.dt;
     },
+    highHue:80,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 33), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -356,8 +390,10 @@ const dadras = {
     dz: function (x, y, z) {
         return (this.zeta * x * y - this.epsilon * z) * this.dt;
     },
+    highHue:120,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 200), 100, 84);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -441,8 +477,10 @@ const aizawa = {
             this.dt
         );
     },
+    highHue:90,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 150), 100, 84);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -508,8 +546,10 @@ const chen = {
     tracerColor: function () {
         return color(0, 100, 80);
     },
+    highHue:180,
+    lowHue: 60,
     particleColor: function () {
-        return color(random(30, 100), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -567,8 +607,10 @@ const thomas = {
     tracerColor: function () {
         return color(174, 66, 39);
     },
+    highHue:50,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 50), 89, 54);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -634,8 +676,10 @@ const rossler = {
     tracerColor: function () {
         return color(42, 100, 50);
     },
+    highHue:200,
+    lowHue: 75,
     particleColor: function () {
-        return color(random(75, 200), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -710,8 +754,10 @@ const threeScroll2 = {
     tracerColor: function () {
         return color(260, 100, 50);
     },
+    highHue:300,
+    lowHue: 240,
     particleColor: function () {
-        return color(random(261, 291), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -791,8 +837,10 @@ const threeScroll1 = {
     tracerColor: function () {
         return color(260, 100, 50);
     },
+    highHue:360,
+    lowHue: 250,
     particleColor: function () {
-        return color(random(261, 291), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -856,8 +904,10 @@ const lorenz83 = {
     tracerColor: function () {
         return color(0, 100, 30);
     },
+    highHue:60,
+    lowHue: 30,
     particleColor: function () {
-        return color(random(22, 66), 100, 49);
+        return color(random(this.lowHue, this.highHue), 100, 49);
     },
     initialCoordinates: function () {
         let position = {};
@@ -916,8 +966,10 @@ const newtonLeipnik = {
     tracerColor: function () {
         return color(0, 100, 30);
     },
+    highHue:60,
+    lowHue: 30,
     particleColor: function () {
-        return color(random(22, 66), 100, 49);
+        return color(random(this.lowHue, this.highHue), 100, 49);
     },
     initialCoordinates: function () {
         let position = {};
@@ -976,8 +1028,10 @@ const noseHoover = {
     dz: function (x, y, z) {
         return (this.α - y * y) * this.dt;
     },
+    highHue:240,
+    lowHue: 120,
     particleColor: function () {
-        return color(random(40, 120), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1041,8 +1095,10 @@ const bouali = {
     tracerColor: function () {
         return color(169, 100, 50);
     },
+    highHue:60,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 57), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1107,8 +1163,10 @@ const coullet = {
     tracerColor: function () {
         return color(169, 100, 50);
     },
+    highHue:57,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 57), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1174,8 +1232,10 @@ const finance = {
     tracerColor: function () {
         return color(169, 100, 50);
     },
+    highHue:57,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(0, 57), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1222,7 +1282,7 @@ const arneodo = {
     },
     scl: 30,
     dt: 0.01,
-    pathLength: 125,
+    pathLength: 175,
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -1235,8 +1295,10 @@ const arneodo = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:205,
+    lowHue: 160,
     particleColor: function () {
-        return color(random(160, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1296,8 +1358,10 @@ const rayleighBenard = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:240,
+    lowHue: 180,
     particleColor: function () {
-        return color(random(160, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1393,8 +1457,10 @@ const genesioTesi = {
     tracerColor: () => {
         return color(188, 50, 50);
     },
+    highHue:180,
+    lowHue: 120,
     particleColor: function () {
-        return color(random(40, 120), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1451,8 +1517,10 @@ const burkeShaw = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:220,
+    lowHue: 160,
     particleColor: function () {
-        return color(random(160, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1514,8 +1582,10 @@ const chua1 = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:360,
+    lowHue: 300,
     particleColor: function () {
-        return color(random(1, 50), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1576,8 +1646,10 @@ const hadley = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:320,
+    lowHue: 240,
     particleColor: function () {
-        return color(random(100, 200), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1638,8 +1710,10 @@ const lorenzMod1 = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:220,
+    lowHue: 150,
     particleColor: function () {
-        return color(random(150, 220), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1700,8 +1774,10 @@ const lorenzMod2 = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:280,
+    lowHue: 150,
     particleColor: function () {
-        return color(random(150, 220), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1716,16 +1792,37 @@ const lorenzMod2 = {
 };
 const anishchenkoAstakhov = {
     name: "Anishchenko Astakhov",
-    dxdt: "dx/dt = ",
-    dydt: "dy/dt = ",
-    dzdt: "dz/dt = ",
-    nu: 1.2,
-    eta: 0.5,
-    scl: 20,
-    dt: 0.02,
-    pathLength: 120,
+    dxdt: "dx/dt = μx + y - xz",
+    dydt: "dy/dt = -x",
+    dzdt: "dz/dt = -ηz + ηI(x)x"+squared,
+    μ: 1.2,
+    η: 0.5,
+    parameters:{
+        "I(x)": "{1 ,x > 0; 0, x <= 0 }",
+        μ: "1.2",
+        η: "0.5",
+    },
+    offSet:{
+        x:0,
+        y:-2,
+        z:-1
+    },
+    motion: {
+        vel: -0.01,
+        axis: [0,1,0],
+    },
+    tilt:{
+        x: 0,
+        y: 0,
+        z: 0,
+        otherTilt: 0,
+        otherAxis: [1,0,0]
+    },
+    scl: 40,
+    dt: 0.03,
+    pathLength: 200,
     dx: function (x, y, z) {
-        return (this.nu * x + y - x * z) * this.dt;
+        return (this.μ * x + y - x * z) * this.dt;
     },
     dy: function (x, y, z) {
         return -x * this.dt;
@@ -1737,17 +1834,19 @@ const anishchenkoAstakhov = {
         } else {
             newX = 0;
         }
-        return (-this.nu * z + this.nu * newX * x * x) * this.dt;
+        return (-this.η * z + this.η * newX * x * x) * this.dt;
     },
     tracerColor: function () {
         return color(325, 100, 50);
     },
+    lowHue: 170,
+    highHue: 205,
     particleColor: function () {
-        return color(random(170, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-5, 0), 2);
+        let x = round(random(-1, 0), 2);
         let y = round(random(0, 5), 2);
         let z = round(random(0, 0), 2);
         position["x"] = x;
@@ -1801,8 +1900,10 @@ const rucklidge = {
     tracerColor: function () {
         return color(325, 100, 50);
     },
+    highHue:257,
+    lowHue: 200,
     particleColor: function () {
-        return color(random(200, 256), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1861,8 +1962,10 @@ const qiChen = {
     tracerColor: function () {
         return color(325, 100, 50);
     },
+    highHue:270,
+    lowHue: 200,
     particleColor: function () {
-        return color(random(200, 256), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -1960,8 +2063,10 @@ const sakarya = {
     tracerColor: function () {
         return color(325, 100, 50);
     },
+    highHue:360,
+    lowHue: 270,
     particleColor: function () {
-        return color(random(200, 256), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -2062,8 +2167,10 @@ const luChen = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:205,
+    lowHue: 160,
     particleColor: function () {
-        return color(random(160, 205), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -2128,8 +2235,10 @@ const chua2 = {
     tracerColor: function () {
         return color(230, 100, 76);
     },
+    highHue:57,
+    lowHue: 0,
     particleColor: function () {
-        return color(random(1, 50), 100, 50);
+        return color(random(this.lowHue, this.highHue), 100, 50);
     },
     initialCoordinates: function () {
         let position = {};
@@ -2211,6 +2320,8 @@ function setup() {
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let params = document.querySelector(".para-list");
+    let r = document.querySelector(':root')
+
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -2244,13 +2355,17 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = halvorsen;
+    attractor = lorenz;
     title.textContent = attractor["name"];
     // attractor = lorenz;
     // title.textContent = attractor.name;
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
     dz.textContent += attractor.dzdt;
+    let newHighHue = complementaryHue(attractor.highHue)
+    let newLowHue = complementaryHue(attractor.lowHue)
+    r.style.setProperty("--hiHue",`hsl(${newHighHue}, 100%,50%)`)
+    r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
 
     for (const key in attractor.parameters) {
         const li = document.createElement("li");
@@ -2293,6 +2408,15 @@ function halt() {
     }
 }
 
+function complementaryHue(h){
+    let newHue = h + 180
+    if(newHue > 360){
+        newHue-=360
+    }
+    return newHue
+
+}
+
 function windowResized() {
     let hld = document.getElementById("holder");
     // console.log(hld.offsetWidth, hld.offsetHeight);
@@ -2301,11 +2425,19 @@ function windowResized() {
 
 function changeAttractor(name) {
     att = name;
+    // console.log(att)
+    let r = document.querySelector(':root')
     let title = document.getElementById("attractor-name");
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let params = document.querySelector(".para-list");
+    let newHighHue = complementaryHue(attractors[att].highHue)  
+
+    let newLowHue =  complementaryHue(attractors[att].lowHue)  
+    // console.log(newHighHue, newLowHue)
+    r.style.setProperty("--hiHue",`hsl(${newHighHue}, 100%,50%)`)
+    r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
     while (params.hasChildNodes()) {
         params.removeChild(params.firstChild);
     }
@@ -2322,7 +2454,7 @@ function changeAttractor(name) {
     for(const axis in attractors[att].offSet){
         attractors[att].offSet[axis] = attractors[att].offSet[axis]*attractors[att].scl
     }
-    console.log(attractors[att].offSet)
+    // console.log(attractors[att])
 
     title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
     for (let p of particles) {
