@@ -1,6 +1,9 @@
 html {
     background: black;
 }
+html * {
+    font-family: 'Roboto Condensed', sans-serif;
+}
 :root {
     font-size: 16px;
 
@@ -8,6 +11,7 @@ html {
     --text-secondary: #ececec;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
+    /* --bg-secondary: pink; */
     --transition-speed: 600ms;
     --hiHue: hsl(0, 0%, 100%);
     --lowHue: hsl(0, 0%, 100%);
@@ -31,7 +35,6 @@ body::-webkit-scrollbar-thumb {
 
 .navbar {
     width: 5rem;
-    /* width: 16rem; */
     height: 100dvh;
     position: fixed;
     background-color: var(--bg-primary);
@@ -59,6 +62,8 @@ body::-webkit-scrollbar-thumb {
     text-decoration: none;
     filter: grayscale(100%) opacity(0.7);
     transition: var(--transition-speed);
+    margin: 0.5em;
+    border-radius: 0.5em;
 }
 
 .nav-link:hover {
@@ -126,11 +131,7 @@ body::-webkit-scrollbar-thumb {
     top: 2em;
     right: 2em;
     aspect-ratio: 0.618;
-    /* background: var(--bg-primary); */
     border-radius: 0.5rem;
-    /* outline: grey solid 1px; */
-    /* justify-items: center; */
-    /* background: white; */
     background: linear-gradient(
         to top,
         var(--hiHue),
@@ -143,28 +144,14 @@ body::-webkit-scrollbar-thumb {
 
 .name {
     display: grid;
-    /* background-color: red; */
     text-align: center;
-    /* color: red; */
-    /* background-image: linear-gradient(to right, red , yellow); */
-    /* background: linear-gradient(
-        to right,
-        hsl(0, 100%, 50%),
-        hsl(240, 100%, 50%)
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
 }
 .name > * {
     margin: auto;
 }
 .equ {
-    /* background-color: blue; */
     flex-direction: column;
     justify-content: center;
-    /* text-align: center; */
-    /* color: blue; */
 }
 .equ-list {
     display: grid;
@@ -178,24 +165,18 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.5rem;
     list-style-type: none;
 
-    /* vertical-align: middle; */
-    /* text-align: center; */
-    /* background: pink; */
 }
 .para {
-    /* background-color: green; */
-    /* color: green; */
-    /* padding: auto; */
+   
 }
 .para-list {
-    /* display: grid; */
-    /* grid-template-rows:  auto; */
     height: 100%;
     text-align: left;
     align-items: center;
     margin: 0.5em auto;
     columns: 2;
 }
+
 .para-list > li {
     font-size: 1.5rem;
     margin: 0.5em auto;

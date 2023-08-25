@@ -41,7 +41,6 @@ class Particle {
         }
 
         noFill();
-        // fill(this.color)
         stroke(this.color);
         strokeWeight(5);
         point(

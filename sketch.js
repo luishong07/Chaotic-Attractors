@@ -1,27 +1,4 @@
-const alpha = "\u03B1";
-const beta = "\u03B2";
-const gamma = "\u03B3";
-const delta = "\u03B4";
-const epsilon = "\u03B5";
-const zeta = "\u03B6";
-const eta = "\u03B7";
-const theta = "\u03B8";
-const iota = "\u03B9";
-const kappa = "\u03BA";
-const lambda = "\u03BB";
-const mu = "\u03BC";
-const nu = "\u03BD";
-const xi = "\u03BE";
-const omicron = "\u03BF";
-const pi = "\u03C0";
-const rho = "\u03C1";
-const sigma = "\u03C2";
-const tau = "\u03C4";
-const upsilon = "\u03C5";
-const phi = "\u03C6";
-const hi = "\u03C7";
-const psi = "\u03C8";
-const omega = "\u03C9";
+
 const squared = "\u00B2";
 const cubed = "\u00B3";
 
@@ -1798,9 +1775,9 @@ const anishchenkoAstakhov = {
     μ: 1.2,
     η: 0.5,
     parameters:{
-        "I(x)": "{1 ,x > 0; 0, x <= 0 }",
         μ: "1.2",
         η: "0.5",
+        "I(x)": "{1 ,x > 0; 0, x <= 0 }",
     },
     offSet:{
         x:0,
@@ -2466,12 +2443,14 @@ const bouali2 = {
         return position;
     },
 };
-let c1;
-let c2;
+
+let angle = 0;
+let vel = 0
+let axis = [0,0,0]
+
 let tracers = [];
 let particles = [];
 let attractor;
-// let attractors = {}
 //wang sun is idential to fourwing
 //yuwang exponential out of control
 //hadley idential to lorenz83
@@ -2524,10 +2503,7 @@ let attractors = {
     noseHoover: noseHoover,
     bouali: bouali,
 };
-// let f
-// function preload(){
-//     f = textFont('Georgia')
-// }
+
 
 function setup() {
     let hld = document.getElementById("holder");
@@ -2571,37 +2547,35 @@ function setup() {
     }
 
     //initial attractor
-    // attractor = attractors[random(attractorNamesArray)];
     attractor = attractors[random(attractorNamesArray)];
-    title.textContent = attractor["name"];
-    // attractor = lorenz;
-    // title.textContent = attractor.name;
+    title.textContent = attractor["name"];//setting title card name
+    //setting equations on card
     dx.textContent += attractor.dxdt;
     dy.textContent += attractor.dydt;
     dz.textContent += attractor.dzdt;
+    //calculating opposite hue
     let newHighHue = complementaryHue(attractor.highHue)
     let newLowHue = complementaryHue(attractor.lowHue)
+    //setting new hues
     r.style.setProperty("--hiHue",`hsl(${newHighHue}, 100%,50%)`)
     r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
 
+    //dynamically creaing li's depending on attractor
     for (const key in attractor.parameters) {
         const li = document.createElement("li");
         li.textContent = `${key} = ${attractor.parameters[key]}`;
         params.append(li);
     }
 
-    //random selection at start
-    // attractor = attractors[random(attractorNamesArray)];
-    // title.textContent = attractor["name"];
+    // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
+    // c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
+    // c3 = new Tracer(-0, 1, -2, attractor.tracerColor(), attractor.scl);
 
-    c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
-    c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
-    c3 = new Tracer(-0, 1, -2, attractor.tracerColor(), attractor.scl);
+    // tracers.push(c1);
+    // tracers.push(c2);
+    // tracers.push(c3);
 
-    tracers.push(c1);
-    tracers.push(c2);
-    tracers.push(c3);
-
+    //creating particles
     for (let i = 0; i < 50; i++) {
         let p = new Particle(
             attractor.particleColor(),
@@ -2613,9 +2587,7 @@ function setup() {
         particles.push(p);
     }
 }
-let angle = 0;
-let vel = 0
-let axis = [0,0,0]
+
 function halt() {
     //pause the whole drawing
     if (isLooping()) {
@@ -2631,61 +2603,67 @@ function complementaryHue(h){
         newHue-=360
     }
     return newHue
-
 }
 
 function windowResized() {
     let hld = document.getElementById("holder");
-    // console.log(hld.offsetWidth, hld.offsetHeight);
     resizeCanvas(hld.offsetWidth, hld.offsetHeight);
 }
 
 function changeAttractor(name) {
-    if(attractor.name == attractors[name].name){//if trying to click on current attractor just return and do nothing
+    att = name;
+    const incomingAttractor = attractors[att]
+    if(attractor.name == incomingAttractor.name){
+        //if trying to click on current attractor just return and do nothing
         return
     }
-    att = name;
+    //getting elements from dom
     let r = document.querySelector(':root')
     let title = document.getElementById("attractor-name");
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let params = document.querySelector(".para-list");
-
-    let newHighHue = complementaryHue(attractors[att].highHue)  
-    let newLowHue =  complementaryHue(attractors[att].lowHue)  
+    //calculating new hues
+    let newHighHue = complementaryHue(incomingAttractor.highHue)  
+    let newLowHue =  complementaryHue(incomingAttractor.lowHue)  
+    //setting hues
     r.style.setProperty("--hiHue",`hsl(${newHighHue}, 100%,50%)`)
     r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
+    //removing current params 
     while (params.hasChildNodes()) {
         params.removeChild(params.firstChild);
     }
-    for (const key in attractors[att].parameters) {
+    //adding new params
+    for (const key in incomingAttractor.parameters) {
         const li = document.createElement("li");
-        li.textContent = `${key} = ${attractors[att].parameters[key]}`;
+        li.textContent = `${key} = ${incomingAttractor.parameters[key]}`;
         params.append(li);
     }
-    let titleName = attractors[att].name;
-    dx.textContent = attractors[att].dxdt;
-    dy.textContent = attractors[att].dydt;
-    dz.textContent = attractors[att].dzdt;
-    for(const axis in attractors[att].offSet){
-        attractors[att].offSet[axis] = attractors[att].offSet[axis]*attractors[att].scl
+    //setting new names and equations
+    
+    title.textContent = incomingAttractor.name;
+    dx.textContent = incomingAttractor.dxdt;
+    dy.textContent = incomingAttractor.dydt;
+    dz.textContent = incomingAttractor.dzdt;
+    //applying scale to the offset in all three axes
+    for(const axis in incomingAttractor.offSet){
+        incomingAttractor.offSet[axis] = incomingAttractor.offSet[axis]*incomingAttractor.scl
     }
 
-    title.textContent = titleName.charAt(0).toUpperCase() + titleName.slice(1);
-    for (let p of particles) {
-        let newParticleCoordinate = attractors[att].initialCoordinates();
-        p.initialCoordinates = attractors[att].initialCoordinates;
+    for (let p of particles) {//changing the properties of particles
+        let newParticleCoordinate = incomingAttractor.initialCoordinates();
+        p.initialCoordinates = incomingAttractor.initialCoordinates;
         p.path = [];
-        p.offSet = attractors[att].offSet
-        p.scl = attractors[att].scl;
-        p.pathLength = attractors[att].pathLength;
-        p.color = attractors[att].particleColor();
+        p.offSet = incomingAttractor.offSet
+        p.scl = incomingAttractor.scl;
+        p.pathLength = incomingAttractor.pathLength;
+        p.color = incomingAttractor.particleColor();
         p.x = newParticleCoordinate.x;
         p.y = newParticleCoordinate.y;
         p.z = newParticleCoordinate.z;
     }
-    attractor = attractors[att];
+    attractor = incomingAttractor;
 }
 
 function draw() {
@@ -2752,16 +2730,16 @@ function draw() {
     // console.log(particles[0].y,particles[0].x)
     // rotate(angle+=0.01,[0,1,0])
     // attractor.motion
-    if(angle > TWO_PI) {
+    if(angle > TWO_PI) {//keeping angle within a cycle
         angle = 0
     }
+
     rotateX(attractor.tilt.x)
     rotateY(attractor.tilt.y)
     rotateZ(attractor.tilt.z)
     rotate(attractor.tilt.otherTilt,attractor.tilt.otherAxis)
-    // stroke('yellow')
-    // line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
     rotate(angle+=attractor.motion.vel, attractor.motion.axis)
+
     for (let p of particles) {
         let dx = attractor.dx(p.x, p.y, p.z);
         let dy = attractor.dy(p.x, p.y, p.z);
@@ -2770,20 +2748,7 @@ function draw() {
         let newX = p.x + dx;
         let newY = p.y + dy;
         let newZ = p.z + dz;
-        // console.log(newX, newY, newZ)
         p.show(newX, newY, newZ);
     }
-    // stroke('green')
-    // line(
-    //     0,
-    //     0,
-    //     0,
-    //     (1 * innerWidth) / 2,
-    //     0,
-    //     (1 * innerWidth) / 2
-    // );
-    // line(0, 0, 0, -innerWidth / 2, 0, 0)
-    
-
     // noLoop()
 }
