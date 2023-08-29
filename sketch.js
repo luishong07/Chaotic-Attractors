@@ -1,4 +1,3 @@
-
 const squared = "\u00B2";
 const cubed = "\u00B3";
 
@@ -1995,7 +1994,6 @@ const wangSun = {
         return position;
     },
 };
-//sakarya similar to newton but it only creates one attractor instead of two like the newton
 const sakarya = {
     // rotateZ(PI/2)
     // rotate(angle+=0.01,[-1,0,0])
@@ -2455,11 +2453,8 @@ let attractor;
 //yuwang exponential out of control
 //hadley idential to lorenz83
 let attractors = {
-    // dequanLi:dequanLi,
 
-    // wangSun:wangSun,
     bouali2:bouali2,
-    yuWang:yuWang,
     shimizuMorioka:shimizuMorioka,
     threeScroll1: threeScroll1,
 
@@ -2519,6 +2514,9 @@ function setup() {
     pause.addEventListener("click", () => {
         halt();
     });
+    title.addEventListener('click',()=>{
+        snapShot()
+    })
     cnv.parent("holder");
     colorMode(HSL);
     const attractorNamesArray = Object.keys(attractors);
@@ -2588,6 +2586,10 @@ function setup() {
     }
 }
 
+function snapShot(){
+    console.log("click")
+    // saveCanvas("canvas")
+}
 function halt() {
     //pause the whole drawing
     if (isLooping()) {
