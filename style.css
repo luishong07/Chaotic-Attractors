@@ -15,6 +15,9 @@ html * {
     --transition-speed: 600ms;
     --hiHue: hsl(0, 0%, 100%);
     --lowHue: hsl(0, 0%, 100%);
+
+    --cardHiHue: #141418;
+    --cardLowHue:  #141418;
 }
 body {
     color: black;
@@ -68,13 +71,19 @@ body::-webkit-scrollbar-thumb {
 
 .nav-link:hover {
     filter: grayscale(0%) opacity(1);
-    background: var(--bg-secondary);
+    /* background: var(--bg-secondary); */
+    background: linear-gradient(
+        to right,
+        var(--cardHiHue),
+        var(--cardLowHue)
+    );
     color: var(--text-secondary);
 }
 
 .link-text {
     display: none;
     margin-left: 1rem;
+
 }
 .nav-link svg {
     min-width: 2rem;

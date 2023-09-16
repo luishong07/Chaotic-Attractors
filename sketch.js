@@ -2524,6 +2524,7 @@ function setup() {
 
     for (let i = 0; i < attractorNamesArray.length; i++) {
         // this is for the sidebar
+        // console.log(attractors[attractorNamesArray[i]].highHue, attractors[attractorNamesArray[i]].lowHue)
         const li = document.createElement("li");
         li.setAttribute("class", "nav-item");
         li.setAttribute("id", attractorNamesArray[i]);
@@ -2531,7 +2532,9 @@ function setup() {
         const a = document.createElement("a");
         a.setAttribute("href", "#");
         a.setAttribute("class", "nav-link");
-
+        a.addEventListener('mouseenter',()=>{
+            colorHover(attractors[attractorNamesArray[i]].highHue, attractors[attractorNamesArray[i]].lowHue)
+        })
         const span = document.createElement("span");
         span.setAttribute("class", "link-text");
         span.textContent = attractors[attractorNamesArray[i]].name;
@@ -2584,6 +2587,12 @@ function setup() {
         );
         particles.push(p);
     }
+}
+
+function colorHover(high, low){
+    let r = document.querySelector(':root')
+    r.style.setProperty("--cardHiHue",`hsl(${high}, 100%,50%)`)
+    r.style.setProperty("--cardLowHue",`hsl(${low}, 100%,50%)`)
 }
 
 function snapShot(){
