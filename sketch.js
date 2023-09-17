@@ -8,11 +8,11 @@ const lorenz = {
     dzdt: "dz/dt = xy-βz",
     σ: 10,
     ρ: 28,
-    β: 8 / 3,
+    β: 2.66,
     parameters: {
         σ: "10",
         ρ: "28",
-        β: "8/3",
+        β: "2.66",
     },
     offSet:{
         x:0,
@@ -2576,14 +2576,11 @@ function setup() {
         slider.value = p
         slider.addEventListener('input',(e)=>{
             li.textContent = `${key} = ${e.target.value}`
-            // attractor.parameters[key] = e.target.value
             attractor[key] = e.target.value
         })
 
-
         div.append(li)
         div.append(slider)
-
         params.append(div);
     }
 
@@ -2666,9 +2663,26 @@ function changeAttractor(name) {
     }
     //adding new params
     for (const key in incomingAttractor.parameters) {
+        const p = incomingAttractor[key]
+        console.log(p)
+        const div = document.createElement('div')
         const li = document.createElement("li");
-        li.textContent = `${key} = ${incomingAttractor.parameters[key]}`;
-        params.append(li);
+        li.textContent = `${key} = ${incomingAttractor.parameters[key]}`
+        const slider = document.createElement('input')
+        slider.type = 'range'
+        slider.min = p < 0 ? 2*p : 0
+        slider.max = p < 0 ? 0 : 2*p
+        slider.step = p*0.1
+        slider.value = p
+        slider.addEventListener('input',(e)=>{
+            li.textContent = `${key} = ${e.target.value}`
+            attractor[key] = e.target.value
+        })
+
+
+        div.append(li)
+        div.append(slider)
+        params.append(div);
     }
     //setting new names and equations
     
