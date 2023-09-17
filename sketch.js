@@ -6,9 +6,9 @@ const lorenz = {
     dxdt: "dx/dt = σ(y-x)",
     dydt: "dy/dt = x(ρ-z)-y",
     dzdt: "dz/dt = xy-βz",
-    sigma: 10,
-    rho: 28,
-    beta: 8 / 3,
+    σ: 10,
+    ρ: 28,
+    β: 8 / 3,
     parameters: {
         σ: "10",
         ρ: "28",
@@ -34,13 +34,13 @@ const lorenz = {
     dt: 0.01,
     pathLength: 75,
     dx: function (x, y) {
-        return this.sigma * (y - x) * this.dt;
+        return this.σ * (y - x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-1 * x * z + this.rho * x - y) * this.dt;
+        return (-1 * x * z + this.ρ * x - y) * this.dt;
     },
     dz: function (x, y, z) {
-        return (x * y - this.beta * z) * this.dt;
+        return (x * y - this.β * z) * this.dt;
     },
     tracerColor: () => {
         return color(188, 50, 50);
@@ -2548,7 +2548,8 @@ function setup() {
     }
 
     //initial attractor
-    attractor = attractors[random(attractorNamesArray)];
+    // attractor = attractors[random(attractorNamesArray)];
+    attractor = lorenz
     title.textContent = attractor["name"];//setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2563,9 +2564,27 @@ function setup() {
 
     //dynamically creaing li's depending on attractor
     for (const key in attractor.parameters) {
+        const p = parseFloat(attractor.parameters[key])
+        const div = document.createElement('div')
         const li = document.createElement("li");
         li.textContent = `${key} = ${attractor.parameters[key]}`;
-        params.append(li);
+
+        const slider = document.createElement('input')
+        slider.type = 'range'
+        slider.min = 0
+        slider.max = 2*p
+        slider.value = p
+        slider.addEventListener('input',(e)=>{
+            li.textContent = `${key} = ${e.target.value}`
+            // attractor.parameters[key] = e.target.value
+            attractor[key] = e.target.value
+        })
+
+
+        div.append(li)
+        div.append(slider)
+
+        params.append(div);
     }
 
     // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
