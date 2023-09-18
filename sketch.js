@@ -134,7 +134,7 @@ const halvorsen = {
     // let dx = (-1*a*p.x - 4*p.y - 4*p.z -p.y**2)*dt
     // let dy = (-1*a*p.y - 4*p.z - 4*p.x -p.z**2)*dt
     // let dz = (-1*a*p.z - 4*p.x - 4*p.y -p.x**2)*dt
-    a: 1.89,
+    α: 1.89,
     parameters: {
         α: "1.89",
     },
@@ -161,13 +161,13 @@ const halvorsen = {
         return color(230, 100, 76);
     },
     dx: function (x, y, z) {
-        return (-1 * this.a * x - 4 * y - 4 * z - y ** 2) * this.dt;
+        return (-1 * this.α * x - 4 * y - 4 * z - y ** 2) * this.dt;
     },
     dy: function (x, y, z) {
-        return (-1 * this.a * y - 4 * z - 4 * x - z ** 2) * this.dt;
+        return (-1 * this.α * y - 4 * z - 4 * x - z ** 2) * this.dt;
     },
     dz: function (x, y, z) {
-        return (-1 * this.a * z - 4 * x - 4 * y - x ** 2) * this.dt;
+        return (-1 * this.α * z - 4 * x - 4 * y - x ** 2) * this.dt;
     },
     highHue: 205,
     lowHue: 160,
@@ -195,9 +195,9 @@ const rabinovichFabrikant = {
     dxdt: "dx/dt = y(z - 1 + x" + "\u00B2" + ") + γx",
     dydt: "dy/dt = x(3z + 1 - x" + "\u00B2" + ") + γy",
     dzdt: "dz/dt = -2z( α + xy)",
-    alpha: 0.14,
+    α: 0.14,
     // gamma: 0.065,
-    gamma: 0.1,
+    γ: 0.1,
     parameters: {
         α: "0.14",
         γ: "0.1",
@@ -225,13 +225,13 @@ const rabinovichFabrikant = {
         return color(325, 100, 50);
     },
     dx: function (x, y, z) {
-        return (y * (z - 1 + x ** 2) + this.gamma * x) * this.dt;
+        return (y * (z - 1 + x ** 2) + this.γ * x) * this.dt;
     },
     dy: function (x, y, z) {
-        return (x * (3 * z + 1 - x ** 2) + this.gamma * y) * this.dt;
+        return (x * (3 * z + 1 - x ** 2) + this.γ * y) * this.dt;
     },
     dz: function (x, y, z) {
-        return -2 * z * (this.alpha + x * y) * this.dt;
+        return -2 * z * (this.α + x * y) * this.dt;
     },
     highHue:205,
     lowHue: 170,
@@ -323,11 +323,11 @@ const dadras = {
     // let dx =( p.y - (a*p.x) + (b*p.y*p.z))*dt
     // let dy = ((c*p.y) - (p.x*p.z) + p.z)*dt
     // let dz = ((d*p.x*p.y) - (e*p.z))*dt
-    rho: 3,
-    sigma: 2.7,
-    tau: 1.7,
-    zeta: 2,
-    epsilon: 9,
+    ρ: 3,
+    σ: 2.7,
+    τ: 1.7,
+    ζ: 2,
+    ε: 9,
     parameters: {
         ρ: "3",
         σ: "2.7",
@@ -358,13 +358,13 @@ const dadras = {
         return color(282, 100, 84);
     },
     dx: function (x, y, z) {
-        return (y - this.rho * x + this.sigma * y * z) * this.dt;
+        return (y - this.ρ * x + this.σ * y * z) * this.dt;
     },
     dy: function (x, y, z) {
-        return (this.tau * y - x * z + z) * this.dt;
+        return (this.τ * y - x * z + z) * this.dt;
     },
     dz: function (x, y, z) {
-        return (this.zeta * x * y - this.epsilon * z) * this.dt;
+        return (this.ζ * x * y - this.ε * z) * this.dt;
     },
     highHue:120,
     lowHue: 0,
@@ -1904,7 +1904,7 @@ const qiChen = {
     ς: 80,
     parameters: {
         α: "38",
-        β: "8 / 3",
+        β: "2.66",
         ς: "80",
     },
     offSet:{
@@ -2131,7 +2131,7 @@ const luChen = {
         α: "10",
         β: "4",
         ς: "18.1",
-        δ: "20/7",
+        δ: "2.85",
     },
     offSet:{
         x:0,
@@ -2637,6 +2637,52 @@ function windowResized() {
     resizeCanvas(hld.offsetWidth, hld.offsetHeight);
 }
 
+function renderParams(attractor){
+    let params = document.querySelector(".para-list");
+    const parameters = attractor.parameters
+    const newParams = []
+    for(const key in parameters){
+        const singleParam = parameters[key]
+        const li = document.createElement('li')
+        const div = document.createElement('div')
+        div.textContent = `${key} = ${attractor[key]}`
+        newParams.push(li)
+        const slider = document.createElement('input')
+        slider.type = 'range'
+        slider.min = singleParam < 0 ? 2*singleParam : 0
+        slider.max = singleParam < 0 ? 0 : 2*singleParam
+        slider.step = Math.abs(singleParam*0.05)
+        slider.value = singleParam
+        slider.addEventListener('input',(e)=>{
+            div.textContent = `${key} = ${e.target.value}`
+            attractor[key] = e.target.value
+        })
+        li.append(div)
+        li.append(slider)
+        params.append(li)
+    }
+    // return newParams
+    // for (const key in incomingAttractor.parameters) {
+    //     const p = incomingAttractor[key]
+    //     const div = document.createElement('div')
+    //     const li = document.createElement("li");
+    //     li.textContent = `${key} = ${incomingAttractor.parameters[key]}`
+    //     const slider = document.createElement('input')
+    //     slider.type = 'range'
+    //     slider.min = p < 0 ? 2*p : 0
+    //     slider.max = p < 0 ? 0 : 2*p
+    //     slider.step = Math.abs(p*0.05)
+    //     slider.value = p
+    //     slider.addEventListener('input',(e)=>{
+    //         li.textContent = `${key} = ${e.target.value}`
+    //         attractor[key] = e.target.value
+    //     })
+    //     div.append(li)
+    //     div.append(slider)
+    //     params.append(div);
+    // }
+}
+
 function changeAttractor(name) {
     att = name;
     const incomingAttractor = attractors[att]
@@ -2662,28 +2708,29 @@ function changeAttractor(name) {
         params.removeChild(params.firstChild);
     }
     //adding new params
-    for (const key in incomingAttractor.parameters) {
-        const p = incomingAttractor[key]
-        console.log(p)
-        const div = document.createElement('div')
-        const li = document.createElement("li");
-        li.textContent = `${key} = ${incomingAttractor.parameters[key]}`
-        const slider = document.createElement('input')
-        slider.type = 'range'
-        slider.min = p < 0 ? 2*p : 0
-        slider.max = p < 0 ? 0 : 2*p
-        slider.step = p*0.1
-        slider.value = p
-        slider.addEventListener('input',(e)=>{
-            li.textContent = `${key} = ${e.target.value}`
-            attractor[key] = e.target.value
-        })
-
-
-        div.append(li)
-        div.append(slider)
-        params.append(div);
-    }
+    renderParams(incomingAttractor)
+    // for(const element in newParams){
+    //     params.append(newParams[element])
+    // }
+    // for (const key in incomingAttractor.parameters) {
+    //     const p = incomingAttractor[key]
+    //     const div = document.createElement('div')
+    //     const li = document.createElement("li");
+    //     li.textContent = `${key} = ${incomingAttractor.parameters[key]}`
+    //     const slider = document.createElement('input')
+    //     slider.type = 'range'
+    //     slider.min = p < 0 ? 2*p : 0
+    //     slider.max = p < 0 ? 0 : 2*p
+    //     slider.step = Math.abs(p*0.05)
+    //     slider.value = p
+    //     slider.addEventListener('input',(e)=>{
+    //         li.textContent = `${key} = ${e.target.value}`
+    //         attractor[key] = e.target.value
+    //     })
+    //     div.append(li)
+    //     div.append(slider)
+    //     params.append(div);
+    // }
     //setting new names and equations
     
     title.textContent = incomingAttractor.name;
