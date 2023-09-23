@@ -2583,7 +2583,7 @@ function setup() {
     //     div.append(slider)
     //     params.append(div);
     // }
-    renderParams(attractor)
+    // renderParams(attractor)
 
     // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     // c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
