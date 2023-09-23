@@ -2126,7 +2126,7 @@ const luChen = {
     α: 10,
     β: 4,
     ς: 18.1,
-    δ: 20 / 7,
+    δ: 2.85,
     parameters: {
         α: "10",
         β: "4",
@@ -2549,7 +2549,7 @@ function setup() {
 
     //initial attractor
     // attractor = attractors[random(attractorNamesArray)];
-    attractor = lorenz
+    attractor = chua2
     title.textContent = attractor["name"];//setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2563,26 +2563,27 @@ function setup() {
     r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
 
     //dynamically creaing li's depending on attractor
-    for (const key in attractor.parameters) {
-        const p = parseFloat(attractor.parameters[key])
-        const div = document.createElement('div')
-        const li = document.createElement("li");
-        li.textContent = `${key} = ${attractor.parameters[key]}`;
+    // for (const key in attractor.parameters) {
+    //     const p = parseFloat(attractor.parameters[key])
+    //     const div = document.createElement('div')
+    //     const li = document.createElement("li");
+    //     li.textContent = `${key} = ${attractor.parameters[key]}`;
 
-        const slider = document.createElement('input')
-        slider.type = 'range'
-        slider.min = 0
-        slider.max = 2*p
-        slider.value = p
-        slider.addEventListener('input',(e)=>{
-            li.textContent = `${key} = ${e.target.value}`
-            attractor[key] = e.target.value
-        })
+    //     const slider = document.createElement('input')
+    //     slider.type = 'range'
+    //     slider.min = 0
+    //     slider.max = 2*p
+    //     slider.value = p
+    //     slider.addEventListener('input',(e)=>{
+    //         li.textContent = `${key} = ${e.target.value}`
+    //         attractor[key] = e.target.value
+    //     })
 
-        div.append(li)
-        div.append(slider)
-        params.append(div);
-    }
+    //     div.append(li)
+    //     div.append(slider)
+    //     params.append(div);
+    // }
+    renderParams(attractor)
 
     // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     // c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
