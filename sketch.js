@@ -2646,16 +2646,16 @@ function renderParams(attractor){
         const singleParam = parameters[key]
         const li = document.createElement('li')
         const div = document.createElement('div')
-        div.textContent = `${key} = ${attractor[key]}`
+        div.textContent = `${key} = ${attractor[key].toFixed(2)}`
         newParams.push(li)
         const slider = document.createElement('input')
         slider.type = 'range'
         slider.min = singleParam < 0 ? 2*singleParam : 0
         slider.max = singleParam < 0 ? 0 : 2*singleParam
-        slider.step = Math.abs(singleParam*0.05)
+        slider.step = Math.abs(singleParam*0.05).toFixed(2)
         slider.value = singleParam
         slider.addEventListener('input',(e)=>{
-            div.textContent = `${key} = ${e.target.value}`
+            div.textContent = `${key} = ${parseFloat(e.target.value).toFixed(2)}`
             attractor[key] = e.target.value
         })
         li.append(div)
