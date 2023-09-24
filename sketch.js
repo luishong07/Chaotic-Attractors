@@ -2507,7 +2507,7 @@ function setup() {
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
-    let params = document.querySelector(".para-list");
+    // let params = document.querySelector(".para-list");
     let r = document.querySelector(':root')
 
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
@@ -2524,7 +2524,6 @@ function setup() {
 
     for (let i = 0; i < attractorNamesArray.length; i++) {
         // this is for the sidebar
-        // console.log(attractors[attractorNamesArray[i]].highHue, attractors[attractorNamesArray[i]].lowHue)
         const li = document.createElement("li");
         li.setAttribute("class", "nav-item");
         li.setAttribute("id", attractorNamesArray[i]);
@@ -2549,7 +2548,6 @@ function setup() {
 
     //initial attractor
     attractor = attractors[random(attractorNamesArray)];
-    // attractor = chua2
     title.textContent = attractor["name"];//setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2562,36 +2560,13 @@ function setup() {
     r.style.setProperty("--hiHue",`hsl(${newHighHue}, 100%,50%)`)
     r.style.setProperty("--lowHue",`hsl(${newLowHue}, 100%,50%)`)
 
-    //dynamically creaing li's depending on attractor
-    // for (const key in attractor.parameters) {
-    //     const p = parseFloat(attractor.parameters[key])
-    //     const div = document.createElement('div')
-    //     const li = document.createElement("li");
-    //     li.textContent = `${key} = ${attractor.parameters[key]}`;
-
-    //     const slider = document.createElement('input')
-    //     slider.type = 'range'
-    //     slider.min = 0
-    //     slider.max = 2*p
-    //     slider.value = p
-    //     slider.addEventListener('input',(e)=>{
-    //         li.textContent = `${key} = ${e.target.value}`
-    //         attractor[key] = e.target.value
-    //     })
-
-    //     div.append(li)
-    //     div.append(slider)
-    //     params.append(div);
-    // }
+    
+    
     renderParams(attractor)
 
     // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     // c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
     // c3 = new Tracer(-0, 1, -2, attractor.tracerColor(), attractor.scl);
-
-    // tracers.push(c1);
-    // tracers.push(c2);
-    // tracers.push(c3);
 
     //creating particles
     for (let i = 0; i < 50; i++) {
@@ -2642,11 +2617,15 @@ function renderParams(attractor){
     let params = document.querySelector(".para-list");
     const parameters = attractor.parameters
     const newParams = []
-    for(const key in parameters){
+    for(const [key,value] of Object.entries(parameters)){
         const singleParam = parameters[key]
         const pairContainer = document.createElement('div')
         const div = document.createElement('div')
-        div.textContent = `${key} = ${attractor[key]}`
+        div.textContent = `${key} = ${value}`
+        console.log(parseFloat(value)?'number':"poop")
+        if(parseFloat(value)){
+            
+        }
         newParams.push(pairContainer)
         const slider = document.createElement('input')
         slider.type = 'range'
@@ -2658,32 +2637,13 @@ function renderParams(attractor){
             div.textContent = `${key} = ${e.target.value}`
             attractor[key] = e.target.value
         })
-        div.classList.add('param-value')
-        pairContainer.classList.add('param-pair')
         pairContainer.append(div)
         pairContainer.append(slider)
+        div.classList.add('param-value')
+        pairContainer.classList.add('param-pair')
         params.append(pairContainer)
     }
-    // return newParams
-    // for (const key in incomingAttractor.parameters) {
-    //     const p = incomingAttractor[key]
-    //     const div = document.createElement('div')
-    //     const li = document.createElement("li");
-    //     li.textContent = `${key} = ${incomingAttractor.parameters[key]}`
-    //     const slider = document.createElement('input')
-    //     slider.type = 'range'
-    //     slider.min = p < 0 ? 2*p : 0
-    //     slider.max = p < 0 ? 0 : 2*p
-    //     slider.step = Math.abs(p*0.05)
-    //     slider.value = p
-    //     slider.addEventListener('input',(e)=>{
-    //         li.textContent = `${key} = ${e.target.value}`
-    //         attractor[key] = e.target.value
-    //     })
-    //     div.append(li)
-    //     div.append(slider)
-    //     params.append(div);
-    // }
+    
 }
 
 function changeAttractor(name) {
@@ -2712,28 +2672,7 @@ function changeAttractor(name) {
     }
     //adding new params
     renderParams(incomingAttractor)
-    // for(const element in newParams){
-    //     params.append(newParams[element])
-    // }
-    // for (const key in incomingAttractor.parameters) {
-    //     const p = incomingAttractor[key]
-    //     const div = document.createElement('div')
-    //     const li = document.createElement("li");
-    //     li.textContent = `${key} = ${incomingAttractor.parameters[key]}`
-    //     const slider = document.createElement('input')
-    //     slider.type = 'range'
-    //     slider.min = p < 0 ? 2*p : 0
-    //     slider.max = p < 0 ? 0 : 2*p
-    //     slider.step = Math.abs(p*0.05)
-    //     slider.value = p
-    //     slider.addEventListener('input',(e)=>{
-    //         li.textContent = `${key} = ${e.target.value}`
-    //         attractor[key] = e.target.value
-    //     })
-    //     div.append(li)
-    //     div.append(slider)
-    //     params.append(div);
-    // }
+    
     //setting new names and equations
     
     title.textContent = incomingAttractor.name;

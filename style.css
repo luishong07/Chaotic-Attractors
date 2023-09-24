@@ -161,7 +161,6 @@ body::-webkit-scrollbar-thumb {
     text-align: left;
     align-items: center;
     margin: 0;
-    /* padding: 0; */
 }
 .equ-list > li {
     font-size: 1.5rem;
@@ -179,7 +178,6 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.5rem;
 }
 .para-list {
-    /* outline: red 1px solid; */
     margin: 1.5em 0;
     display: grid;
     grid-template-columns: 1fr;
