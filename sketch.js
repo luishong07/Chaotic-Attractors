@@ -2548,8 +2548,8 @@ function setup() {
     }
 
     //initial attractor
-    // attractor = attractors[random(attractorNamesArray)];
-    attractor = chua2
+    attractor = attractors[random(attractorNamesArray)];
+    // attractor = chua2
     title.textContent = attractor["name"];//setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2583,7 +2583,7 @@ function setup() {
     //     div.append(slider)
     //     params.append(div);
     // }
-    // renderParams(attractor)
+    renderParams(attractor)
 
     // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
     // c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
@@ -2644,23 +2644,25 @@ function renderParams(attractor){
     const newParams = []
     for(const key in parameters){
         const singleParam = parameters[key]
-        const li = document.createElement('li')
+        const pairContainer = document.createElement('div')
         const div = document.createElement('div')
-        div.textContent = `${key} = ${attractor[key].toFixed(2)}`
-        newParams.push(li)
+        div.textContent = `${key} = ${attractor[key]}`
+        newParams.push(pairContainer)
         const slider = document.createElement('input')
         slider.type = 'range'
         slider.min = singleParam < 0 ? 2*singleParam : 0
         slider.max = singleParam < 0 ? 0 : 2*singleParam
-        slider.step = Math.abs(singleParam*0.05).toFixed(2)
+        slider.step = Math.abs(singleParam*0.05)
         slider.value = singleParam
         slider.addEventListener('input',(e)=>{
-            div.textContent = `${key} = ${parseFloat(e.target.value).toFixed(2)}`
+            div.textContent = `${key} = ${e.target.value}`
             attractor[key] = e.target.value
         })
-        li.append(div)
-        li.append(slider)
-        params.append(li)
+        div.classList.add('param-value')
+        pairContainer.classList.add('param-pair')
+        pairContainer.append(div)
+        pairContainer.append(slider)
+        params.append(pairContainer)
     }
     // return newParams
     // for (const key in incomingAttractor.parameters) {

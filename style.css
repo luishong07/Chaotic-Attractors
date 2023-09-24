@@ -179,7 +179,8 @@ body::-webkit-scrollbar-thumb {
     font-size: 1.5rem;
 }
 .para-list {
-    outline: red 1px solid;
+    /* outline: red 1px solid; */
+    margin: 1.5em 0;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
