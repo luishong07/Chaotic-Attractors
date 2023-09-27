@@ -2589,6 +2589,7 @@ function toggleSpin(){
 }
 function resetDrawing(){
     console.log('reset');
+    renderParams(attractor)
 }
 function colorHover(high, low) {
     let r = document.querySelector(":root");
@@ -2628,7 +2629,6 @@ function renderParams(attractor) {
     while (params.hasChildNodes()) {
         params.removeChild(params.firstChild);
     }
-    console.log(params)
     const parameters = attractor.parameters;
     const newParams = [];
     for (const [key, value] of Object.entries(parameters)) {
@@ -2637,6 +2637,8 @@ function renderParams(attractor) {
         const div = document.createElement("div");
         let slider = "";
         let extra = document.createElement('div')
+        console.log(typeof attractor[key],typeof value);
+        attractor[key] = parseFloat(value)
         if (parseFloat(value)) {
             div.textContent = `${key} = ${value}`;
             pairContainer.append(div);
