@@ -2441,7 +2441,6 @@ let angle = 0;
 let vel = 0;
 let axis = [0, 0, 0];
 
-let tracers = [];
 let particles = [];
 let attractor;
 let omega = 0
@@ -2495,15 +2494,21 @@ let attractors = {
 };
 
 function setup() {
+    initialSetUp()
+}
+
+function initialSetUp(){
     let hld = document.getElementById("holder");
     let pause = document.querySelector(".logo");
     let title = document.getElementById("attractor-name");
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
-    // let params = document.querySelector(".para-list");
     let r = document.querySelector(":root");
-
+    let resetBtn = document.querySelector('.reset-btn')
+    resetBtn.addEventListener('click',()=>{
+        resetDrawing()
+    })
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -2513,8 +2518,8 @@ function setup() {
     });
     cnv.parent("holder");
     colorMode(HSL);
+
     const attractorNamesArray = Object.keys(attractors);
-    // console.log(attractorNamesArray.sort())
     const mainInfoContainer = document.querySelector(".navbar-nav");
 
     for (let i = 0; i < attractorNamesArray.length; i++) {
@@ -2560,9 +2565,6 @@ function setup() {
 
     renderParams(attractor);
 
-    // c1 = new Tracer(-2, -1, 3, attractor.tracerColor(), attractor.scl);
-    // c2 = new Tracer(1, -1, 1, attractor.tracerColor(), attractor.scl);
-    // c3 = new Tracer(-0, 1, -2, attractor.tracerColor(), attractor.scl);
 
     //creating particles
     for (let i = 0; i < 50; i++) {
@@ -2577,6 +2579,7 @@ function setup() {
     }
     omega = attractor.motion.vel
 }
+
 function toggleSpin(){
     if(omega != 0){
         omega = 0
@@ -2584,7 +2587,9 @@ function toggleSpin(){
         omega = attractor.motion.vel
     }
 }
-
+function resetDrawing(){
+    console.log('reset');
+}
 function colorHover(high, low) {
     let r = document.querySelector(":root");
     r.style.setProperty("--cardHiHue", `hsl(${high}, 100%,50%)`);
@@ -2620,6 +2625,10 @@ function windowResized() {
 
 function renderParams(attractor) {
     let params = document.querySelector(".para-list");
+    while (params.hasChildNodes()) {
+        params.removeChild(params.firstChild);
+    }
+    console.log(params)
     const parameters = attractor.parameters;
     const newParams = [];
     for (const [key, value] of Object.entries(parameters)) {

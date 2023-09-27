@@ -183,6 +183,11 @@ body::-webkit-scrollbar-thumb {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
+.reset{
+    outline: red 1px solid;
+    display: grid;
+    text-align: center;
+}
 .param-value{
     text-align: center;
     font-size: 1.5rem;
@@ -191,10 +196,16 @@ body::-webkit-scrollbar-thumb {
     margin: 1.5em 0;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows:  1fr;
     grid-column-gap: 0;
     grid-row-gap: 1em;
 }
 #attractor-name{
+    cursor: pointer;
+}
+.attractor-name{
+    cursor: pointer;
+}
+.reset-btn{
     cursor: pointer;
 }
