@@ -2579,7 +2579,6 @@ function initialSetUp(){
     }
     omega = attractor.motion.vel
 }
-
 function toggleSpin(){
     if(omega != 0){
         omega = 0
@@ -2596,7 +2595,6 @@ function colorHover(high, low) {
     r.style.setProperty("--cardHiHue", `hsl(${high}, 100%,50%)`);
     r.style.setProperty("--cardLowHue", `hsl(${low}, 100%,50%)`);
 }
-
 function snapShot() {
     console.log("click");
     toggleSpin()
@@ -2610,7 +2608,6 @@ function halt() {
         loop();
     }
 }
-
 function complementaryHue(h) {
     let newHue = h + 180;
     if (newHue > 360) {
@@ -2618,7 +2615,6 @@ function complementaryHue(h) {
     }
     return newHue;
 }
-
 function windowResized() {
     let hld = document.getElementById("holder");
     resizeCanvas(hld.offsetWidth, hld.offsetHeight);
@@ -2650,7 +2646,8 @@ function renderParams(attractor) {
             slider.value = singleParam;
             slider.addEventListener("input", (e) => {
                 div.textContent = `${key} = ${e.target.value}`;
-                attractor[key] = e.target.value;
+                console.log(typeof e.target.value);
+                attractor[key] = parseFloat(e.target.value);
             });
             pairContainer.append(slider);
             newParams.push(pairContainer);
