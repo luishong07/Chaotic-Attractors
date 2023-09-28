@@ -20,7 +20,7 @@ class Particle {
         this.x = x;
         this.y = y;
         this.z = z;
-        // console.log( z);
+        // console.log(x, y, z);
 
         if (
             this.z * this.scl > innerWidth / 2 ||

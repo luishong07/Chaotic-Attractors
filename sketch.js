@@ -1896,8 +1896,13 @@ const qiChen = {
     dydt: "dy/dt = ςx + y - xz",
     dzdt: "dz/dt = xy - βz",
     α: 38,
-    β: 8 / 3,
+    β: 2.66,
     ς: 80,
+    scl: 3,
+    dt: 0.0005,
+    pathLength: 100,
+    highHue: 270,
+    lowHue: 200,
     parameters: {
         α: "38",
         β: "2.66",
@@ -1919,9 +1924,6 @@ const qiChen = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    scl: 4,
-    dt: 0.001,
-    pathLength: 100,
     dx: function (x, y, z) {
         return (this.α * (y - x) + y * z) * this.dt;
     },
@@ -1934,8 +1936,6 @@ const qiChen = {
     tracerColor: function () {
         return color(325, 100, 50);
     },
-    highHue: 270,
-    lowHue: 200,
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -2505,10 +2505,10 @@ function initialSetUp(){
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let r = document.querySelector(":root");
-    let resetBtn = document.querySelector('.reset-btn')
-    resetBtn.addEventListener('click',()=>{
-        resetDrawing()
-    })
+    // let resetBtn = document.querySelector('.reset-btn')
+    // resetBtn.addEventListener('click',()=>{
+    //     resetDrawing()
+    // })
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     pause.addEventListener("click", () => {
         halt();
@@ -2633,7 +2633,6 @@ function renderParams(attractor) {
         const div = document.createElement("div");
         let slider = "";
         let extra = document.createElement('div')
-        console.log(typeof attractor[key],typeof value);
         attractor[key] = parseFloat(value)
         if (parseFloat(value)) {
             div.textContent = `${key} = ${value}`;
