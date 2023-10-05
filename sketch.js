@@ -1899,7 +1899,7 @@ const qiChen = {
     β: 2.66,
     ς: 80,
     scl: 3,
-    dt: 0.0005,
+    dt: 0.001,
     pathLength: 100,
     highHue: 270,
     lowHue: 200,
