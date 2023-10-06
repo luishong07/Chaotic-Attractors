@@ -156,7 +156,8 @@ body::-webkit-scrollbar-thumb {
 .name {
     display: grid;
     text-align: center;
-    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-columns:   1fr;
+    gap: 1rem;
 }
 
 .name > h2 {
@@ -318,4 +319,16 @@ input[type="range"]:focus::-ms-fill-lower {
 }
 input[type="range"]:focus::-ms-fill-upper {
     background: linear-gradient(to left, var(--hiHue), var(--lowHue));
+}
+
+.snapshot{
+    /* outline: red 1px solid; */
+    /* background-image: url(camera.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer; */
+    /* background-color: red; */
+    
+
 }
