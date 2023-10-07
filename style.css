@@ -333,3 +333,26 @@ input[type="range"]:focus::-ms-fill-upper {
     
 
 }
+.color-picker{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    justify-content: center;
+
+}
+.color-picker > *{
+    margin: 1rem 0;
+    text-align: center;
+    place-self: center;
+}
+.particle-button{
+    /* outline: red 1px solid; */
+    border: solid #808080 2px;
+    border-radius: .75rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+
+}

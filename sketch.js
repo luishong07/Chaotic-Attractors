@@ -2505,6 +2505,8 @@ function initialSetUp(){
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let r = document.querySelector(":root");
+    let addParticleButton = document.querySelector('.particle-button')
+
     // let resetBtn = document.querySelector('.reset-btn')
     // resetBtn.addEventListener('click',()=>{
     //     resetDrawing()
@@ -2513,6 +2515,9 @@ function initialSetUp(){
     pause.addEventListener("click", () => {
         halt();
     });
+    addParticleButton.addEventListener('click',()=>{
+        addNewParticle()
+    })
     title.addEventListener("click", () => {
         snapShot();
     });
@@ -2578,6 +2583,14 @@ function initialSetUp(){
         particles.push(p);
     }
     omega = attractor.motion.vel
+}
+function addNewParticle(){
+    let newColor = document.querySelector('#colorpicker')
+    console.log('new particle');
+    console.log(attractor.scl,
+        attractor.initialCoordinates,
+        attractor.pathLength,
+        attractor.offSet);
 }
 function toggleSpin(){
     if(omega != 0){
