@@ -2443,7 +2443,7 @@ let axis = [0, 0, 0];
 
 let particles = [];
 let attractor;
-let omega = 0
+let omega = 0;
 //wang sun is idential to fourwing
 //yuwang exponential out of control
 //hadley idential to lorenz83
@@ -2455,21 +2455,19 @@ let attractors = {
     aizawa: aizawa,
     luChen: luChen,
     bouali2: bouali2,
-    
+
     rayleighBenard: rayleighBenard,
-    
+
     thomas: thomas,
     halvorsen: halvorsen,
-    
+
     anishchenkoAstakhov: anishchenkoAstakhov,
     qiChen: qiChen,
     rucklidge: rucklidge,
-    
-    
+
     lorenzMod2: lorenzMod2,
     lorenzMod1: lorenzMod1,
-    
-    
+
     sakarya: sakarya,
     threeScroll1: threeScroll1,
     genesioTesi: genesioTesi,
@@ -2494,10 +2492,10 @@ let attractors = {
 };
 
 function setup() {
-    initialSetUp()
+    initialSetUp();
 }
 
-function initialSetUp(){
+function initialSetUp() {
     let hld = document.getElementById("holder");
     let pause = document.querySelector(".logo");
     let title = document.getElementById("attractor-name");
@@ -2505,7 +2503,7 @@ function initialSetUp(){
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let r = document.querySelector(":root");
-    let addParticleButton = document.querySelector('.particle-button')
+    let addParticleButton = document.querySelector(".particle-button");
 
     // let resetBtn = document.querySelector('.reset-btn')
     // resetBtn.addEventListener('click',()=>{
@@ -2515,9 +2513,9 @@ function initialSetUp(){
     pause.addEventListener("click", () => {
         halt();
     });
-    addParticleButton.addEventListener('click',()=>{
-        addNewParticle()
-    })
+    addParticleButton.addEventListener("click", () => {
+        addNewParticle();
+    });
     title.addEventListener("click", () => {
         snapShot();
     });
@@ -2570,7 +2568,6 @@ function initialSetUp(){
 
     renderParams(attractor);
 
-
     //creating particles
     for (let i = 0; i < 50; i++) {
         let p = new Particle(
@@ -2582,26 +2579,39 @@ function initialSetUp(){
         );
         particles.push(p);
     }
-    omega = attractor.motion.vel
+    omega = attractor.motion.vel;
 }
-function addNewParticle(){
-    let newColor = document.querySelector('#colorpicker')
-    console.log('new particle');
-    console.log(attractor.scl,
+function addNewParticle() {
+    let newColor = document.querySelector("#colorpicker");
+    console.log("new particle");
+    console.log(newColor.value,
+        attractor.scl,
         attractor.initialCoordinates,
         attractor.pathLength,
         attractor.offSet);
+    const newParticle = new Particle(
+        newColor.value,
+        attractor.scl,
+        attractor.initialCoordinates,
+        attractor.pathLength,
+        attractor.offSet
+    );
+    particles.push(newParticle)
+    // console.log(attractor.scl,
+    //     attractor.initialCoordinates,
+    //     attractor.pathLength,
+    //     attractor.offSet);
 }
-function toggleSpin(){
-    if(omega != 0){
-        omega = 0
-    }else{
-        omega = attractor.motion.vel
+function toggleSpin() {
+    if (omega != 0) {
+        omega = 0;
+    } else {
+        omega = attractor.motion.vel;
     }
 }
-function resetDrawing(){
-    console.log('reset');
-    renderParams(attractor)
+function resetDrawing() {
+    console.log("reset");
+    renderParams(attractor);
 }
 function colorHover(high, low) {
     let r = document.querySelector(":root");
@@ -2610,7 +2620,7 @@ function colorHover(high, low) {
 }
 function snapShot() {
     console.log("click");
-    toggleSpin()
+    toggleSpin();
     // saveCanvas("canvas")
 }
 function halt() {
@@ -2645,8 +2655,8 @@ function renderParams(attractor) {
         const pairContainer = document.createElement("div");
         const div = document.createElement("div");
         let slider = "";
-        let extra = document.createElement('div')
-        attractor[key] = parseFloat(value)
+        let extra = document.createElement("div");
+        attractor[key] = parseFloat(value);
         if (parseFloat(value)) {
             div.textContent = `${key} = ${value}`;
             pairContainer.append(div);
@@ -2664,13 +2674,12 @@ function renderParams(attractor) {
             pairContainer.append(slider);
             newParams.push(pairContainer);
             params.append(pairContainer);
-        }else{
-            console.log('poop');
-            extra.textContent = `${key} = ${value}`
-            extra.classList.add('param-value')
-            newParams.push(extra)
-            params.append(extra)
-
+        } else {
+            console.log("poop");
+            extra.textContent = `${key} = ${value}`;
+            extra.classList.add("param-value");
+            newParams.push(extra);
+            params.append(extra);
         }
         // extra.classList.add('param-pair')
         div.classList.add("param-value");
@@ -2807,7 +2816,6 @@ function draw() {
     rotateZ(attractor.tilt.z);
     rotate(attractor.tilt.otherTilt, attractor.tilt.otherAxis);
     rotate((angle += omega), attractor.motion.axis);
-    
 
     for (let p of particles) {
         let dx = attractor.dx(p.x, p.y, p.z);
