@@ -9,6 +9,7 @@ const lorenz = {
     σ: 10,
     ρ: 28,
     β: 2.66,
+    scl: 8,
     parameters: {
         σ: "10",
         ρ: "28",
@@ -17,7 +18,7 @@ const lorenz = {
     offSet: {
         x: 0,
         y: 0,
-        z: -27,
+        z: -27*8,
     },
     motion: {
         vel: 0.01,
@@ -30,7 +31,6 @@ const lorenz = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    scl: 8,
     dt: 0.01,
     pathLength: 75,
     dx: function (x, y) {
@@ -2553,7 +2553,7 @@ function initialSetUp() {
     }
 
     //initial attractor
-    attractor = lorenz
+    attractor = shimizuMorioka
     // attractor = attractors[random(attractorNamesArray)];
     title.textContent = attractor["name"]; //setting title card name
     //setting equations on card
@@ -2723,10 +2723,12 @@ function changeAttractor(name) {
     dy.textContent = incomingAttractor.dydt;
     dz.textContent = incomingAttractor.dzdt;
     //applying scale to the offset in all three axes///Major bug as numbers keep multiplying every the attractor is selected again
+    console.log(incomingAttractor.offSet);
     // for (const axis in incomingAttractor.offSet) {
     //     incomingAttractor.offSet[axis] =
     //         incomingAttractor.offSet[axis] * incomingAttractor.scl;
     // }
+    console.log(incomingAttractor.offSet);
 
     for (let p of particles) {
         //changing the properties of particles
@@ -2751,18 +2753,17 @@ function draw() {
     // omega = attractor.motion.vel
     // angleMode(DEGREES)
 
-    // stroke("red");
-    // line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
-    // line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
+    stroke("red");
+    line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
+    line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
 
-    // stroke("blue");
-    // line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
-    // line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
-    // line(0, 0, 0, -innerWidth / 2, 0, -innerWidth / 2)
+    stroke("blue");
+    line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
+    line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
 
-    // stroke("yellow");
-    // line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
-    // line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
+    stroke("yellow");
+    line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
+    line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
 
     // stroke("purple");
     // // line(0, 0, 0, 0, -innerWidth / 2, innerWidth / 2);
