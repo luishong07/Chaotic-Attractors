@@ -1,5 +1,5 @@
 class Particle {
-    constructor(clr, scl, initialCoordinates, pathLength,offSet) {
+    constructor(clr, scl, initialCoordinates, pathLength, offSet) {
         this.startPoint = initialCoordinates();
         this.x = this.startPoint.x;
         this.y = this.startPoint.y;
@@ -9,11 +9,12 @@ class Particle {
         this.path = [];
         this.initialCoordinates = initialCoordinates;
         this.pathLength = pathLength;
-        this.offSet = {}
-        for(const axis in offSet){
-            this.offSet[axis] = offSet[axis]*this.scl
+        this.offSet = {};
+        for (const axis in offSet) {
+            this.offSet[axis] = offSet[axis] * this.scl;
         }
         // console.log(this.offSet)
+        // console.log(this.x, this.y, this.z);
     }
 
     show(x, y, z) {
@@ -46,8 +47,9 @@ class Particle {
         strokeWeight(5);
         point(
             this.offSet.x + this.x * this.scl,
-            this.offSet.y + this.y * this.scl, 
-            this.offSet.z + this.z * this.scl);
+            this.offSet.y + this.y * this.scl,
+            this.offSet.z + this.z * this.scl
+        );
 
         beginShape();
 

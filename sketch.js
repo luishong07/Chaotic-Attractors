@@ -2450,19 +2450,23 @@ let omega = 0;
 let attractors = {
     lorenz: lorenz,
     shimizuMorioka: shimizuMorioka,
+    bouali2: bouali2,
+    rayleighBenard: rayleighBenard,
+    anishchenkoAstakhov: anishchenkoAstakhov,
+    qiChen: qiChen,
+    sprott: sprott,
+    chua1: chua1,
+    finance: finance,
+    bouali: bouali,
     hadley: hadley,
     chua2: chua2,
     aizawa: aizawa,
     luChen: luChen,
-    bouali2: bouali2,
 
-    rayleighBenard: rayleighBenard,
 
     thomas: thomas,
     halvorsen: halvorsen,
 
-    anishchenkoAstakhov: anishchenkoAstakhov,
-    qiChen: qiChen,
     rucklidge: rucklidge,
 
     lorenzMod2: lorenzMod2,
@@ -2473,14 +2477,11 @@ let attractors = {
     genesioTesi: genesioTesi,
 
     arneodo: arneodo,
-    chua1: chua1,
     burkeShaw: burkeShaw,
     newtonLeipnik: newtonLeipnik,
     coullet: coullet,
-    finance: finance,
     fourwing: fourwing,
     rabinovichFabrikant: rabinovichFabrikant,
-    sprott: sprott,
     dadras: dadras,
     chen: chen,
     rossler: rossler,
@@ -2488,7 +2489,6 @@ let attractors = {
     lorenz83: lorenz83,
 
     noseHoover: noseHoover,
-    bouali: bouali,
 };
 
 function setup() {
@@ -2553,7 +2553,8 @@ function initialSetUp() {
     }
 
     //initial attractor
-    attractor = attractors[random(attractorNamesArray)];
+    attractor = lorenz
+    // attractor = attractors[random(attractorNamesArray)];
     title.textContent = attractor["name"]; //setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2569,7 +2570,7 @@ function initialSetUp() {
     renderParams(attractor);
 
     //creating particles
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         let p = new Particle(
             attractor.particleColor(),
             attractor.scl,
@@ -2584,19 +2585,20 @@ function initialSetUp() {
 function addNewParticle() {
     let newColor = document.querySelector("#colorpicker");
     console.log("new particle");
-    console.log(newColor.value,
+    console.log(
         attractor.scl,
-        attractor.initialCoordinates,
+        attractor.offSet,
         attractor.pathLength,
-        attractor.offSet);
-    const newParticle = new Particle(
-        newColor.value,
-        attractor.scl,
         attractor.initialCoordinates,
-        attractor.pathLength,
-        attractor.offSet
-    );
-    particles.push(newParticle)
+        );
+    // const newParticle = new Particle(
+    //     newColor.value,
+    //     attractor.scl,
+    //     attractor.initialCoordinates,
+    //     attractor.pathLength,
+    //     attractor.offSet
+    // );
+    // particles.push(newParticle)
     // console.log(attractor.scl,
     //     attractor.initialCoordinates,
     //     attractor.pathLength,
@@ -2720,11 +2722,11 @@ function changeAttractor(name) {
     dx.textContent = incomingAttractor.dxdt;
     dy.textContent = incomingAttractor.dydt;
     dz.textContent = incomingAttractor.dzdt;
-    //applying scale to the offset in all three axes
-    for (const axis in incomingAttractor.offSet) {
-        incomingAttractor.offSet[axis] =
-            incomingAttractor.offSet[axis] * incomingAttractor.scl;
-    }
+    //applying scale to the offset in all three axes///Major bug as numbers keep multiplying every the attractor is selected again
+    // for (const axis in incomingAttractor.offSet) {
+    //     incomingAttractor.offSet[axis] =
+    //         incomingAttractor.offSet[axis] * incomingAttractor.scl;
+    // }
 
     for (let p of particles) {
         //changing the properties of particles
