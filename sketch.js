@@ -18,7 +18,7 @@ const lorenz = {
     offSet: {
         x: 0,
         y: 0,
-        z: -27*8,
+        z: -27 * 8,
     },
     motion: {
         vel: 0.01,
@@ -266,7 +266,7 @@ const sprott = {
         β: "1.79",
     },
     offSet: {
-        x: -0.76*100,
+        x: -0.76 * 100,
         y: 0,
         z: 0,
     },
@@ -1038,7 +1038,7 @@ const bouali = {
     },
     offSet: {
         x: 0,
-        y: -5*35,
+        y: -5 * 35,
         z: 0,
     },
     motion: {
@@ -1175,7 +1175,7 @@ const finance = {
     },
     offSet: {
         x: 0,
-        y: 4*60,
+        y: 4 * 60,
         z: 0,
     },
     motion: {
@@ -1302,7 +1302,7 @@ const rayleighBenard = {
     offSet: {
         x: 0,
         y: 0,
-        z: -10*20,
+        z: -10 * 20,
     },
     motion: {
         vel: -0.01,
@@ -1526,7 +1526,7 @@ const chua1 = {
     offSet: {
         x: 0,
         y: 0,
-        z: -15*8,
+        z: -15 * 8,
     },
     motion: {
         vel: -0.01,
@@ -1776,8 +1776,8 @@ const anishchenkoAstakhov = {
     },
     offSet: {
         x: 0,
-        y: -2*40,
-        z: -1*40,
+        y: -2 * 40,
+        z: -1 * 40,
     },
     motion: {
         vel: -0.01,
@@ -1844,7 +1844,7 @@ const rucklidge = {
     offSet: {
         x: 0,
         y: 0,
-        z: -7*20,
+        z: -7 * 20,
     },
     motion: {
         vel: -0.01,
@@ -1911,7 +1911,7 @@ const qiChen = {
     offSet: {
         x: 0,
         y: 0,
-        z: -100*3,
+        z: -100 * 3,
     },
     motion: {
         vel: 0.01,
@@ -2260,7 +2260,7 @@ const shimizuMorioka = {
     offSet: {
         x: 0,
         y: 0,
-        z: -1*150,
+        z: -1 * 150,
     },
     motion: {
         vel: -0.01,
@@ -2391,7 +2391,7 @@ const bouali2 = {
     },
     offSet: {
         x: 0,
-        y: -1*100,
+        y: -1 * 100,
         z: 0,
     },
     motion: {
@@ -2462,7 +2462,6 @@ let attractors = {
     chua2: chua2,
     aizawa: aizawa,
     luChen: luChen,
-
 
     thomas: thomas,
     halvorsen: halvorsen,
@@ -2580,22 +2579,23 @@ function initialSetUp() {
         );
         particles.push(p);
     }
+
+    // let p1 = new Particle(
+    //     attractor.particleColor(),
+    //     attractor.scl,
+    //     attractor.initialCoordinates,
+    //     attractor.pathLength,
+    //     attractor.offSet
+    // );
     omega = attractor.motion.vel;
 }
 function addNewParticle() {
     let newColor = document.querySelector("#colorpicker");
-    let newOffSet = {}
-    for(const [key, value] of Object.entries(attractor.offSet)){
-        newOffSet[key] = value/attractor.scl
+    let newOffSet = {};
+    for (const [key, value] of Object.entries(attractor.offSet)) {
+        newOffSet[key] = value / attractor.scl;
     }
-    console.log("new particle");
-    console.log(newOffSet);
-    // console.log(
-    //     attractor.scl,
-    //     attractor.offSet,
-    //     attractor.pathLength,
-    //     attractor.initialCoordinates,
-    //     );
+
     const newParticle = new Particle(
         newColor.value,
         attractor.scl,
@@ -2603,11 +2603,7 @@ function addNewParticle() {
         attractor.pathLength,
         newOffSet
     );
-    particles.push(newParticle)
-    // console.log(attractor.scl,
-    //     attractor.initialCoordinates,
-    //     attractor.pathLength,
-    //     attractor.offSet);
+    particles.push(newParticle);
 }
 function toggleSpin() {
     if (omega != 0) {
@@ -2758,17 +2754,17 @@ function draw() {
     // omega = attractor.motion.vel
     // angleMode(DEGREES)
 
-    stroke("red");
-    line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
-    line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
+    // stroke("red");
+    // line(0, 0, 0, 0, innerWidth / 2, 0); //y axis
+    // line(0, 0, 0, 0, -innerWidth / 2, 0); //y axis
 
-    stroke("blue");
-    line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
-    line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
+    // stroke("blue");
+    // line(0, 0, 0, 0, 0, innerWidth / 2); //z axis
+    // line(0, 0, 0, 0, 0, -innerWidth / 2); //z axis
 
-    stroke("yellow");
-    line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
-    line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
+    // stroke("yellow");
+    // line(0, 0, 0, innerWidth / 2, 0, 0); //x axis
+    // line(0, 0, 0, -innerWidth / 2, 0, 0); //x axis
 
     // stroke("purple");
     // // line(0, 0, 0, 0, -innerWidth / 2, innerWidth / 2);
