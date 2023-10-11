@@ -2552,8 +2552,8 @@ function initialSetUp() {
     }
 
     //initial attractor
-    // attractor = shimizuMorioka
-    attractor = attractors[random(attractorNamesArray)];
+    attractor = thomas
+    // attractor = attractors[random(attractorNamesArray)];
     title.textContent = attractor["name"]; //setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
