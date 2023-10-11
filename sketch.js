@@ -2584,21 +2584,26 @@ function initialSetUp() {
 }
 function addNewParticle() {
     let newColor = document.querySelector("#colorpicker");
+    let newOffSet = {}
+    for(const [key, value] of Object.entries(attractor.offSet)){
+        newOffSet[key] = value/attractor.scl
+    }
     console.log("new particle");
-    console.log(
-        attractor.scl,
-        attractor.offSet,
-        attractor.pathLength,
-        attractor.initialCoordinates,
-        );
-    // const newParticle = new Particle(
-    //     newColor.value,
+    console.log(newOffSet);
+    // console.log(
     //     attractor.scl,
-    //     attractor.initialCoordinates,
+    //     attractor.offSet,
     //     attractor.pathLength,
-    //     attractor.offSet
-    // );
-    // particles.push(newParticle)
+    //     attractor.initialCoordinates,
+    //     );
+    const newParticle = new Particle(
+        newColor.value,
+        attractor.scl,
+        attractor.initialCoordinates,
+        attractor.pathLength,
+        newOffSet
+    );
+    particles.push(newParticle)
     // console.log(attractor.scl,
     //     attractor.initialCoordinates,
     //     attractor.pathLength,
