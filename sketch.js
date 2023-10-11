@@ -266,7 +266,7 @@ const sprott = {
         β: "1.79",
     },
     offSet: {
-        x: -0.76,
+        x: -0.76*100,
         y: 0,
         z: 0,
     },
@@ -1038,7 +1038,7 @@ const bouali = {
     },
     offSet: {
         x: 0,
-        y: -5,
+        y: -5*35,
         z: 0,
     },
     motion: {
@@ -1175,7 +1175,7 @@ const finance = {
     },
     offSet: {
         x: 0,
-        y: 4,
+        y: 4*60,
         z: 0,
     },
     motion: {
@@ -1302,7 +1302,7 @@ const rayleighBenard = {
     offSet: {
         x: 0,
         y: 0,
-        z: -10,
+        z: -10*20,
     },
     motion: {
         vel: -0.01,
@@ -1526,7 +1526,7 @@ const chua1 = {
     offSet: {
         x: 0,
         y: 0,
-        z: -15,
+        z: -15*8,
     },
     motion: {
         vel: -0.01,
@@ -1776,8 +1776,8 @@ const anishchenkoAstakhov = {
     },
     offSet: {
         x: 0,
-        y: -2,
-        z: -1,
+        y: -2*40,
+        z: -1*40,
     },
     motion: {
         vel: -0.01,
@@ -1844,7 +1844,7 @@ const rucklidge = {
     offSet: {
         x: 0,
         y: 0,
-        z: -7,
+        z: -7*20,
     },
     motion: {
         vel: -0.01,
@@ -1911,7 +1911,7 @@ const qiChen = {
     offSet: {
         x: 0,
         y: 0,
-        z: -100,
+        z: -100*3,
     },
     motion: {
         vel: 0.01,
@@ -2260,7 +2260,7 @@ const shimizuMorioka = {
     offSet: {
         x: 0,
         y: 0,
-        z: -2,
+        z: -1*150,
     },
     motion: {
         vel: -0.01,
@@ -2391,7 +2391,7 @@ const bouali2 = {
     },
     offSet: {
         x: 0,
-        y: -1,
+        y: -1*100,
         z: 0,
     },
     motion: {
@@ -2553,8 +2553,8 @@ function initialSetUp() {
     }
 
     //initial attractor
-    attractor = shimizuMorioka
-    // attractor = attractors[random(attractorNamesArray)];
+    // attractor = shimizuMorioka
+    attractor = attractors[random(attractorNamesArray)];
     title.textContent = attractor["name"]; //setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2570,7 +2570,7 @@ function initialSetUp() {
     renderParams(attractor);
 
     //creating particles
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 25; i++) {
         let p = new Particle(
             attractor.particleColor(),
             attractor.scl,
