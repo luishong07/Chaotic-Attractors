@@ -18,10 +18,10 @@ const lorenz = {
     offSet: {
         x: 0,
         y: 0,
-        z: -27 * 8,
+        z: -27 *8,
     },
     motion: {
-        vel: 0.01,
+        vel: -0.01,
         axis: [0, 1, 0],
     },
     tilt: {
@@ -2552,8 +2552,8 @@ function initialSetUp() {
     }
 
     //initial attractor
-    attractor = thomas
-    // attractor = attractors[random(attractorNamesArray)];
+    // attractor = lorenz
+    attractor = attractors[random(attractorNamesArray)];
     title.textContent = attractor["name"]; //setting title card name
     //setting equations on card
     dx.textContent += attractor.dxdt;
@@ -2569,7 +2569,7 @@ function initialSetUp() {
     renderParams(attractor);
 
     //creating particles
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 10; i++) {
         let p = new Particle(
             attractor.particleColor(),
             attractor.scl,
@@ -2593,7 +2593,8 @@ function addNewParticle() {
     let newColor = document.querySelector("#colorpicker");
     let newOffSet = {};
     for (const [key, value] of Object.entries(attractor.offSet)) {
-        newOffSet[key] = value / attractor.scl;
+        // newOffSet[key] = value / attractor.scl;
+        newOffSet[key] = value 
     }
 
     const newParticle = new Particle(
@@ -2671,7 +2672,7 @@ function renderParams(attractor) {
             slider.value = singleParam;
             slider.addEventListener("input", (e) => {
                 div.textContent = `${key} = ${e.target.value}`;
-                console.log(typeof e.target.value);
+                // console.log(typeof e.target.value);s
                 attractor[key] = parseFloat(e.target.value);
             });
             pairContainer.append(slider);
@@ -2724,12 +2725,12 @@ function changeAttractor(name) {
     dy.textContent = incomingAttractor.dydt;
     dz.textContent = incomingAttractor.dzdt;
     //applying scale to the offset in all three axes///Major bug as numbers keep multiplying every the attractor is selected again
-    console.log(incomingAttractor.offSet);
+    // console.log(incomingAttractor.offSet);
     // for (const axis in incomingAttractor.offSet) {
     //     incomingAttractor.offSet[axis] =
     //         incomingAttractor.offSet[axis] * incomingAttractor.scl;
     // }
-    console.log(incomingAttractor.offSet);
+    // console.log(incomingAttractor.offSet);
 
     for (let p of particles) {
         //changing the properties of particles
