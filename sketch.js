@@ -1950,46 +1950,6 @@ const qiChen = {
         return position;
     },
 };
-const wangSun = {
-    name: "Wang-Sun",
-    dxdt: "",
-    dydt: "",
-    dzdt: "",
-    alpha: 0.2,
-    beta: -0.01,
-    sigma: 1,
-    delta: -0.4,
-    epsilon: -1,
-    zeta: -1,
-    scl: 100,
-    dt: 0.08,
-    pathLength: 100,
-    dx: function (x, y, z) {
-        return (x * this.alpha + this.sigma * y * z) * this.dt;
-    },
-    dy: function (x, y, z) {
-        return (this.beta * x + this.delta * y - x * z) * this.dt;
-    },
-    dz: function (x, y, z) {
-        return (this.epsilon * z + this.zeta * x * y) * this.dt;
-    },
-    tracerColor: function () {
-        return color(325, 100, 50);
-    },
-    particleColor: function () {
-        return color(random(200, 256), 100, 50);
-    },
-    initialCoordinates: function () {
-        let position = {};
-        let x = round(random(-2, 2), 2);
-        let y = round(random(-2, 2), 2);
-        let z = round(random(-2, 2), 2);
-        position["x"] = x;
-        position["y"] = y;
-        position["z"] = z;
-        return position;
-    },
-};
 const sakarya = {
     // rotateZ(PI/2)
     // rotate(angle+=0.01,[-1,0,0])
@@ -2044,68 +2004,6 @@ const sakarya = {
         let x = round(random(-2, 2), 2);
         let y = round(random(-2, 2), 2);
         let z = round(random(-2, 2), 2);
-        position["x"] = x;
-        position["y"] = y;
-        position["z"] = z;
-        return position;
-    },
-};
-const yuWang = {
-    name: "Yu-Wang",
-    dxdt: "α(y - x)",
-    dydt: "βx - ςxz",
-    dzdt: "",
-    α: 10,
-    β: 40,
-    ς: 2,
-    δ: 2.5,
-    parameters: {
-        α: "10",
-        β: "40",
-        ς: "2",
-        δ: "2.5",
-    },
-    offSet: {
-        x: 0,
-        y: 0,
-        z: 0,
-    },
-    motion: {
-        vel: 0.0,
-        axis: [-1, 0, 0],
-    },
-    tilt: {
-        x: 0,
-        y: 0,
-        z: 0,
-        otherTilt: 0,
-        otherAxis: [0, 1, 0],
-    },
-    scl: 20,
-    dt: 0.001,
-    pathLength: 100,
-    dx: function (x, y, z) {
-        return 10 * (y - x) * this.dt;
-    },
-    dy: function (x, y, z) {
-        return (40 * x - 2 * x * z) * this.dt;
-    },
-    dz: function (x, y, z) {
-        return (2.71828 ** (x * y) - 2.5 * z) * this.dt;
-    },
-    tracerColor: function () {
-        return color(230, 100, 76);
-    },
-    highHue: 360,
-    lowHue: 270,
-    particleColor: function () {
-        return color(random(this.lowHue, this.highHue), 100, 50);
-    },
-    initialCoordinates: function () {
-        let position = {};
-        let x = round(random(-5, 5), 2);
-        let y = round(random(-5, 5), 2);
-        let z = round(random(-5, 5), 2);
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -2506,10 +2404,6 @@ function initialSetUp() {
     let r = document.querySelector(":root");
     let addParticleButton = document.querySelector(".particle-button");
 
-    // let resetBtn = document.querySelector('.reset-btn')
-    // resetBtn.addEventListener('click',()=>{
-    //     resetDrawing()
-    // })
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     toggleDetails.addEventListener('click',()=>{
         showDetails()
@@ -2585,21 +2479,21 @@ function initialSetUp() {
         particles.push(p);
     }
 
-    // let p1 = new Particle(
-    //     attractor.particleColor(),
-    //     attractor.scl,
-    //     attractor.initialCoordinates,
-    //     attractor.pathLength,
-    //     attractor.offSet
-    // );
     omega = attractor.motion.vel;
 }
 
 function showDetails(){
     let card = document.querySelector('.card')
+    let showBtn = document.querySelector('#show-hide')
     card.classList.toggle('hidden')
-}
 
+    if(showBtn.textContent == 'Hide'){
+        showBtn.textContent = 'Show'
+    }else{
+        showBtn.textContent = 'Hide'
+    }
+
+}
 function addNewParticle() {
     let newColor = document.querySelector("#colorpicker");
     let newOffSet = {};
@@ -2666,7 +2560,6 @@ function windowResized() {
     let hld = document.getElementById("holder");
     resizeCanvas(hld.offsetWidth, hld.offsetHeight);
 }
-
 function renderParams(attractor) {
     let params = document.querySelector(".para-list");
     while (params.hasChildNodes()) {
@@ -2710,7 +2603,6 @@ function renderParams(attractor) {
         pairContainer.classList.add("param-pair");
     }
 }
-
 function changeAttractor(name) {
     att = name;
     const incomingAttractor = attractors[att];
@@ -2767,7 +2659,6 @@ function changeAttractor(name) {
     }
     attractor = incomingAttractor;
 }
-
 function draw() {
     background("black");
     frameRate(30);

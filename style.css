@@ -87,7 +87,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .link-text {
-    display: none;
+    /* display: none; */
     margin-left: 1rem;
 }
 .nav-link svg {
@@ -98,9 +98,9 @@ body::-webkit-scrollbar-thumb {
     width: 16rem;
     overflow: hidden scroll;
 }
-.navbar:hover .link-text {
+/* .navbar:hover .link-text {
     display: block;
-}
+} */
 .icon {
     fill: greenyellow;
     transition: var(--transition-speed);
