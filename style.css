@@ -356,3 +356,7 @@ input[type="range"]:focus::-ms-fill-upper {
     padding: 1rem 1.5rem;
 
 }
+
+.hidden{
+    display: none
+}

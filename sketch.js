@@ -2496,8 +2496,10 @@ function setup() {
 
 function initialSetUp() {
     let hld = document.getElementById("holder");
-    let pause = document.querySelector(".logo");
+    let pause = document.querySelector("#pause-play");
     let title = document.getElementById("attractor-name");
+    let toggleSpin = document.getElementById('spin');
+    let toggleDetails = document.getElementById('display-details')
     let dx = document.getElementById("dx");
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
@@ -2509,13 +2511,16 @@ function initialSetUp() {
     //     resetDrawing()
     // })
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
+    toggleDetails.addEventListener('click',()=>{
+        showDetails()
+    })
     pause.addEventListener("click", () => {
         halt();
     });
     addParticleButton.addEventListener("click", () => {
         addNewParticle();
     });
-    title.addEventListener("click", () => {
+    toggleSpin.addEventListener("click", () => {
         snapShot();
     });
     cnv.parent("holder");
@@ -2589,6 +2594,12 @@ function initialSetUp() {
     // );
     omega = attractor.motion.vel;
 }
+
+function showDetails(){
+    let card = document.querySelector('.card')
+    card.classList.toggle('hidden')
+}
+
 function addNewParticle() {
     let newColor = document.querySelector("#colorpicker");
     let newOffSet = {};
@@ -2623,7 +2634,7 @@ function colorHover(high, low) {
     r.style.setProperty("--cardLowHue", `hsl(${low}, 100%,50%)`);
 }
 function snapShot() {
-    console.log("click");
+    // console.log("click");
     toggleSpin();
     // saveCanvas("canvas")
 }
