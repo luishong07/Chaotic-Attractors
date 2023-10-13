@@ -37,7 +37,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .navbar {
-    width: 5rem;
+    width: 16rem;
     height: 100dvh;
     position: fixed;
     background-color: var(--bg-primary);

@@ -2618,10 +2618,15 @@ function addNewParticle() {
     particles.push(newParticle);
 }
 function toggleSpin() {
+    let spinBtn = document.querySelector('#spin-text')
+    
     if (omega != 0) {
         omega = 0;
+        spinBtn.textContent = 'Spin'
     } else {
         omega = attractor.motion.vel;
+        spinBtn.textContent = 'No Spin'
+
     }
 }
 function resetDrawing() {
@@ -2639,11 +2644,15 @@ function snapShot() {
     // saveCanvas("canvas")
 }
 function halt() {
+    let pauseBtn = document.querySelector('#pause-text')
     //pause the whole drawing
     if (isLooping()) {
+        pauseBtn.textContent = 'Play'
         noLoop();
     } else {
         loop();
+        pauseBtn.textContent = 'Pause'
+
     }
 }
 function complementaryHue(h) {
