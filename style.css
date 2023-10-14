@@ -62,7 +62,7 @@ body::-webkit-scrollbar-thumb {
     height: 4.5rem;
     color: var(--text-primary);
     text-decoration: none;
-    filter: grayscale(100%) opacity(0.7);
+    /* filter: grayscale(100%) opacity(0.7); */
     transition: var(--transition-speed);
     margin: 0.5em;
     border-radius: 0.5em;
@@ -120,10 +120,16 @@ body::-webkit-scrollbar-thumb {
 .logo svg {
     transform: rotate((0deg));
     transition: transform var(--transition-speed);
+    /* fill: rebeccapurple; */
+    /* outline: red 1px solid; */
+}
+svg{
+    /* outline: red 1px solid; */
+    fill: var(--text-primary);
 }
 
 .navbar:hover .logo svg {
-    transform: rotate(-180deg);
+    /* transform: rotate(-180deg); */
 }
 
 #holder {
@@ -221,15 +227,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-.spinner {
-    /* outline: red solid 1px; */
-    background-image: url(spinner.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    cursor: pointer;
-    /* color: var(--lowHue); */
-}
+
 
 input[type="range"] {
     height: 38px;
@@ -335,11 +333,12 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 .color-picker{
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(3, auto);
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     justify-content: center;
+    gap: 1.5rem;
 
 }
 .color-picker > *{
@@ -353,10 +352,18 @@ input[type="range"]:focus::-ms-fill-upper {
     border-radius: .75rem;
     cursor: pointer;
     font-size: 1.5rem;
-    padding: 1rem 1.5rem;
+    padding: 1rem 0.75rem;
 
 }
 
 .hidden{
-    display: none
+    display: none;
+}
+@keyframes spin {
+    0% {transform: rotate(0deg)}
+    100%{ transform: rotate(359deg)}
+
+}
+.spinner{
+    animation: spin 3s linear infinite;
 }

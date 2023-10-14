@@ -2402,8 +2402,8 @@ function initialSetUp() {
     let dy = document.getElementById("dy");
     let dz = document.getElementById("dz");
     let r = document.querySelector(":root");
-    let addParticleButton = document.querySelector(".particle-button");
-
+    let addParticleButton = document.querySelector("#add-button");
+    let removeParticleButton = document.querySelector('#remove-button')
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
     toggleDetails.addEventListener('click',()=>{
         showDetails()
@@ -2414,6 +2414,9 @@ function initialSetUp() {
     addParticleButton.addEventListener("click", () => {
         addNewParticle();
     });
+    removeParticleButton.addEventListener('click', ()=>{
+        removeParticle()
+    })
     toggleSpin.addEventListener("click", () => {
         snapShot();
     });
@@ -2511,9 +2514,13 @@ function addNewParticle() {
     );
     particles.push(newParticle);
 }
+function removeParticle(){
+    particles.shift()
+}
 function toggleSpin() {
     let spinBtn = document.querySelector('#spin-text')
-    
+    let spinIcon = document.querySelector('#spinner')
+    spinIcon.classList.toggle('spinner')
     if (omega != 0) {
         omega = 0;
         spinBtn.textContent = 'Spin'
@@ -2539,8 +2546,13 @@ function snapShot() {
 }
 function halt() {
     let pauseBtn = document.querySelector('#pause-text')
+    let pauseIcon = document.querySelector('#pause-icon')
+    let playIcon = document.querySelector('#play-icon')
+    pauseIcon.classList.toggle('hidden')
+    playIcon.classList.toggle('hidden')
     //pause the whole drawing
     if (isLooping()) {
+        
         pauseBtn.textContent = 'Play'
         noLoop();
     } else {
