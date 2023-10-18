@@ -12,8 +12,8 @@ const lorenz = {
     dt: 0.01,
     pathLength: 75,
     scl: 8,
-    highHue: 120,
-    lowHue: 60,
+    highHue: 220,
+    lowHue: 150,
     parameters: {
         σ: "10",
         ρ: "28",
@@ -306,7 +306,7 @@ const dadras = {
     dt: 0.01,
     pathLength: 120,
     scl: 20,
-    highHue: 120,
+    highHue: 75,
     lowHue: 0,
     parameters: {
         ρ: "3",
@@ -450,8 +450,8 @@ const chen = {
     dt: 0.008,
     pathLength: 120,
     scl: 20,
-    highHue: 180,
-    lowHue: 60,
+    highHue: 330,
+    lowHue: 180,
     parameters: {
         α: "5",
         β: "-10",
@@ -543,9 +543,9 @@ const thomas = {
     },
     initialCoordinates: function () {
         let position = {};
-        let x = round(random(-5, 5));
-        let y = round(random(-5, 5));
-        let z = round(random(-5, 5));
+        let x = round(random(-2, 2));
+        let y = round(random(-2, 2));
+        let z = round(random(-2, 2));
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -1062,8 +1062,8 @@ const finance = {
     dt: 0.05,
     pathLength: 100,
     scl: 60,
-    highHue: 57,
-    lowHue: 0,
+    highHue: 359,
+    lowHue: 220,
     parameters: {
         α: "0.001",
         β: "0.2",
@@ -2126,8 +2126,8 @@ const bouali2 = {
     dt: 0.02,
     scl: 100,
     pathLength: 100,
-    highHue: 57,
-    lowHue: 0,
+    highHue: 150,
+    lowHue: 40,
     parameters: {
         α: "3",
         β: "2.2",
@@ -2245,8 +2245,11 @@ function initialSetUp() {
     let dz = document.getElementById("dz");
     let r = document.querySelector(":root");
     let addParticleButton = document.querySelector("#add-button");
-    let removeParticleButton = document.querySelector('#remove-button')
+    let removeParticleButton = document.querySelector('#remove-button');
+
     let cnv = createCanvas(hld.offsetWidth, hld.offsetHeight, WEBGL);
+
+    
     toggleDetails.addEventListener('click',()=>{
         showDetails()
     })
@@ -2313,7 +2316,7 @@ function initialSetUp() {
     renderParams(attractor);
 
     //creating particles
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 13; i++) {
         let p = new Particle(
             attractor.particleColor(),
             attractor.scl,
@@ -2382,6 +2385,7 @@ function colorHover(high, low) {
 function snapShot() {
     toggleSpin();
 }
+
 function halt() {
     let pauseBtn = document.querySelector('#pause-text')
     let pauseIcon = document.querySelector('#pause-icon')
@@ -2504,12 +2508,11 @@ function draw() {
     background("black");
     frameRate(30);
     orbitControl();
-
-    if (angle > TWO_PI) {
+    // console.log(angle);
+    if (angle > TWO_PI || angle < -TWO_PI) {
         //keeping angle within a cycle
         angle = 0;
     }
-
     rotateX(attractor.tilt.x);
     rotateY(attractor.tilt.y);
     rotateZ(attractor.tilt.z);

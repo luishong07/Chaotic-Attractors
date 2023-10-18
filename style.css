@@ -11,7 +11,6 @@ html * {
     --text-secondary: #ececec;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
-    /* --bg-secondary: pink; */
     --transition-speed: 600ms;
     --hiHue: hsl(0, 0%, 100%);
     --lowHue: hsl(0, 0%, 100%);
@@ -25,15 +24,6 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-}
-body::-webkit-scrollbar {
-    width: 0.25rem;
-}
-body::-webkit-scrollbar-track {
-    background-color: black;
-}
-body::-webkit-scrollbar-thumb {
-    background-color: purple;
 }
 
 .navbar {
@@ -62,7 +52,6 @@ body::-webkit-scrollbar-thumb {
     height: 4.5rem;
     color: var(--text-primary);
     text-decoration: none;
-    /* filter: grayscale(100%) opacity(0.7); */
     transition: var(--transition-speed);
     margin: 0.5em;
     border-radius: 0.5em;
@@ -81,13 +70,11 @@ body::-webkit-scrollbar-thumb {
 
 .nav-link:hover {
     filter: grayscale(0%) opacity(1);
-    /* background: var(--bg-secondary); */
     background: linear-gradient(to right, var(--cardHiHue), var(--cardLowHue));
-    color: var(--text-secondary);
+    color: black;
 }
 
 .link-text {
-    /* display: none; */
     margin-left: 1rem;
 }
 .nav-link svg {
@@ -98,13 +85,11 @@ body::-webkit-scrollbar-thumb {
     width: 16rem;
     overflow: hidden scroll;
 }
-/* .navbar:hover .link-text {
-    display: block;
-} */
-.icon {
+
+/* .icon {
     fill: greenyellow;
     transition: var(--transition-speed);
-}
+} */
 
 .logo {
     font-weight: bold;
@@ -120,11 +105,8 @@ body::-webkit-scrollbar-thumb {
 .logo svg {
     transform: rotate((0deg));
     transition: transform var(--transition-speed);
-    /* fill: rebeccapurple; */
-    /* outline: red 1px solid; */
 }
 svg{
-    /* outline: red 1px solid; */
     fill: var(--text-primary);
 }
 
@@ -150,9 +132,7 @@ svg{
     width: 22rem;
     top: 2em;
     right: 2em;
-    /* aspect-ratio: 0.618; */
     border-radius: 0.5rem;
-    /* border: red 1px solid; */
     background: linear-gradient(to top, var(--hiHue), var(--lowHue));
     background-clip: text;
     -webkit-background-clip: text;
@@ -181,6 +161,7 @@ svg{
     text-align: left;
     align-items: center;
     margin: 0;
+    cursor: default;
 }
 .equ-list > li {
     font-size: 1.5rem;
@@ -209,17 +190,11 @@ svg{
     grid-template-rows: 1fr;
     grid-column-gap: 0;
     grid-row-gap: 1em;
+    cursor: default;
 }
 #attractor-name {
-    cursor: pointer;
+    cursor: default;
 }
-/* #attractor-name::after{
-    width: 100px;
-    height: 100px;
-    outline: red solid 1px;
-    content: 'hello';
-    margin: 0 1em;
-} */
 .attractor-name {
     cursor: pointer;
 }
@@ -231,8 +206,6 @@ svg{
 
 input[type="range"] {
     height: 38px;
-    /* -webkit-appearance: none; */
-    /* margin: 10px 0; */
     width: 100%;
     background: black;
 }
@@ -243,7 +216,6 @@ input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
-    /* animate: 0.2s; */
     box-shadow: 1px 1px 1px #000000;
     background: linear-gradient(to left, var(--hiHue), var(--lowHue));
     border-radius: 5px;
@@ -267,7 +239,6 @@ input[type="range"]::-moz-range-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
-    /* animate: 0.2s; */
     box-shadow: 1px 1px 1px #000000;
     background: linear-gradient(to left, var(--hiHue), var(--lowHue));
     border-radius: 5px;
@@ -286,7 +257,6 @@ input[type="range"]::-ms-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
-    /* animate: 0.2s; */
     background: transparent;
     border-color: transparent;
     color: transparent;
@@ -321,14 +291,7 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .snapshot{
-    /* outline: red 1px solid; */
-    /* background-image: url(camera.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    cursor: pointer; */
-    /* background-color: red; */
-    
+
 
 }
 .color-picker{
@@ -347,7 +310,6 @@ input[type="range"]:focus::-ms-fill-upper {
     place-self: center;
 }
 .particle-button{
-    /* outline: red 1px solid; */
     border: solid #808080 2px;
     border-radius: .75rem;
     cursor: pointer;
@@ -366,4 +328,4 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 .spinner{
     animation: spin 3s linear infinite;
-}
+};
