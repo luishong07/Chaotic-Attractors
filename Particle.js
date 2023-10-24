@@ -10,19 +10,13 @@ class Particle {
         this.initialCoordinates = initialCoordinates;
         this.pathLength = pathLength;
         this.offSet =  offSet
-        // this.offSet = {};
-        // for (const axis in offSet) {
-        //     this.offSet[axis] = offSet[axis] * this.scl;
-        // }
-        // console.log(this.offSet)
-        // console.log(this.x, this.y, this.z);
+        
     }
 
     show(x, y, z) {
         this.x = x;
         this.y = y;
         this.z = z;
-        // console.log(x, y, z);
 
         if (
             this.z * this.scl > innerWidth / 2 ||
