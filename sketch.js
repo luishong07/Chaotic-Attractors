@@ -44,9 +44,6 @@ const lorenz = {
     dz: function (x, y, z) {
         return (x * y - this.β * z) * this.dt;
     },
-    // tracerColor: () => {
-    //     return color(188, 50, 50);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -95,9 +92,6 @@ const fourwing = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    // tracerColor: function () {
-    //     return color(169, 100, 50);
-    // },
     dx: function (x, y, z) {
         return (this.α * x + y * z) * this.dt;
     },
@@ -151,9 +145,6 @@ const halvorsen = {
         otherTilt: Math.PI / 4,
         otherAxis: [1, 0, -1],
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
     dx: function (x, y, z) {
         return (-1 * this.α * x - 4 * y - 4 * z - y ** 2) * this.dt;
     },
@@ -209,9 +200,6 @@ const rabinovichFabrikant = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    // tracerColor: function () {
-    //     return color(325, 100, 50);
-    // },
     dx: function (x, y, z) {
         return (y * (z - 1 + x ** 2) + this.γ * x) * this.dt;
     },
@@ -267,9 +255,6 @@ const sprott = {
         otherTilt: 0,
         otherAxis: [1, 0, 0],
     },
-    // tracerColor: function () {
-    //     return color(57, 100, 50);
-    // },
     dx: function (x, y, z) {
         return (y + this.α * x * y + x * z) * this.dt;
     },
@@ -331,9 +316,6 @@ const dadras = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    // tracerColor: function () {
-    //     return color(282, 100, 84);
-    // },
     dx: function (x, y, z) {
         return (y - this.ρ * x + this.σ * y * z) * this.dt;
     },
@@ -406,9 +388,6 @@ const aizawa = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    // tracerColor: function () {
-    //     return color(0, 96, 37);
-    // },
     dx: function (x, y, z) {
         return ((z - this.β) * x - this.δ * y) * this.dt;
     },
@@ -482,9 +461,6 @@ const chen = {
     dz: function (x, y, z) {
         return (this.δ * z + (x * y) / 3) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(0, 100, 80);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -595,9 +571,6 @@ const rossler = {
     dz: function (x, y, z) {
         return (this.β + z * (x - this.ς)) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(42, 100, 50);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -662,9 +635,6 @@ const threeScroll2 = {
     dz: function (x, y, z) {
         return (this.β * z + x * y - this.ε * x * x) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(260, 100, 50);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -726,9 +696,6 @@ const threeScroll1 = {
     dz: function (x, y, z) {
         return (this.β * z + x * y - this.ε * x * x) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(260, 100, 50);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -788,9 +755,6 @@ const lorenz83 = {
     dz: function (x, y, z) {
         return (-1 * z + this.β * x * y + x * z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(0, 100, 30);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 49);
     },
@@ -847,10 +811,6 @@ const newtonLeipnik = {
     dz: function (x, y, z) {
         return (this.β * z - 5 * x * y) * this.dt;
     },
-    tracerColor: function () {
-        return color(0, 100, 30);
-    },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 49);
     },
@@ -895,10 +855,6 @@ const noseHoover = {
         otherTilt: 0,
         otherAxis: [0, 1, 0],
     },
-    
-    // tracerColor: () => {
-    //     return color(188, 50, 50);
-    // },
     dx: function (x, y, z) {
         return y * this.dt;
     },
@@ -964,10 +920,6 @@ const bouali = {
     dz: function (x, y, z) {
         return (-x * (1.5 - this.ς * z) - 0.05 * z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(169, 100, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -976,7 +928,6 @@ const bouali = {
         let x = round(random(-2, 2), 2);
         let y = round(random(0, 2), 2);
         let z = round(random(-2, 2), 2);
-        // let z = 0
         position["x"] = x;
         position["y"] = y;
         position["z"] = z;
@@ -1032,10 +983,6 @@ const coullet = {
             this.dt
         );
     },
-    // tracerColor: function () {
-    //     return color(169, 100, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1095,10 +1042,6 @@ const finance = {
     dz: function (x, y, z) {
         return (-x - this.ς * z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(169, 100, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1158,10 +1101,6 @@ const arneodo = {
     dz: function (x, y, z) {
         return (-this.α * x - this.β * y - z + this.δ * x * x * x) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1220,10 +1159,6 @@ const rayleighBenard = {
     dz: function (x, y, z) {
         return (x * y - this.τ * z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1280,10 +1215,6 @@ const genesioTesi = {
     dz: function (x, y, z) {
         return (-x + this.α * y + this.β * z + x * x) * this.dt;
     },
-    // tracerColor: () => {
-    //     return color(188, 50, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1339,10 +1270,6 @@ const burkeShaw = {
     dz: function (x, y, z) {
         return (this.η * x * y + this.μ) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1402,10 +1329,6 @@ const chua1 = {
     dz: function (x, y, z) {
         return (x * y - this.μ * z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1465,10 +1388,6 @@ const hadley = {
     dz: function (x, y, z) {
         return (this.β * x * y + x * z - z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1529,10 +1448,6 @@ const lorenzMod1 = {
     dz: function (x, y, z) {
         return (z + x * (this.β * y + z)) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1593,10 +1508,6 @@ const lorenzMod2 = {
     dz: function (x, y, z) {
         return (-z + x * (this.β * y + z)) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1660,10 +1571,6 @@ const anishchenkoAstakhov = {
         }
         return (-this.η * z + this.η * newX * x * x) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(325, 100, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1719,10 +1626,6 @@ const rucklidge = {
     dz: function (x, y, z) {
         return (-z + y * y) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(325, 100, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1780,9 +1683,6 @@ const qiChen = {
     dz: function (x, y, z) {
         return (x * y - this.β * z) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(325, 100, 50);
-    // },
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1838,10 +1738,6 @@ const sakarya = {
     dz: function (x, y, z) {
         return (z - this.β * x * y) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(325, 100, 50);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1901,10 +1797,6 @@ const luChen = {
     dz: function (x, y, z) {
         return (this.δ * z - y * x + this.ς) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -1969,10 +1861,6 @@ const chua2 = {
     dz: function (x, y, z) {
         return -this.ς * y * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -2028,10 +1916,6 @@ const shimizuMorioka = {
     dz: function (x, y, z) {
         return (x * x - z * this.β) * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -2096,10 +1980,6 @@ const liuChen = {
     dz: function (x, y, z) {
         return -this.ς * y * this.dt;
     },
-    tracerColor: function () {
-        return color(230, 100, 76);
-    },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -2160,10 +2040,6 @@ const bouali2 = {
     dz: function (x, y, z) {
         return this.μ * x * this.dt;
     },
-    // tracerColor: function () {
-    //     return color(230, 100, 76);
-    // },
-    
     particleColor: function () {
         return color(random(this.lowHue, this.highHue), 100, 50);
     },
@@ -2445,7 +2321,6 @@ function renderParams(attractor) {
             newParams.push(pairContainer);
             params.append(pairContainer);
         } else {
-            console.log("poop");
             extra.textContent = `${key} = ${value}`;
             extra.classList.add("param-value");
             newParams.push(extra);
@@ -2508,7 +2383,6 @@ function draw() {
     background("black");
     frameRate(30);
     orbitControl();
-    // console.log(angle);
     if (angle > TWO_PI || angle < -TWO_PI) {
         //keeping angle within a cycle
         angle = 0;
