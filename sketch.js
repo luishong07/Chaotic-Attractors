@@ -2380,7 +2380,8 @@ function changeAttractor(name) {
     attractor = incomingAttractor;
 }
 function draw() {
-    background("black");
+    // background("black");
+    background(214,19,7)
     frameRate(30);
     orbitControl();
     if (angle > TWO_PI || angle < -TWO_PI) {

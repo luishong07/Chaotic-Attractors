@@ -207,7 +207,8 @@ svg{
 input[type="range"] {
     height: 38px;
     width: 100%;
-    background: black;
+    /* background: black; */
+    background: rgb(15,18,22)
 }
 input[type="range"]:focus {
     outline: none;
