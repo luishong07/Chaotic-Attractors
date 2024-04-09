@@ -207,7 +207,7 @@ Project Link: [https://luishong07.github.io/Chaotic-Attractors/](https://luishon
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: lorenz.png
 
 [Javascript.js]: https://img.shields.io/badge/JavaScript-%23f8d843?style=for-the-badge&logo=javascript&logoColor=black
 [P5]: https://img.shields.io/badge/P5.JS-%23ED225D?style=for-the-badge&logo=p5dotjs
