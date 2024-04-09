@@ -25,17 +25,17 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="lorenz-logo.png" alt="Logo" width="80" height="80">
+    <img src="/assets/butterfly4.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Chaotic Attractor Visualizer</h3>
 
   <p align="center">
     A tool to visualize chaotic attractors,
-                                        and the mathematics that generates them
-                                        in which parameters can be changed,
-                                        altering their form and behavior
-                                        blending art, programming and math.
+    and the mathematics that generates them
+    in which parameters can be changed,
+    altering their form and behavior
+    blending art, programming and math.
     <br />
     <br />
     <br />
@@ -67,7 +67,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -80,7 +79,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][lorenz.png]]
 
 This interactive tool lets you visualize chaotic attractors. These fascinating shapes emerge from simple mathematical equations that exhibit chaotic behavior. Even though the equations themselves are deterministic (meaning they have a fixed set of rules), the solutions can be incredibly unpredictable, with tiny changes in starting conditions leading to wildly different outcomes.
 
@@ -135,9 +134,8 @@ Or, alternatively
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+By changing the value of the parameters in the set of equations, the attractors can take different shapes, and behaviours, and by adding or subtracting particles with different colors the attractor can have particular color palettes.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -166,7 +164,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -185,9 +183,10 @@ Project Link: [https://luishong07.github.io/Chaotic-Attractors/](https://luishon
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [Coding Train - Lorenz Attractor](https://www.youtube.com/watch?v=f0lkz2gSsIk)
+* [Veritasium - Chaos: The Science of the Butterfly Effect](https://www.youtube.com/watch?v=fDek6cYijxI)
+* [Dynamic Mathematics](https://www.dynamicmath.xyz/strange-attractors/)
+* [Attractors](https://en.wikipedia.org/wiki/Attractor)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -195,18 +194,7 @@ Project Link: [https://luishong07.github.io/Chaotic-Attractors/](https://luishon
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+
 [product-screenshot]: lorenz.png
 
 [Javascript.js]: https://img.shields.io/badge/JavaScript-%23f8d843?style=for-the-badge&logo=javascript&logoColor=black
