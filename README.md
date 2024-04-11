@@ -24,7 +24,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/luishong07/Chaotic-Attractors">
     <img src="/assets/butterfly4.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -79,7 +79,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][lorenz.png]]
+![Product Name Screen Shot][product-screenshot]
 
 This interactive tool lets you visualize chaotic attractors. These fascinating shapes emerge from simple mathematical equations that exhibit chaotic behavior. Even though the equations themselves are deterministic (meaning they have a fixed set of rules), the solutions can be incredibly unpredictable, with tiny changes in starting conditions leading to wildly different outcomes.
 
